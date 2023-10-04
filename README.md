@@ -11,15 +11,18 @@ Aplicação para todo sistema de Controle de Pedidos de uma lanchonete - [API] B
 </br>
 
 # 🔗 Links do projeto
-- GIT Repositório: https://github.com/xxx (```lembrar de deixar público```)
-- Miro: https://miro.com/app/board/uXjVMijt7dc=/
-- Swagger: https://www.xxxx.com (```ou mandar o PDF```)
-- Postman: https://www.xxxx.com (```ou mandar o JSON```)
+- Documento: [DDD](https://1drv.ms/w/s!AntPAkrc0xN9q8kH5tUnZYZQgotMxQ?e=f4ur3f)
+- Miro: [Dashboard Miro](https://miro.com/app/board/uXjVMijt7dc=/)
+- GIT: [Repositório GIT](https://github.com/eraldoads/TechChallenge-Grupo13)
+- Documentação API: [Swagger](https://www.xxxx.com)
+- Testes: [Postman](https://www.xxxx.com)
+
 
 </br>
 
 # 🔗 Tecnologias
+
 ![Badge](https://img.shields.io/static/v1?label=.NET&message=framework&color=blue&style=for-the-badge&logo=.NET)
 ![Badge](https://img.shields.io/static/v1?label=csharp&message=linguagem&color=blue&style=for-the-badge&logo=Csharp)
 ![Badge](https://img.shields.io/static/v1?label=mysql&message=banco-de-dados&color=blue&style=for-the-badge&logo=mysql)
-![Badge](https://img.shields.io/static/v1?label=docker&message=docker&color=blue&style=for-the-badge&logo=docker)
+![Badge](https://img.shields.io/static/v1?label=docker&message=Plataforma&color=blue&style=for-the-badge&logo=docker)
