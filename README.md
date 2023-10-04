@@ -16,11 +16,9 @@ Aplicação para todo sistema de Controle de Pedidos de uma lanchonete - [API] B
 - Swagger: https://www.xxxx.com (```ou mandar o PDF```)
 - Postman: https://www.xxxx.com (```ou mandar o JSON```)
 
-
 </br>
 
 # 🔗 Tecnologias
-
 ![Badge](https://img.shields.io/static/v1?label=.NET&message=framework&color=blue&style=for-the-badge&logo=.NET)
 ![Badge](https://img.shields.io/static/v1?label=csharp&message=linguagem&color=blue&style=for-the-badge&logo=Csharp)
 ![Badge](https://img.shields.io/static/v1?label=mysql&message=banco-de-dados&color=blue&style=for-the-badge&logo=mysql)
