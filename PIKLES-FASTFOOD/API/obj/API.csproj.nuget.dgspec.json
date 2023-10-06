@@ -1,0 +1,212 @@
+{
+  "format": 1,
+  "restore": {
+    "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\API\\API.csproj": {}
+  },
+  "projects": {
+    "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\API\\API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\API\\API.csproj",
+        "projectName": "API",
+        "projectPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\erald\\.nuget\\packages\\",
+        "outputPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\API\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\erald\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj": {
+                "projectPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "Swashbuckle.AspNetCore.Annotations": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "Swashbuckle.AspNetCore.ReDoc": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj",
+        "projectName": "Application",
+        "projectPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj",
+        "packagesPath": "C:\\Users\\erald\\.nuget\\packages\\",
+        "outputPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\erald\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain\\Domain.csproj": {
+                "projectPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain\\Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain\\Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain\\Domain.csproj",
+        "projectName": "Domain",
+        "projectPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\erald\\.nuget\\packages\\",
+        "outputPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\erald\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
