@@ -1,292 +1,219 @@
-using App.Application.Interfaces;
-using App.Application.ViewModels.Request;
-using App.Application.ViewModels.Response;
+﻿using App.Application.ViewModels.Response;
+using Data.Context;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.Extensions.Primitives;
-using Newtonsoft.Json.Linq;
+using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
-using static Domain.ValueObjects.ResultBase;
-using System.Diagnostics;
-using System.Net;
 
 namespace API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
 
     [Produces("application/json", new string[] { })]
-    [SwaggerResponse(204, "Requisi��o conclu�da, por�m n�o h� dados de retorno!", null)]
-    [SwaggerResponse(400, "A solicita��o n�o pode ser entendida pelo servidor devido a sintaxe malformada!", null)]
-    [SwaggerResponse(401, "Requisi��o requer autentica��o do usu�rio!", null)]
-    [SwaggerResponse(403, "Privil�gios insuficientes!", null)]
-    [SwaggerResponse(404, "O recurso solicitado n�o existe!", null)]
-    [SwaggerResponse(412, "Condi��o pr�via dada em um ou mais dos campos avaliado como falsa!", null)]
-    [SwaggerResponse(500, "Servidor encontrou uma condi��o inesperada!", null)]
+    [SwaggerResponse(204, "Requisição concluída sem dados de retorno.", null)]
+    [SwaggerResponse(400, "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.", null)]
+    [SwaggerResponse(401, "A requisição requer autenticação do usuário.", null)]
+    [SwaggerResponse(403, "Privilégios insuficientes.", null)]
+    [SwaggerResponse(404, "O recurso solicitado não existe.", null)]
+    [SwaggerResponse(412, "Condição prévia dada em um ou mais dos campos avaliada como falsa.", null)]
+    [SwaggerResponse(500, "O servidor encontrou uma condição inesperada.", null)]
     [Consumes("application/json", new string[] { })]
 
-    public class ClienteController : Microsoft.AspNetCore.Mvc.ControllerBase
+    public class ClienteController : ControllerBase
     {
-        private readonly ILogger<ClienteController> _logger;
+        private readonly MySQLContext _context;
 
-        public ClienteController(ILogger<ClienteController> logger)
+        public ClienteController(MySQLContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public override bool Equals(object? obj)
-        {
-            return obj is ClienteController controller &&
-                   EqualityComparer<ILogger<ClienteController>>.Default.Equals(_logger, controller._logger);
-        }
-
-        //private readonly IClienteAppService _appService;
-
-        //// Usando a inje��o de construtor
-        //public ClienteController(IClienteAppService appService) : base("Pikle-FastFood")
-        //{
-        //    _appService = appService;
-        //}
-
-
+        // GET: api/Clientes
         [HttpGet()]
         [SwaggerOperation(
         Summary = "Endpoint para listar todos os clientes cadastrados",
-        Description = @"Endpoint para listar todos os Clientes </br>
-                      <b>Par�metros de entrada:</b>
-                       <br/> &bull; <b>Nome</b>:busca exemplo nome Caso nenhum filtro seja informado, ele ir� trazer todos &rArr; <font color='green'><b>Opcional</b></font>
-                        ",
+        Description = @"Busca todos os Clientes</br>",
         Tags = new[] { "Clientes" }
         )]
         [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(List<Cliente>))]
-        [SwaggerResponse(206, "Conte�do Parcial!", typeof(List<Cliente>))]
-
-        public async Task<IActionResult> Get([FromQuery] GetCliente filtroCliente)
+        [SwaggerResponse(206, "Conteúdo Parcial!", typeof(List<Cliente>))]
+        public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
         {
-            if (filtroCliente is null)
+            if (_context.Cliente == null)
+                return NotFound();
+
+            return await _context.Cliente.ToListAsync();
+        }
+
+        // GET: api/Clientes/{id}
+        [HttpGet("{id?}")]
+        [SwaggerOperation(
+        Summary = "Endpoint para listar um cliente específico pelo id",
+        Description = @"Endpoint para listar um cliente específico pelo id </br>
+                      <b>Parâmetros de entrada:</b>
+                       <br/> • <b>id</b>: o identificador do cliente ⇒ <font color='red'><b>Obrigatório</b></font>
+                        ",
+        Tags = new[] { "Clientes" }
+        )]
+        [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(Cliente))]
+        [SwaggerResponse(404, "Cliente não encontrado!", typeof(void))]
+        public async Task<ActionResult<Cliente>> GetCliente(int? id)
+        {
+            if (id == null)
             {
-                throw new ArgumentNullException(nameof(filtroCliente));
+                return BadRequest();
             }
+            var cliente = await _context.Cliente.FindAsync(id);
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+            return cliente;
+        }
+
+        // POST: api/Clientes
+        [HttpPost]
+        [SwaggerOperation(
+        Summary = "Endpoint para criar um novo cliente",
+        Description = @"Endpoint para criar um novo cliente </br>
+              <b>Parâmetros de entrada:</b>
+                <br/> • <b>id</b>: o identificador do cliente a ser criado ⇒ <font color='green'><b>Opcional</b></font>
+                <br/> • <b>nome</b>: o primeiro nome do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>sobrenome</b>: o sobrenome do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>cpf</b>: o CPF do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>email</b>: o e-mail do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
+                ",
+        Tags = new[] { "Clientes" }
+        )]
+        [SwaggerResponse(201, "Cliente criado com sucesso!", typeof(Cliente))]
+        public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
+        {
+            if (cliente == null)
+                return BadRequest();
+
+            _context.Cliente.Add(cliente);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction("GetCliente", new { id = cliente.Id }, cliente);
+        }
+
+        // PATCH: api/Clientes/{id}
+        [HttpPatch("{id}")]
+        [SwaggerOperation(
+            Summary = "Endpoint para atualizar parcialmente um cliente pelo ID",
+            Description = @"Endpoint para atualizar parcialmente um Cliente pelo ID </br>
+              <b>Parâmetros de entrada:</b>
+                <br/> • <b>ID</b>: o identificador do cliente. ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>operationType</b>: Este é um número que representa o tipo de operação a ser realizada. Os valores possíveis são 0 (Adicionar), 1 (Remover), 2 (Substituir), 3 (Mover), 4 (Copiar) e 5 (Testar). ⇒ <font color='green'><b>Opcional</b></font>
+                <br/> • <b>path</b>: Este é o caminho do valor a ser alterado na estrutura de dados JSON. Por exemplo, se você tem um objeto com uma propriedade chamada ‘nomeProduto’, o caminho seria ‘/nomeProduto’. ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>op</b>: Esta é a operação a ser realizada. Os valores possíveis são ‘add’, ‘remove’, ‘replace’, ‘move’, ‘copy’ e ‘test. ⇒ <font color='green'><b>Opcional</b></font>
+                <br/> • <b>from</b>: Este campo é usado apenas para as operações ‘move’ e ‘copy’. Ele especifica o caminho do local de onde o valor deve ser movido ou copiado. ⇒ <font color='green'><b>Opcional</b></font>
+                <br/> • <b>value</b>:  Este é o valor a ser adicionado, substituído ou testado. ⇒ <font color='red'><b>Obrigatório</b></font>
+                ",
+            Tags = new[] { "Clientes" }
+        )]
+        [SwaggerResponse(204, "Cliente atualizado parcialmente com sucesso!", typeof(void))]
+        public async Task<IActionResult> PatchCliente(int id, [FromBody] JsonPatchDocument<Cliente> patchDoc)
+        {
+            if (patchDoc != null)
+            {
+                var itemCliente = await _context.Cliente.FindAsync(id);
+
+                if (itemCliente == null)
+                    return NotFound();
+
+                patchDoc.ApplyTo(itemCliente, ModelState);
+
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                _context.Entry(itemCliente).State = EntityState.Modified;
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ClienteExists(id))
+                        return NotFound();
+                    else
+                        throw;
+                }
+
+                return NoContent();
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+
+        // PUT: api/Clientes/{id}
+        [HttpPut("{id}")]
+        [SwaggerOperation(
+        Summary = "Endpoint para atualizar completamente um cliente pelo id",
+        Description = @"Endpoint para atualizar completamente um cliente pelo id </br>
+              <b>Parâmetros de entrada:</b>
+                <br/> • <b>id</b>: o identificador do cliente a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>nome</b>: o primeiro nome do cliente a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>sobrenome</b>: o sobrenome do cliente a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>cpf</b>: o CPF do cliente a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>email</b>: o e-mail do cliente a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>
+                ",
+        Tags = new[] { "Clientes" }
+        )]
+        [SwaggerResponse(204, "Cliente atualizado com sucesso!", typeof(void))]
+        public async Task<IActionResult> PutCliente(int id, [FromBody] Cliente cliente)
+        {
+            cliente.Id = id;
+
+            if (cliente == null)
+                return BadRequest();
+
+            _context.Entry(cliente).State = EntityState.Modified;
+
             try
             {
-                //var result = await _appService.Get(filtroCliente);
-
-                // Lista de nomes, cpfs e emails para criar os itens
-                var nomes = new[] { "Cliente esfomeado", "Cliente satisfeito", "Cliente exigente", "Cliente fiel", "Cliente indeciso", "Cliente simp�tico", "Cliente apressado", "Cliente curioso", "Cliente generoso", "Cliente educado" };
-                var cpfs = new[] { "12345678910", "10987654321", "13579246810", "24680135792", "14725836901", "15975346820", "35715924680", "95135724680", "75395124680", "85296374101" };
-                var emails = new[] { "cliente@esfomeado.com.br", "cliente@satisfeito.com.br", "cliente@exigente.com.br", "cliente@fiel.com.br", "cliente@indeciso.com.br", "cliente@simpatico.com.br", "cliente@apressado.com.br", "cliente@curioso.com.br", "cliente@generoso.com.br", "cliente@educado.com.br" };
-
-                // Cria a vari�vel resultArray vazio com o tamanho da lista de nomes
-                var resultArray = new object[nomes.Length];
-
-                // Loop foreach para percorrer a lista de nomes e criar os itens
-                int index = 0; // Cria uma vari�vel para armazenar o �ndice do resultArray
-                foreach (var nome in nomes)
-                {
-                    // Crie um objeto an�nimo com as propriedades Nome, CPF e email, usando os valores da lista
-                    var item = new { Nome = nome, CPF = cpfs[index], email = emails[index] };
-                    // Adicione o item ao resultArray na posi��o index
-                    resultArray[index] = item;
-                    // Incremente o index em 1
-                    index++;
-                }
-
-                // Verifica se o resultArray est� nulo.
-                if (resultArray == null)
-                {
-                    return NotFound(); // retorna um NotFoundResult com o status 404
-                }
-                return Ok(resultArray); // retorna um OkObjectResult com o status 200 e o objeto result no corpo da resposta
+                await _context.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch (DbUpdateConcurrencyException)
             {
-                return Problem(ex.Message, null, StatusCodes.Status500InternalServerError); // retorna um ObjectResult com o status 500 e um objeto ProblemDetails no corpo da resposta
-            }
-        }
-
-        public override int GetHashCode()
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    #region [Tratamento do Status de Retorno | Criar uma classe especifica dentro do projeto]
-    public abstract class ControllerBase : Controller
-    {
-        public readonly Stopwatch _stopwatch;
-
-        protected string _systemName { get; set; }
-
-        protected ControllerBase(string systemName)
-        {
-            _stopwatch = new Stopwatch();
-            _systemName = systemName;
-        }
-
-        public virtual IActionResult FromResult(ModelStateDictionary modelState)
-        {
-            List<ResultError> listaErros = modelState.Keys.SelectMany((string key) => modelState[key]!.Errors.Select((ModelError x) => new ResultError
-            {
-                CampoErro = key,
-                MensagemErro = x.ErrorMessage
-            })).ToList();
-            PreConditionResult<ErrorValidacao> result = new PreConditionResult<ErrorValidacao>(new ErrorValidacao
-            {
-                ListaErros = listaErros
-            });
-            return FromResult(result);
-        }
-
-        public virtual IActionResult FromResult<T>(PagedResult<T> pagedResult)
-        {
-            return PagedResult(pagedResult);
-        }
-
-        private IActionResult PagedResult<T>(PagedResult<T> pagedResult)
-        {
-            if (pagedResult.ResultType == ResultType.NoContent)
-            {
-                return FromResult(new NoContentResult<T>());
+                if (!ClienteExists(id))
+                    return NotFound();
+                else
+                    throw;
             }
 
-            SetPaginationHeader(pagedResult._Offset, pagedResult._Limit, pagedResult._Total);
-            if (pagedResult.ResultType == ResultType.PartialContent)
-            {
-                return FromResult(new PartialContentResult<IList<T>>(pagedResult.Data));
-            }
-
-            return FromResult(new SuccessResult<IList<T>>(pagedResult.Data));
+            return NoContent();
         }
 
-        private static T GetPropertyValue<T>(object o, string propertyName)
+        // DELETE: api/Clientes/{id}
+        [HttpDelete("{id}")]
+        [SwaggerOperation(
+        Summary = "Endpoint para deletar um cliente pelo id",
+        Description = @"Endpoint para deletar um cliente pelo id </br>
+              <b>Parâmetros de entrada:</b>
+               <br/> • <b>id</b>: o identificador do cliente a ser deletado ⇒ <font color='red'><b>Obrigatório</b></font>
+                ",
+        Tags = new[] { "Clientes" }
+        )]
+        [SwaggerResponse(200, "Cliente deletado com sucesso!", typeof(Cliente))]
+        public async Task<ActionResult<Cliente>> DeleteCliente(int id)
         {
-            return (T)o.GetType().GetProperty(propertyName)!.GetValue(o, null);
+            var cliente = await _context.Cliente.FindAsync(id);
+
+            if (cliente == null)
+                return NotFound();
+
+            _context.Cliente.Remove(cliente);
+            await _context.SaveChangesAsync();
+            return cliente;
         }
 
-        public virtual IActionResult FromResult<T>(Result<T> result)
+        private bool ClienteExists(int id)
         {
-            try
-            {
-                if (result.GetType().Name.Contains("PagedResult"))
-                {
-                    int propertyValue = GetPropertyValue<int>(result, "_Offset");
-                    int propertyValue2 = GetPropertyValue<int>(result, "_Limit");
-                    int propertyValue3 = GetPropertyValue<int>(result, "_Total");
-                    if (result.ResultType == ResultType.PartialContent)
-                    {
-                        SetPaginationHeader(propertyValue, propertyValue2, propertyValue3);
-                    }
-                }
-            }
-            catch
-            {
-            }
-
-            switch (result.ResultType)
-            {
-                case ResultType.Accepted:
-                    return ReturnStatusCode(202, result);
-                case ResultType.BadRequest:
-                    return ReturnStatusCode(400, result);
-                case ResultType.Created:
-                    return ReturnStatusCode(201, result);
-                case ResultType.Exception:
-                    {
-                        int num = result.Code ?? 500;
-                        return ReturnStatusCode(num, result);
-                    }
-                case ResultType.NoContent:
-                    return ReturnStatusCode(204);
-                case ResultType.NotFound:
-                    return ReturnStatusCode(404);
-                case ResultType.PartialContent:
-                    return ReturnStatusCode(206, result);
-                case ResultType.PermissionDenied:
-                    return ReturnStatusCode(403, result);
-                case ResultType.PreCondition:
-                    return ReturnStatusCode(412, result);
-                case ResultType.Success:
-                    return ReturnStatusCode(200, result);
-                case ResultType.Unauthorized:
-                    return ReturnStatusCode(401, result);
-                default:
-                    return ReturnStatusCode(result.Code ?? 501, result);
-            }
+            return _context.Cliente.Any(e => e.Id == id);
         }
-
-        private IActionResult ReturnStatusCode(int httpStatusCode)
-        {
-            return ReturnStatusCode<object>(httpStatusCode);
-        }
-
-        private IActionResult ReturnStatusCode<T>(int httpStatusCode, Result<T> result = null)
-        {
-            if (httpStatusCode == 412 && result != null && result.Error != null)
-            {
-                ErrorValidacao error = result.Error;
-                if ((error != null && error.ListaErros?.Count > 0) || !string.IsNullOrEmpty(result.Error?.MensagemErro))
-                {
-                    return StatusCode(httpStatusCode, result.Error);
-                }
-            }
-
-            if (result == null || result.Data == null)
-            {
-                return StatusCode(httpStatusCode);
-            }
-
-            return StatusCode(httpStatusCode, result.Data);
-        }
-
-        public virtual void SetPaginationHeader(int _Offset, int _Limit, int _Total)
-        {
-            base.Request.HttpContext.Response.Headers.Add("_offset", _Offset.ToString());
-            base.Request.HttpContext.Response.Headers.Add("_limit", _Limit.ToString());
-            base.Request.HttpContext.Response.Headers.Add("_total", _Total.ToString());
-        }
-
-        public class SuccessResult<T> : Result<T>
-        {
-            public override ResultType ResultType => ResultType.Success;
-
-            public SuccessResult(T data)
-            {
-                base.Data = data;
-            }
-        }
-
-        public class PartialContentResult<T> : Result<T>
-        {
-            public override ResultType ResultType => ResultType.PartialContent;
-
-            public PartialContentResult(T data)
-            {
-                base.Data = data;
-            }
-        }
-
-        public class NoContentResult<T> : Result<T>
-        {
-            public override ResultType ResultType => ResultType.NoContent;
-
-            public NoContentResult()
-            {
-            }
-        }
-
-        public class PreConditionResult<T> : Result<T>
-        {
-            public override ResultType ResultType => ResultType.PreCondition;
-
-            public PreConditionResult(ErrorValidacao error)
-            {
-                if (error != null)
-                {
-                    base.Error = error;
-                }
-            }
-        }
-        #endregion
-    
     }
 }

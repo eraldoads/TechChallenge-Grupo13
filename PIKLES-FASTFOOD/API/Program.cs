@@ -1,15 +1,35 @@
-using App.Application.Interfaces;
-using App.Application.Services;
-using Microsoft.AspNetCore.Cors.Infrastructure;
+using Data.Context;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Adiciona serviços ao contêiner.
+
+// Criar uma variável que armazena a string de conexão com o banco de dados MySQL.
+var connectionStringMysql = builder.Configuration.GetConnectionString("ConnectionMysql");
+
+// Adicionar um serviço do tipo MySQLContext ao objeto builder.Services.
+builder.Services.AddDbContext<MySQLContext>(option => option.UseMySql(
+    connectionStringMysql, // Usar a string de conexão.
+    ServerVersion.AutoDetect(connectionStringMysql), // Especificar a versão do servidor MySQL.
+    builder => builder.MigrationsAssembly("API") // Especifica o assembly do projeto que contém as classes de migrações do EF Core.
+    )
+);
+
+
+builder.Services.AddControllers(options =>
+{
+    options.InputFormatters.Insert(0, JsonPatchSample.MyJPIF.GetJsonPatchInputFormatter());
+});
+
+builder.Services.AddControllers().AddNewtonsoftJson();
+
+// Configurar os serviços relacionados aos controladores.
 builder.Services.AddControllers();
+
 // Saiba mais sobre como configurar o Swagger/OpenAPI em https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
 
 // Configuração do SwaggerGen para gerar a documentação da Web API.
 builder.Services.AddSwaggerGen(
