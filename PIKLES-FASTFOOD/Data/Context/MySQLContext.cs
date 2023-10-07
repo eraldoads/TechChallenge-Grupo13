@@ -1,4 +1,4 @@
-﻿using App.Application.ViewModels.Response;
+﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Context
