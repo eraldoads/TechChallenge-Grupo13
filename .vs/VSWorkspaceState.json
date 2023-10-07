@@ -1,7 +1,15 @@
 {
   "ExpandedNodes": [
     "",
-    "\\PIKLES-FASTFOOD"
+    "\\PIKLES-FASTFOOD",
+    "\\PIKLES-FASTFOOD\\API",
+    "\\PIKLES-FASTFOOD\\API\\Migrations",
+    "\\PIKLES-FASTFOOD\\API\\Properties",
+    "\\PIKLES-FASTFOOD\\Data",
+    "\\PIKLES-FASTFOOD\\Data\\Context",
+    "\\PIKLES-FASTFOOD\\Data\\Repository",
+    "\\PIKLES-FASTFOOD\\Domain",
+    "\\PIKLES-FASTFOOD\\Domain.Tests"
   ],
   "SelectedNode": "\\PIKLES-FASTFOOD\\PIKLES-FASTFOOD.sln",
   "PreviewInSolutionExplorer": false

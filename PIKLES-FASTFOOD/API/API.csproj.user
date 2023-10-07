@@ -5,5 +5,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ActiveDebugProfile>API</ActiveDebugProfile>
+    <_SelectedScaffolderID>ApiControllerWithContextScaffolder</_SelectedScaffolderID>
+    <_SelectedScaffolderCategoryPath>root/Common/Api</_SelectedScaffolderCategoryPath>
+    <WebStackScaffolding_ControllerDialogWidth>1032</WebStackScaffolding_ControllerDialogWidth>
+    <WebStackScaffolding_DbContextDialogWidth>650</WebStackScaffolding_DbContextDialogWidth>
   </PropertyGroup>
 </Project>
