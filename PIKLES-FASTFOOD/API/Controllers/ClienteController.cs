@@ -1,5 +1,5 @@
-﻿using App.Application.ViewModels.Response;
-using Data.Context;
+﻿using Data.Context;
+using Domain.Entities;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +29,7 @@ namespace API.Controllers
             _context = context;
         }
 
-        // GET: api/Clientes
+        // GET: api/clientes
         [HttpGet()]
         [SwaggerOperation(
         Summary = "Endpoint para listar todos os clientes cadastrados",
@@ -46,7 +46,7 @@ namespace API.Controllers
             return await _context.Cliente.ToListAsync();
         }
 
-        // GET: api/Clientes/{id}
+        // GET: api/clientes/{id}
         [HttpGet("{id?}")]
         [SwaggerOperation(
         Summary = "Endpoint para listar um cliente específico pelo id",
@@ -72,7 +72,7 @@ namespace API.Controllers
             return cliente;
         }
 
-        // POST: api/Clientes
+        // POST: api/clientes
         [HttpPost]
         [SwaggerOperation(
         Summary = "Endpoint para criar um novo cliente",
@@ -87,7 +87,7 @@ namespace API.Controllers
         Tags = new[] { "Clientes" }
         )]
         [SwaggerResponse(201, "Cliente criado com sucesso!", typeof(Cliente))]
-        public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
+        public async Task<ActionResult<Cliente>> PostCliente([FromBody] Cliente cliente)
         {
             if (cliente == null)
                 return BadRequest();
@@ -97,7 +97,7 @@ namespace API.Controllers
             return CreatedAtAction("GetCliente", new { id = cliente.Id }, cliente);
         }
 
-        // PATCH: api/Clientes/{id}
+        // PATCH: api/clientes/{id}
         [HttpPatch("{id}")]
         [SwaggerOperation(
             Summary = "Endpoint para atualizar parcialmente um cliente pelo ID",
@@ -149,7 +149,7 @@ namespace API.Controllers
             }
         }
 
-        // PUT: api/Clientes/{id}
+        // PUT: api/clientes/{id}
         [HttpPut("{id}")]
         [SwaggerOperation(
         Summary = "Endpoint para atualizar completamente um cliente pelo id",
@@ -188,7 +188,7 @@ namespace API.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Clientes/{id}
+        // DELETE: api/clientes/{id}
         [HttpDelete("{id}")]
         [SwaggerOperation(
         Summary = "Endpoint para deletar um cliente pelo id",

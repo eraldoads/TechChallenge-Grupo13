@@ -1,11 +1,14 @@
 using Data.Context;
+using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.Win32;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
+// Cria um builder de aplicação web com os argumentos passados
 var builder = WebApplication.CreateBuilder(args);
 
 // Adiciona serviços ao contêiner.
-
 // Criar uma variável que armazena a string de conexão com o banco de dados MySQL.
 var connectionStringMysql = builder.Configuration.GetConnectionString("ConnectionMysql");
 
@@ -17,13 +20,22 @@ builder.Services.AddDbContext<MySQLContext>(option => option.UseMySql(
     )
 );
 
-
+// Adiciona os serviços de controllers ao builder
 builder.Services.AddControllers(options =>
 {
+    // Insere um formato de entrada personalizado para o JsonPatch
     options.InputFormatters.Insert(0, JsonPatchSample.MyJPIF.GetJsonPatchInputFormatter());
 });
 
+// Adiciona o suporte ao NewtonsoftJson aos controllers
 builder.Services.AddControllers().AddNewtonsoftJson();
+
+// Configura as opções de rota para usar URLs e query strings em minúsculo
+builder.Services.Configure<RouteOptions>(options =>
+{
+    options.LowercaseUrls = true;
+    options.LowercaseQueryStrings = true;
+});
 
 // Configurar os serviços relacionados aos controladores.
 builder.Services.AddControllers();
@@ -43,8 +55,12 @@ builder.Services.AddSwaggerGen(
             Title = "Swagger Documentação Web API",
             Description = "Um exemplo de como fornecer a documentação para APIs.",
             Contact = new OpenApiContact() { Name = "Tech Challenge - Grupo 13", Email = "grupo13@fiap.com" },
-            License = new OpenApiLicense() { Name = "MIT License", Url = new Uri("https://opensource.org/licenses/MIT") }
+            License = new OpenApiLicense() { Name = "MIT License", Url = new Uri("https://opensource.org/licenses/MIT") },
+            Version = "1.0.11"
         });
+
+        // Habilita o uso para registrar o SchemaFilter
+        c.SchemaFilter<ClienteSchemaFilter>();
     }
 );
 

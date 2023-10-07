@@ -1,5 +1,5 @@
-﻿using App.Application.ViewModels.Response;
-using Data.Context;
+﻿using Data.Context;
+using Domain.Entities;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +30,7 @@ namespace API.Controllers
             _context = context;
         }
 
+        // GET : /api/Produto
         [HttpGet()]
         [SwaggerOperation(
         Summary = "Endpoint para listar todos os produtos cadastrados",
@@ -46,15 +47,16 @@ namespace API.Controllers
             return await _context.Produto.ToListAsync();
         }
 
+        // GET : /api/Produto/{id}
         [HttpGet("{id?}")]
         [SwaggerOperation(
-        Summary = "Endpoint para listar um produto específico pelo id",
-        Description = @"Endpoint para listar um produto específico pelo id </br>
+            Summary = "Endpoint para listar um produto específico pelo id",
+            Description = @"Endpoint para listar um produto específico pelo id </br>
               <b>Parâmetros de entrada:</b>
                <br/> • <b>id</b>: o identificador do produto ⇒ <font color='red'><b>Obrigatório</b></font>
                 ",
-        Tags = new[] { "Produtos" }
-        )]
+            Tags = new[] { "Produtos" }
+            )]
         [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(Produto))]
         public async Task<ActionResult<Produto>> GetProduto(int? id)
         {
@@ -69,6 +71,7 @@ namespace API.Controllers
             return produto;
         }
 
+        // POST : /api/produto
         [HttpPost]
         [SwaggerOperation(
         Summary = "Endpoint para criar um novo produto",
@@ -95,10 +98,11 @@ namespace API.Controllers
             return CreatedAtAction("GetProduto", new { id = produto.Id }, produto);
         }
 
+        // PATCH : /api/produto/{id}
         [HttpPatch("{id}")]
         [SwaggerOperation(
-        Summary = "Endpoint para atualizar parcialmente um produto pelo id",
-        Description = @"Endpoint para atualizar parcialmente um produto pelo id </br>
+                Summary = "Endpoint para atualizar parcialmente um produto pelo id",
+                Description = @"Endpoint para atualizar parcialmente um produto pelo id </br>
               <b>Parâmetros de entrada:</b>
                 <br/> • <b>ID</b>: o identificador do cliente. ⇒ <font color='red'><b>Obrigatório</b></font>
                 <br/> • <b>operationType</b>: Este é um número que representa o tipo de operação a ser realizada. Os valores possíveis são 0 (Adicionar), 1 (Remover), 2 (Substituir), 3 (Mover), 4 (Copiar) e 5 (Testar). ⇒ <font color='green'><b>Opcional</b></font>
@@ -107,8 +111,8 @@ namespace API.Controllers
                 <br/> • <b>from</b>: Este campo é usado apenas para as operações ‘move’ e ‘copy’. Ele especifica o caminho do local de onde o valor deve ser movido ou copiado. ⇒ <font color='green'><b>Opcional</b></font>
                 <br/> • <b>value</b>:  Este é o valor a ser adicionado, substituído ou testado. ⇒ <font color='red'><b>Obrigatório</b></font>
                 ",
-        Tags = new[] { "Produtos" }
-        )]
+                Tags = new[] { "Produtos" }
+                )]
         [SwaggerResponse(204, "Cliente atualizado parcialmente com sucesso!", typeof(void))]
         public async Task<IActionResult> PatchProduto(int id, [FromBody] JsonPatchDocument<Produto> patchDoc)
         {
@@ -144,11 +148,11 @@ namespace API.Controllers
             }
         }
 
-
+        // PUT : /api/produto/{id}
         [HttpPut("{id}")]
         [SwaggerOperation(
-        Summary = "Endpoint para atualizar completamente um produto pelo id",
-        Description = @"Endpoint para atualizar completamente um produto pelo id </br>
+            Summary = "Endpoint para atualizar completamente um produto pelo id",
+            Description = @"Endpoint para atualizar completamente um produto pelo id </br>
               <b>Parâmetros de entrada:</b>
                 <br/> • <b>id</b>: o identificador do produto a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>
                 <br/> • <b>codigoProduto</b>: o código do produto a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>
@@ -157,8 +161,8 @@ namespace API.Controllers
                 <br/> • <b>categoriaProduto</b>: a categoria do produto a ser atualizado⇒ <font color='red'><b>Obrigatório</b></font>
                 <br/> • <b>descricaoProduto</b>: a descrição do produto a ser  atualizado⇒ <font color='red'><b>Obrigatório</b></font>
                 ",
-        Tags = new[] { "Produtos" }
-        )]
+            Tags = new[] { "Produtos" }
+            )]
         [SwaggerResponse(204, "Cliente atualizado com sucesso!", typeof(void))]
         public async Task<IActionResult> PutProduto(int id, Produto produto)
         {
@@ -188,15 +192,16 @@ namespace API.Controllers
             return NoContent();
         }
 
+        // DELETE : /api/produto/{id}
         [HttpDelete("{id}")]
         [SwaggerOperation(
-        Summary = "Endpoint para deletar um produto pelo id",
-        Description = @"Endpoint para deletar um produto pelo id </br>
+            Summary = "Endpoint para deletar um produto pelo id",
+            Description = @"Endpoint para deletar um produto pelo id </br>
               <b>Parâmetros de entrada:</b>
                <br/> • <b>id</b>: o identificador do produto a ser deletado ⇒ <font color='red'><b>Obrigatório</b></font>
                 ",
-        Tags = new[] { "Produtos" }
-        )]
+            Tags = new[] { "Produtos" }
+            )]
         [SwaggerResponse(200, "Produto deletado com sucesso!", typeof(Produto))]
         public async Task<ActionResult<Produto>> DeleteProduto(int id)
         {

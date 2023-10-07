@@ -4523,6 +4523,11 @@
       "Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "Swashbuckle.AspNetCore.Annotations": "6.5.0",
+          "Swashbuckle.AspNetCore.SwaggerGen": "6.5.0"
+        },
         "compile": {
           "bin/placeholder/Domain.dll": {}
         },
