@@ -1,4 +1,5 @@
 ﻿using Data.Context;
+using Domain.Base;
 using Domain.Entities;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -52,8 +53,8 @@ namespace API.Controllers
         [SwaggerOperation(
             Summary = "Endpoint para listar um produto específico pelo id",
             Description = @"Endpoint para listar um produto específico pelo id </br>
-              <b>Parâmetros de entrada:</b>
-               <br/> • <b>id</b>: o identificador do produto ⇒ <font color='red'><b>Obrigatório</b></font>
+                <b>Parâmetros de entrada:</b>
+                <br/> • <b>id</b>: o identificador do produto ⇒ <font color='red'><b>Obrigatório</b></font>
                 ",
             Tags = new[] { "Produtos" }
             )]
@@ -71,6 +72,30 @@ namespace API.Controllers
             return produto;
         }
 
+        // GET : /api/Produto/categoria/{idCategoria?}
+        [HttpGet("categoria/{idCategoria?}")]
+        [SwaggerOperation(
+            Summary = "Endpoint para listar os produtos de uma categoria específica",
+            Description = @"Endpoint para listar os produtos de uma categoria específica </br>
+                <b>Parâmetros de entrada:</b>
+                <br/> • <b>idCategoria</b>: o id da categoria do produto ⇒ <font color='red'><b>Obrigatório</b></font>
+                ",
+            Tags = new[] { "Produtos" }
+            )]
+        [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(List<Produto>))]
+        public async Task<ActionResult<List<Produto>>> GetProdutosPorIdCategoria(EnumCategoria? idCategoria)
+        {
+            if (idCategoria == null)
+                return BadRequest();
+
+            var produtos = await _context.Produto.Where(x => x.IdCategoria == idCategoria).ToListAsync();
+
+            if (produtos == null || produtos.Count == 0)
+                return NotFound();
+
+            return produtos;
+        }
+
         // POST : /api/produto
         [HttpPost]
         [SwaggerOperation(
@@ -81,7 +106,11 @@ namespace API.Controllers
                         <br/> • <b>codigoProduto</b>: o código do produto a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
                         <br/> • <b>nomeProduto</b>: o nome do produto a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
                         <br/> • <b>valorProduto</b>: o valor do produto a ser criado⇒ <font color='red'><b>Obrigatório</b></font>
-                        <br/> • <b>categoriaProduto</b>: a categoria do produto a ser criado⇒ <font color='red'><b>Obrigatório</b></font>
+                        <br/> • <b>categoriaProduto</b>: a categoria do produto a ser criado, tem como definição os valores:⇒ <font color='red'><b>Obrigatório</b></font>
+                            <br/>&nbsp;&emsp;&emsp;• <b>1</b> - Lanche
+                            <br/>&nbsp;&emsp;&emsp;• <b>2</b> - Acompanhamento
+                            <br/>&nbsp;&emsp;&emsp;• <b>3</b> - Bebida
+                            <br/>&nbsp;&emsp;&emsp;• <b>4</b> - Sobremesa
                         <br/> • <b>descricaoProduto</b>: a descrição do produto a ser  criado⇒ <font color='red'><b>Obrigatório</b></font>
                         ",
         Tags = new[] { "Produtos" }
@@ -158,7 +187,11 @@ namespace API.Controllers
                 <br/> • <b>codigoProduto</b>: o código do produto a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>
                 <br/> • <b>nomeProduto</b>: o nome do produto a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>
                 <br/> • <b>valorProduto</b>: o valor do produto a ser atualizado⇒ <font color='red'><b>Obrigatório</b></font>
-                <br/> • <b>categoriaProduto</b>: a categoria do produto a ser atualizado⇒ <font color='red'><b>Obrigatório</b></font>
+                        <br/> • <b>categoriaProduto</b>: a categoria do produto a ser criado, tem como definição os valores:⇒ <font color='red'><b>Obrigatório</b></font>
+                            <br/>&nbsp;&emsp;&emsp;• <b>1</b> - Lanche
+                            <br/>&nbsp;&emsp;&emsp;• <b>2</b> - Acompanhamento
+                            <br/>&nbsp;&emsp;&emsp;• <b>3</b> - Bebida
+                            <br/>&nbsp;&emsp;&emsp;• <b>4</b> - Sobremesa
                 <br/> • <b>descricaoProduto</b>: a descrição do produto a ser  atualizado⇒ <font color='red'><b>Obrigatório</b></font>
                 ",
             Tags = new[] { "Produtos" }
