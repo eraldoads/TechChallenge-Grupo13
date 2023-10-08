@@ -18,8 +18,8 @@ namespace Domain.ValueObjects
                     ["codigoProduto"] = new OpenApiInteger(1300),
                     ["nomeProduto"] = new OpenApiString("Nome do produto - [string]"),
                     ["valorProduto"] = new OpenApiFloat(00),
-                    ["categoria"] = new OpenApiString("categoria do produto - [string]"),
-                    ["descricao"] = new OpenApiString("Descrição do produto - [string]")
+                    ["idCategoriaProduto"] = new OpenApiInteger(1),
+                    ["descricaoProduto"] = new OpenApiString("Descrição do produto - [string]")
                 };
                 // atribui o exemplo ao esquema
                 schema.Example = modeloProduto;

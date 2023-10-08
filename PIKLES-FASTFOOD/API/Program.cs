@@ -2,8 +2,6 @@ using Data.Context;
 using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Microsoft.Win32;
-using Swashbuckle.AspNetCore.SwaggerGen;
 
 // Cria um builder de aplicação web com os argumentos passados
 var builder = WebApplication.CreateBuilder(args);

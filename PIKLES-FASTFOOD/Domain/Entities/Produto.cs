@@ -1,4 +1,5 @@
-﻿using Domain.ValueObjects;
+﻿using Domain.Base;
+using Domain.ValueObjects;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
@@ -26,10 +27,9 @@ namespace Domain.Entities
         [Range(0.01, float.MaxValue, ErrorMessage = "O valor do produto deve ser um número positivo maior que zero")]
         public float ValorProduto { get; set; }
 
-        [JsonProperty("categoriaProduto")]
-        [Required(ErrorMessage = "A categoria do produto é obrigatória")]
-        [StringLength(50, ErrorMessage = "A categoria do produto deve ter no máximo 50 caracteres")]
-        public string? Categoria { get; set; }
+        [JsonProperty("idCategoriaProduto")]
+        [Required(ErrorMessage = "O IdCategoria do produto é obrigatória")]
+        public EnumCategoria IdCategoria { get; set; }
 
         [JsonProperty("descricaoProduto")]
         [Required(ErrorMessage = "A descrição do produto é obrigatória")]
