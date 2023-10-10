@@ -31,5 +31,6 @@ Aplicação para todo sistema de Controle de Pedidos de uma lanchonete - [API] B
 
 ```mermaid
 graph LR
-A[Cliente] --> B[API Backend] B --> D[Databases]
+A[Cliente] --> B[API Backend]
+B --> C[Databases]
 ```
