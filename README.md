@@ -27,6 +27,8 @@ Aplicação para todo sistema de Controle de Pedidos de uma lanchonete - [API] B
 ![Badge](https://img.shields.io/static/v1?label=mysql&message=banco-de-dados&color=blue&style=for-the-badge&logo=mysql)
 ![Badge](https://img.shields.io/static/v1?label=docker&message=Plataforma&color=blue&style=for-the-badge&logo=docker)
 
+</br>
+
 ## 🔛 Fluxo:
 
 ```mermaid
