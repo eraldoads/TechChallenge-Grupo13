@@ -18,7 +18,7 @@ namespace Domain.Entities
         [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "O nome deve conter apenas letras e somente o primeiro nome")]
         public string? Nome { get; set; }
 
-        [JsonProperty("Sobrenome")]
+        [JsonProperty("sobrenome")]
         [Required(ErrorMessage = "O sobrenome é obrigatório")]
         [StringLength(50, ErrorMessage = "O sobrenome deve ter no máximo 50 caracteres")]
         public string? Sobrenome { get; set; }

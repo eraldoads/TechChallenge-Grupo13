@@ -1,0 +1,54 @@
+version: '3.4'
+
+services:
+  db:
+    image: mysql:8.0    
+    environment:
+      MYSQL_ROOT_PASSWORD: pikles
+      MYSQL_DATABASE: piklesfastfood
+      MYSQL_USER: pikles
+      MYSQL_PASSWORD: fastfood
+    ports: 
+      - "3306:3306"
+    volumes:
+      - $PWD/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - dbdata:/var/lib/mysql
+
+    networks:
+      fastfood:
+        ipv4_address: 172.16.238.10
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      fastfood:
+
+  api:
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__ConnectionMysql=server=172.16.238.10;port=3306;userid=pikles;password=fastfood;database=piklesfastfood;
+    restart: always
+    image: ${DOCKER_REGISTRY-}api
+    build:
+      context: .
+      dockerfile: API/Dockerfile
+    ports: 
+      - "80:80"
+    networks:
+      fastfood:
+
+networks:
+  fastfood:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.238.0/24
+      
+volumes:
+    dbdata:
+
+

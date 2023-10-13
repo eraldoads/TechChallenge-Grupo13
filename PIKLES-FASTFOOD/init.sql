@@ -1,0 +1,25 @@
+CREATE TABLE IF NOT EXISTS Cliente (
+  id INT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(50) NOT NULL,
+  sobrenome VARCHAR(50) NOT NULL,
+  cpf VARCHAR(14) NOT NULL,
+  email VARCHAR(254) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS Categoria (
+  id INT NOT NULL AUTO_INCREMENT,
+  nomeCategoria VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS Produto (
+  id INT NOT NULL AUTO_INCREMENT,
+  codigoProduto INT NOT NULL,
+  nomeProduto VARCHAR(100) NOT NULL,
+  valorProduto FLOAT NOT NULL,
+  idCategoriaProduto INT NOT NULL,
+  descricaoProduto VARCHAR(500) NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_categoria_produto FOREIGN KEY (idCategoriaProduto) REFERENCES Categoria(id)
+);
