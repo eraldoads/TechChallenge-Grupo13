@@ -13,7 +13,6 @@ services:
     volumes:
       - $PWD/init.sql:/docker-entrypoint-initdb.d/init.sql
       - dbdata:/var/lib/mysql
-
     networks:
       fastfood:
         ipv4_address: 172.16.238.10
