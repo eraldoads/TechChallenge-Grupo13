@@ -9,9 +9,9 @@ services:
       MYSQL_USER: pikles
       MYSQL_PASSWORD: fastfood
     ports: 
-      - "3306:3306"
+      - "3307:3306"
     volumes:
-      - $PWD/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - dbdata:/var/lib/mysql
     networks:
       fastfood:
@@ -49,5 +49,3 @@ networks:
       
 volumes:
     dbdata:
-
-

@@ -1,5 +1,6 @@
 ﻿using Data.Context;
 using Domain.Entities;
+using Domain.ValueObjects;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -41,7 +42,7 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
         {
             if (_context.Cliente == null)
-                return NotFound();
+                return NoContent();
 
             return await _context.Cliente.ToListAsync();
         }
@@ -67,7 +68,7 @@ namespace API.Controllers
             var cliente = await _context.Cliente.FindAsync(id);
             if (cliente == null)
             {
-                return NotFound();
+                return NoContent();
             }
             return cliente;
         }
@@ -120,7 +121,7 @@ namespace API.Controllers
                 var itemCliente = await _context.Cliente.FindAsync(id);
 
                 if (itemCliente == null)
-                    return NotFound();
+                    return NoContent();
 
                 patchDoc.ApplyTo(itemCliente, ModelState);
 
@@ -136,7 +137,7 @@ namespace API.Controllers
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!ClienteExists(id))
-                        return NotFound();
+                        return NoContent();
                     else
                         throw;
                 }
@@ -151,6 +152,7 @@ namespace API.Controllers
 
         // PUT: api/clientes/{id}
         [HttpPut("{id}")]
+        [ValidateModel]
         [SwaggerOperation(
         Summary = "Endpoint para atualizar completamente um cliente pelo id",
         Description = @"Endpoint para atualizar completamente um cliente pelo id </br>
@@ -180,12 +182,12 @@ namespace API.Controllers
             catch (DbUpdateConcurrencyException)
             {
                 if (!ClienteExists(id))
-                    return NotFound();
+                    return Ok();
                 else
                     throw;
             }
 
-            return NoContent();
+            return Ok();
         }
 
         // DELETE: api/clientes/{id}
@@ -204,7 +206,7 @@ namespace API.Controllers
             var cliente = await _context.Cliente.FindAsync(id);
 
             if (cliente == null)
-                return NotFound();
+                return NoContent();
 
             _context.Cliente.Remove(cliente);
             await _context.SaveChangesAsync();

@@ -5,21 +5,18 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Domain.ValueObjects
 {
-    public class ProdutoSchemaFilter : ISchemaFilter
+    public class ProdutoImputSchemaFilter : ISchemaFilter
     {
         public void Apply(OpenApiSchema schema, SchemaFilterContext context)
         {
             // verifica se o contexto é da classe Pessoa
-            if (context.Type == typeof(Produto))
+            if (context.Type == typeof(ProdutoInput))
             {
                 // cria um objeto OpenApiObject com os valores desejados
                 var modeloProduto = new OpenApiObject
                 {
-                    ["codigoProduto"] = new OpenApiInteger(1300),
-                    ["nomeProduto"] = new OpenApiString("Nome do produto - [string]"),
-                    ["valorProduto"] = new OpenApiDouble(0.01),
-                    ["idCategoriaProduto"] = new OpenApiInteger(1),
-                    ["descricaoProduto"] = new OpenApiString("Descrição do produto - [string]")
+                    ["IdProduto"] = new OpenApiInteger(0),
+                    ["Quantidade"] = new OpenApiInteger(0),
                 };
                 // atribui o exemplo ao esquema
                 schema.Example = modeloProduto;

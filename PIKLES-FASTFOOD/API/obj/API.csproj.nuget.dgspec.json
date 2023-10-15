@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\API\\API.csproj": {}
+    "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\API\\API.csproj": {
+    "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\API\\API.csproj",
+        "projectUniqueName": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\lfeli\\.nuget\\packages\\",
-        "outputPath": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\API\\obj\\",
+        "projectPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\erald\\.nuget\\packages\\",
+        "outputPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\lfeli\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\erald\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,11 +28,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj": {
-                "projectPath": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj"
+              "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj": {
+                "projectPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj"
               },
-              "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Data\\Data.csproj": {
-                "projectPath": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Data\\Data.csproj"
+              "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Data\\Data.csproj": {
+                "projectPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Data\\Data.csproj"
               }
             }
           }
@@ -131,17 +131,17 @@
         }
       }
     },
-    "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj": {
+    "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj",
+        "projectUniqueName": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj",
-        "packagesPath": "C:\\Users\\lfeli\\.nuget\\packages\\",
-        "outputPath": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\obj\\",
+        "projectPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj",
+        "packagesPath": "C:\\Users\\erald\\.nuget\\packages\\",
+        "outputPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\lfeli\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\erald\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -155,8 +155,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain\\Domain.csproj"
+              "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain\\Domain.csproj": {
+                "projectPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain\\Domain.csproj"
               }
             }
           }
@@ -200,17 +200,17 @@
         }
       }
     },
-    "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Data\\Data.csproj": {
+    "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Data\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Data\\Data.csproj",
+        "projectUniqueName": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Data\\Data.csproj",
         "projectName": "Data",
-        "projectPath": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Data\\Data.csproj",
-        "packagesPath": "C:\\Users\\lfeli\\.nuget\\packages\\",
-        "outputPath": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Data\\obj\\",
+        "projectPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Data\\Data.csproj",
+        "packagesPath": "C:\\Users\\erald\\.nuget\\packages\\",
+        "outputPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\lfeli\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\erald\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -224,8 +224,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj": {
-                "projectPath": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj"
+              "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj": {
+                "projectPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Application\\Application.csproj"
               }
             }
           }
@@ -285,17 +285,17 @@
         }
       }
     },
-    "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain\\Domain.csproj": {
+    "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain\\Domain.csproj",
+        "projectUniqueName": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\lfeli\\.nuget\\packages\\",
-        "outputPath": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain\\obj\\",
+        "projectPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\erald\\.nuget\\packages\\",
+        "outputPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\lfeli\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\erald\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

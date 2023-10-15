@@ -38,11 +38,9 @@ namespace Domain.Entities
         //public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         //{
         //    // Se o CPF não for válido, retorna um resultado de validação com uma mensagem de erro e o nome do campo.
-        //    if (!CPFIsValid(CPF))
+        //    if (CPF.ToString() == "")
         //        yield return new ValidationResult("CPF Inválido", new string[] { "Nome" });
         //}
-
-
 
     }
 }
