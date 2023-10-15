@@ -43,7 +43,7 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<Produto>>> GetProdutos()
         {
             if (_context.Produto == null)
-                return NotFound();
+                return NoContent();
 
             return await _context.Produto.ToListAsync();
         }
@@ -67,7 +67,7 @@ namespace API.Controllers
             var produto = await _context.Produto.FindAsync(id);
 
             if (produto == null)
-                return NotFound();
+                return NoContent();
 
             return produto;
         }
@@ -91,7 +91,7 @@ namespace API.Controllers
             var produtos = await _context.Produto.Where(x => x.IdCategoria == idCategoria).ToListAsync();
 
             if (produtos == null || produtos.Count == 0)
-                return NotFound();
+                return NoContent();
 
             return produtos;
         }
@@ -149,7 +149,7 @@ namespace API.Controllers
             {
                 var itemProduto = await _context.Produto.FindAsync(id);
                 if (itemProduto == null)
-                    return NotFound();
+                    return NoContent();
 
                 patchDoc.ApplyTo(itemProduto, ModelState);
 
@@ -164,7 +164,7 @@ namespace API.Controllers
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!ProdutoExists(id))
-                        return NotFound();
+                        return NoContent();
                     else
                         throw;
                 }
@@ -213,16 +213,12 @@ namespace API.Controllers
             catch (DbUpdateConcurrencyException)
             {
                 if (!ProdutoExists(id))
-                {
-                    return NotFound();
-                }
+                    return Ok();
                 else
-                {
                     throw;
-                }
             }
 
-            return NoContent();
+            return Ok();
         }
 
         // DELETE : /api/produto/{id}
@@ -240,7 +236,7 @@ namespace API.Controllers
         {
             var produto = await _context.Produto.FindAsync(id);
             if (produto == null)
-                return NotFound();
+                return NoContent();
 
             _context.Produto.Remove(produto);
             await _context.SaveChangesAsync();

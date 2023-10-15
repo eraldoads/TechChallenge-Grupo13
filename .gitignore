@@ -134,6 +134,11 @@ AutoTest.Net/
 # Installshield output folder
 [Ee]xpress/
 
+# mysql
+mysql/
+db/
+_MySQL_Init_Script/
+
 # DocProject is a documentation generator add-in
 DocProject/buildhelp/
 DocProject/Help/*.HxT

@@ -36,7 +36,10 @@ builder.Services.Configure<RouteOptions>(options =>
 });
 
 // Configurar os serviços relacionados aos controladores.
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add(typeof(ValidateModelAttribute));
+});
 
 // Saiba mais sobre como configurar o Swagger/OpenAPI em https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
