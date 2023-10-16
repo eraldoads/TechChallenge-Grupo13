@@ -9,16 +9,16 @@ namespace Domain.ValueObjects
     {
         public void Apply(OpenApiSchema schema, SchemaFilterContext context)
         {
-            // Verifica se o contexto é da classe Pessoa.
+            // Verifica se o contexto é da classe Cliente.
             if (context.Type == typeof(Cliente))
             {
                 // Cria um objeto OpenApiObject com os valores desejados.
                 var modeloCliente = new OpenApiObject
                 {
-                    ["nome"] = new OpenApiString("Nome do Cliente - [string]"),
-                    ["sobrenome"] = new OpenApiString("Sobrenome do Cliente - [string]"),
-                    ["CPF"] = new OpenApiString("CPF válido do cliente - [xxx.xxx.xxx-xx]"),
-                    ["email"] = new OpenApiString("email válido do cliente - [exemplo@email.com.br]")
+                    ["nome"] = new OpenApiString("[string]"),
+                    ["sobrenome"] = new OpenApiString("[string]"),
+                    ["CPF"] = new OpenApiString("[string]"),
+                    ["email"] = new OpenApiString("[string]")
                 };
                 // Atribui o exemplo ao esquema.
                 schema.Example = modeloCliente;

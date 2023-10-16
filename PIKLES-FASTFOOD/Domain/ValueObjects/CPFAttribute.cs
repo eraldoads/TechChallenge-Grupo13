@@ -7,6 +7,7 @@ namespace Domain.ValueObjects
         public override bool IsValid(object value)
         {
             string? cpf = value as string;
+
             if (!string.IsNullOrEmpty(cpf))
             {
                 // remove os caracteres não numéricos do cpf
@@ -49,5 +50,4 @@ namespace Domain.ValueObjects
             return true;
         }
     }
-
 }

@@ -288,13 +288,6 @@ C:\git\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\refint\API.dll
 C:\git\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\API.pdb
 C:\git\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\API.genruntimeconfig.cache
 C:\git\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\ref\API.dll
-K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\API.csproj.AssemblyReference.cache
-K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\API.GeneratedMSBuildEditorConfig.editorconfig
-K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\API.AssemblyInfoInputs.cache
-K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\API.AssemblyInfo.cs
-K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\API.csproj.CoreCompileInputs.cache
-K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\API.MvcApplicationPartsAssemblyInfo.cs
-K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\API.MvcApplicationPartsAssemblyInfo.cache
 K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\bin\Debug\net6.0\appsettings.Development.json
 K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\bin\Debug\net6.0\appsettings.json
 K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\bin\Debug\net6.0\API.exe
@@ -564,6 +557,13 @@ K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\bin\Debug\
 K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\bin\Debug\net6.0\Application.pdb
 K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\bin\Debug\net6.0\Data.pdb
 K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\bin\Debug\net6.0\Domain.pdb
+K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\API.csproj.AssemblyReference.cache
+K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\API.GeneratedMSBuildEditorConfig.editorconfig
+K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\API.AssemblyInfoInputs.cache
+K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\API.AssemblyInfo.cs
+K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\API.csproj.CoreCompileInputs.cache
+K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\API.MvcApplicationPartsAssemblyInfo.cs
+K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\API.MvcApplicationPartsAssemblyInfo.cache
 K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\staticwebassets\msbuild.API.Microsoft.AspNetCore.StaticWebAssets.props
 K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\staticwebassets\msbuild.build.API.props
 K:\Users\erald\source\repos\TechChallenge-Grupo13\PIKLES-FASTFOOD\API\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.API.props

@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entities
 {
-    [SwaggerSchemaFilter(typeof(ProdutoImputSchemaFilter))]
     public class ProdutoInput
     {
         [Required(ErrorMessage = "O id do produto é obrigatório")]

@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using Domain.ValueObjects;
+using Newtonsoft.Json;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Domain.Entities
 {
-    //[SwaggerSchemaFilter(typeof(ProdutoSchemaFilter))]
+    [SwaggerSchemaFilter(typeof(PedidoSchemaFilter))]
     public class Pedido
     {
         [JsonProperty("id")]
@@ -12,9 +14,12 @@ namespace Domain.Entities
         public int IdCliente { get; set; }
 
         [JsonProperty("dataPedido")]
-        public DateTime DataPedido { get; set; }
+        public DateTimeOffset DataPedido { get; set; }
 
         [JsonProperty("valorTotal")]
         public float ValorTotal { get; set; }
+
     }
+
+
 }
