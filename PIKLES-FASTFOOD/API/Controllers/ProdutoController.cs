@@ -42,8 +42,8 @@ namespace API.Controllers
         [SwaggerResponse(206, "Conteúdo Parcial!", typeof(List<Produto>))]
         public async Task<ActionResult<IEnumerable<Produto>>> GetProdutos()
         {
-            if (_context.Produto == null)
-                return NoContent();
+            if (_context.Produto is null)
+                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
 
             return await _context.Produto.ToListAsync();
         }
@@ -61,6 +61,9 @@ namespace API.Controllers
         [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(Produto))]
         public async Task<ActionResult<Produto>> GetProduto(int? id)
         {
+            if (_context.Produto is null)
+                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
+
             if (id == null)
                 return BadRequest();
 
@@ -85,6 +88,9 @@ namespace API.Controllers
         [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(List<Produto>))]
         public async Task<ActionResult<List<Produto>>> GetProdutosPorIdCategoria(EnumCategoria? idCategoria)
         {
+            if (_context.Produto is null)
+                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
+
             if (idCategoria == null)
                 return BadRequest();
 
@@ -118,6 +124,9 @@ namespace API.Controllers
         [SwaggerResponse(201, "Produto criado com sucesso!", typeof(Produto))]
         public async Task<ActionResult<Produto>> PostProduto(Produto produto)
         {
+            if (_context.Produto is null)
+                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
+
             if (produto == null)
                 return BadRequest();
 
@@ -135,7 +144,7 @@ namespace API.Controllers
               <b>Parâmetros de entrada:</b>
                 <br/> • <b>ID</b>: o identificador do cliente. ⇒ <font color='red'><b>Obrigatório</b></font>
                 <br/> • <b>operationType</b>: Este é um número que representa o tipo de operação a ser realizada. Os valores possíveis são 0 (Adicionar), 1 (Remover), 2 (Substituir), 3 (Mover), 4 (Copiar) e 5 (Testar). ⇒ <font color='green'><b>Opcional</b></font>
-                <br/> • <b>path</b>: Este é o caminho do valor a ser alterado na estrutura de dados JSON. Por exemplo, se você tem um objeto com uma propriedade chamada ‘nomeProduto’, o caminho seria ‘/nomeProduto’. ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>path</b>: Este é o caminho do valor a ser alterado na estrutura de dados JSON. Por exemplo, se você tem um objeto com uma propriedade chamada ‘nomeProduto’, o path seria ' ""path"": ""nomeProduto"" '. ⇒ <font color='red'><b>Obrigatório</b></font>
                 <br/> • <b>op</b>: Esta é a operação a ser realizada. Os valores possíveis são ‘add’, ‘remove’, ‘replace’, ‘move’, ‘copy’ e ‘test. ⇒ <font color='green'><b>Opcional</b></font>
                 <br/> • <b>from</b>: Este campo é usado apenas para as operações ‘move’ e ‘copy’. Ele especifica o caminho do local de onde o valor deve ser movido ou copiado. ⇒ <font color='green'><b>Opcional</b></font>
                 <br/> • <b>value</b>:  Este é o valor a ser adicionado, substituído ou testado. ⇒ <font color='red'><b>Obrigatório</b></font>
@@ -145,6 +154,9 @@ namespace API.Controllers
         [SwaggerResponse(204, "Cliente atualizado parcialmente com sucesso!", typeof(void))]
         public async Task<IActionResult> PatchProduto(int id, [FromBody] JsonPatchDocument<Produto> patchDoc)
         {
+            if (_context.Produto is null)
+                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
+
             if (patchDoc != null)
             {
                 var itemProduto = await _context.Produto.FindAsync(id);
@@ -234,6 +246,9 @@ namespace API.Controllers
         [SwaggerResponse(200, "Produto deletado com sucesso!", typeof(Produto))]
         public async Task<ActionResult<Produto>> DeleteProduto(int id)
         {
+            if (_context.Produto is null)
+                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
+
             var produto = await _context.Produto.FindAsync(id);
             if (produto == null)
                 return NoContent();

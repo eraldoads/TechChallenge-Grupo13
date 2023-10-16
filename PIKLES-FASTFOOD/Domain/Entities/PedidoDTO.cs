@@ -1,4 +1,5 @@
 ﻿using Domain.ValueObjects;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Domain.Entities
@@ -10,6 +11,7 @@ namespace Domain.Entities
     public class PedidoDTO
     {
         public string? Cliente { get; set; }
+        public DateTimeOffset DataPedido { get; set; }
         public int Quantidade { get; set; }
         public string? NomeCategoria { get; set; }
         public int CodigoProduto { get; set; }

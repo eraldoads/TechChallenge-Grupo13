@@ -41,8 +41,8 @@ namespace API.Controllers
         [SwaggerResponse(206, "Conteúdo Parcial!", typeof(List<Cliente>))]
         public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
         {
-            if (_context.Cliente == null)
-                return NoContent();
+            if (_context.Cliente is null)
+                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
 
             return await _context.Cliente.ToListAsync();
         }
@@ -61,15 +61,16 @@ namespace API.Controllers
         [SwaggerResponse(404, "Cliente não encontrado!", typeof(void))]
         public async Task<ActionResult<Cliente>> GetCliente(int? id)
         {
+            if (_context.Cliente is null)
+                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
+
             if (id == null)
-            {
                 return BadRequest();
-            }
+
             var cliente = await _context.Cliente.FindAsync(id);
             if (cliente == null)
-            {
                 return NoContent();
-            }
+
             return cliente;
         }
 
@@ -82,7 +83,7 @@ namespace API.Controllers
                 <br/> • <b>id</b>: o identificador do cliente a ser criado ⇒ <font color='green'><b>Opcional</b></font>
                 <br/> • <b>nome</b>: o primeiro nome do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
                 <br/> • <b>sobrenome</b>: o sobrenome do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
-                <br/> • <b>cpf</b>: o CPF do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>cpf</b>: o CPF do cliente a ser criado - Somente números ⇒ <font color='red'><b>Obrigatório</b></font>
                 <br/> • <b>email</b>: o e-mail do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
                 ",
         Tags = new[] { "Clientes" }
@@ -90,6 +91,14 @@ namespace API.Controllers
         [SwaggerResponse(201, "Cliente criado com sucesso!", typeof(Cliente))]
         public async Task<ActionResult<Cliente>> PostCliente([FromBody] Cliente cliente)
         {
+            if (_context.Cliente is null)
+                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
+
+            var existeCPF = await _context.Cliente.FirstOrDefaultAsync(c => c.CPF == cliente.CPF);
+
+            if (existeCPF != null)
+                return NotFound("CPF já cadastrado para outro cliente.");
+
             if (cliente == null)
                 return BadRequest();
 
@@ -106,7 +115,7 @@ namespace API.Controllers
               <b>Parâmetros de entrada:</b>
                 <br/> • <b>ID</b>: o identificador do cliente. ⇒ <font color='red'><b>Obrigatório</b></font>
                 <br/> • <b>operationType</b>: Este é um número que representa o tipo de operação a ser realizada. Os valores possíveis são 0 (Adicionar), 1 (Remover), 2 (Substituir), 3 (Mover), 4 (Copiar) e 5 (Testar). ⇒ <font color='green'><b>Opcional</b></font>
-                <br/> • <b>path</b>: Este é o caminho do valor a ser alterado na estrutura de dados JSON. Por exemplo, se você tem um objeto com uma propriedade chamada ‘nomeProduto’, o caminho seria ‘/nomeProduto’. ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>path</b>: Este é o caminho do valor a ser alterado na estrutura de dados JSON. Por exemplo, se você tem um objeto com uma propriedade chamada ‘cpf’, o path seria ' ""path"": ""cpf"" ',. ⇒ <font color='red'><b>Obrigatório</b></font>
                 <br/> • <b>op</b>: Esta é a operação a ser realizada. Os valores possíveis são ‘add’, ‘remove’, ‘replace’, ‘move’, ‘copy’ e ‘test. ⇒ <font color='green'><b>Opcional</b></font>
                 <br/> • <b>from</b>: Este campo é usado apenas para as operações ‘move’ e ‘copy’. Ele especifica o caminho do local de onde o valor deve ser movido ou copiado. ⇒ <font color='green'><b>Opcional</b></font>
                 <br/> • <b>value</b>:  Este é o valor a ser adicionado, substituído ou testado. ⇒ <font color='red'><b>Obrigatório</b></font>
@@ -116,6 +125,9 @@ namespace API.Controllers
         [SwaggerResponse(204, "Cliente atualizado parcialmente com sucesso!", typeof(void))]
         public async Task<IActionResult> PatchCliente(int id, [FromBody] JsonPatchDocument<Cliente> patchDoc)
         {
+            if (_context.Cliente is null)
+                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
+
             if (patchDoc != null)
             {
                 var itemCliente = await _context.Cliente.FindAsync(id);
@@ -160,7 +172,7 @@ namespace API.Controllers
                 <br/> • <b>id</b>: o identificador do cliente a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>
                 <br/> • <b>nome</b>: o primeiro nome do cliente a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>
                 <br/> • <b>sobrenome</b>: o sobrenome do cliente a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>
-                <br/> • <b>cpf</b>: o CPF do cliente a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>cpf</b>: o CPF do cliente a ser atualizado - Somente números ⇒ <font color='red'><b>Obrigatório</b></font>
                 <br/> • <b>email</b>: o e-mail do cliente a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>
                 ",
         Tags = new[] { "Clientes" }
@@ -168,7 +180,14 @@ namespace API.Controllers
         [SwaggerResponse(204, "Cliente atualizado com sucesso!", typeof(void))]
         public async Task<IActionResult> PutCliente(int id, [FromBody] Cliente cliente)
         {
+            if (_context.Cliente is null)
+                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
+
             cliente.Id = id;
+            var existeCPF = await _context.Cliente.FirstOrDefaultAsync(c => c.CPF == cliente.CPF);
+
+            if (existeCPF != null)
+                return NotFound("CPF já cadastrado para outro cliente.");
 
             if (cliente == null)
                 return BadRequest();
@@ -203,6 +222,9 @@ namespace API.Controllers
         [SwaggerResponse(200, "Cliente deletado com sucesso!", typeof(Cliente))]
         public async Task<ActionResult<Cliente>> DeleteCliente(int id)
         {
+            if (_context.Cliente is null)
+                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
+
             var cliente = await _context.Cliente.FindAsync(id);
 
             if (cliente == null)
@@ -215,6 +237,9 @@ namespace API.Controllers
 
         private bool ClienteExists(int id)
         {
+            if (_context.Cliente is null)
+                return false;
+
             return _context.Cliente.Any(e => e.Id == id);
         }
     }

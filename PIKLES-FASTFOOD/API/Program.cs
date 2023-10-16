@@ -2,6 +2,7 @@ using Data.Context;
 using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using System.Globalization;
 
 // Cria um builder de aplicação web com os argumentos passados
 var builder = WebApplication.CreateBuilder(args);

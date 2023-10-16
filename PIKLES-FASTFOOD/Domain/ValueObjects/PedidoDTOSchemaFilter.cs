@@ -9,21 +9,22 @@ namespace Domain.ValueObjects
     {
         public void Apply(OpenApiSchema schema, SchemaFilterContext context)
         {
-            // verifica se o contexto é da classe Pessoa
+            // verifica se o contexto é da classe PedidoDTO
             if (context.Type == typeof(PedidoDTO))
             {
                 // cria um objeto OpenApiObject com os valores desejados
-                var modeloProduto = new OpenApiObject
+                var modeloPedidoDTO = new OpenApiObject
                 {
-                    ["Cliente"] = new OpenApiString("Nome completo do cliente - [string]"),
+                    ["Cliente"] = new OpenApiString("[string]"),
+                    ["DataPedido"] = new OpenApiString(DateTime.Now.ToString("yyyy-MM-dd")),
                     ["Quantidade"] = new OpenApiInteger(0),
-                    ["NomeCategoria"] = new OpenApiString("Nome da categoria do produto - [string]"),
+                    ["NomeCategoria"] = new OpenApiString("[string]"),
                     ["CodigoProduto"] = new OpenApiInteger(0),
-                    ["NomeProduto"] = new OpenApiString("Nome do produto - [string]"),
+                    ["NomeProduto"] = new OpenApiString("[string]"),
                     ["ValorProduto"] = new OpenApiDouble(0.01)
                 };
                 // atribui o exemplo ao esquema
-                schema.Example = modeloProduto;
+                schema.Example = modeloPedidoDTO;
             }
         }
     }
