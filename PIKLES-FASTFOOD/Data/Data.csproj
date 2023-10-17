@@ -21,11 +21,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Repository\" />
+		<ProjectReference Include="..\Application\Application.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Application\Application.csproj" />
+	  <Folder Include="Migrations\" />
 	</ItemGroup>
 
 </Project>

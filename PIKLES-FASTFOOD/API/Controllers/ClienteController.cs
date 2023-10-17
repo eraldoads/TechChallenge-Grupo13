@@ -1,15 +1,14 @@
-﻿using Data.Context;
-using Domain.Entities;
+﻿using Domain.Entities;
+using Domain.Services;
 using Domain.ValueObjects;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
 
     [Produces("application/json", new string[] { })]
     [SwaggerResponse(204, "Requisição concluída sem dados de retorno.", null)]
@@ -22,12 +21,12 @@ namespace API.Controllers
     [Consumes("application/json", new string[] { })]
 
     public class ClienteController : ControllerBase
-    {
-        private readonly MySQLContext _context;
+    {        
+        private readonly IClienteService _clienteService;
 
-        public ClienteController(MySQLContext context)
+        public ClienteController(IClienteService clienteService)
         {
-            _context = context;
+            _clienteService = clienteService;
         }
 
         // GET: api/clientes
@@ -41,10 +40,8 @@ namespace API.Controllers
         [SwaggerResponse(206, "Conteúdo Parcial!", typeof(List<Cliente>))]
         public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
         {
-            if (_context.Cliente is null)
-                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
-
-            return await _context.Cliente.ToListAsync();
+            List<Cliente> clientes = await _clienteService.GetClientes();            
+            return clientes;
         }
 
         // GET: api/clientes/{id}
@@ -58,16 +55,14 @@ namespace API.Controllers
         Tags = new[] { "Clientes" }
         )]
         [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(Cliente))]
-        [SwaggerResponse(404, "Cliente não encontrado!", typeof(void))]
+        [SwaggerResponse(204, "Cliente não encontrado!", typeof(void))]
         public async Task<ActionResult<Cliente>> GetCliente(int? id)
         {
-            if (_context.Cliente is null)
-                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
-
             if (id == null)
                 return BadRequest();
 
-            var cliente = await _context.Cliente.FindAsync(id);
+            Cliente cliente = await _clienteService.GetClienteById(id);
+
             if (cliente == null)
                 return NoContent();
 
@@ -91,20 +86,16 @@ namespace API.Controllers
         [SwaggerResponse(201, "Cliente criado com sucesso!", typeof(Cliente))]
         public async Task<ActionResult<Cliente>> PostCliente([FromBody] Cliente cliente)
         {
-            if (_context.Cliente is null)
-                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
-
-            var existeCPF = await _context.Cliente.FirstOrDefaultAsync(c => c.CPF == cliente.CPF);
+            Cliente existeCPF = await _clienteService.GetClienteByCpf(cliente.CPF);
 
             if (existeCPF != null)
-                return NotFound("CPF já cadastrado para outro cliente.");
+                return Conflict(new { message = "CPF já cadastrado para outro cliente." });
 
             if (cliente == null)
                 return BadRequest();
 
-            _context.Cliente.Add(cliente);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction("GetCliente", new { id = cliente.Id }, cliente);
+            Cliente novoCliente = await _clienteService.PostCliente(cliente);
+            return CreatedAtAction("GetCliente", new { id = novoCliente.Id }, novoCliente);
         }
 
         // PATCH: api/clientes/{id}
@@ -125,12 +116,9 @@ namespace API.Controllers
         [SwaggerResponse(204, "Cliente atualizado parcialmente com sucesso!", typeof(void))]
         public async Task<IActionResult> PatchCliente(int id, [FromBody] JsonPatchDocument<Cliente> patchDoc)
         {
-            if (_context.Cliente is null)
-                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
-
             if (patchDoc != null)
             {
-                var itemCliente = await _context.Cliente.FindAsync(id);
+                var itemCliente = await _clienteService.GetClienteById(id);
 
                 if (itemCliente == null)
                     return NoContent();
@@ -140,19 +128,7 @@ namespace API.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                _context.Entry(itemCliente).State = EntityState.Modified;
-
-                try
-                {
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ClienteExists(id))
-                        return NoContent();
-                    else
-                        throw;
-                }
+                await _clienteService.UpdateCliente(itemCliente);
 
                 return NoContent();
             }
@@ -180,31 +156,17 @@ namespace API.Controllers
         [SwaggerResponse(204, "Cliente atualizado com sucesso!", typeof(void))]
         public async Task<IActionResult> PutCliente(int id, [FromBody] Cliente cliente)
         {
-            if (_context.Cliente is null)
-                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
 
             cliente.Id = id;
-            var existeCPF = await _context.Cliente.FirstOrDefaultAsync(c => c.CPF == cliente.CPF);
+            Cliente existeCPF = await _clienteService.GetClienteByCpf(cliente.CPF);
 
             if (existeCPF != null)
-                return NotFound("CPF já cadastrado para outro cliente.");
+                return Conflict(new { message = "CPF já cadastrado para outro cliente." });
 
             if (cliente == null)
                 return BadRequest();
 
-            _context.Entry(cliente).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ClienteExists(id))
-                    return Ok();
-                else
-                    throw;
-            }
+            _ = await _clienteService.UpdateCliente(cliente);
 
             return Ok();
         }
@@ -222,25 +184,13 @@ namespace API.Controllers
         [SwaggerResponse(200, "Cliente deletado com sucesso!", typeof(Cliente))]
         public async Task<ActionResult<Cliente>> DeleteCliente(int id)
         {
-            if (_context.Cliente is null)
-                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
-
-            var cliente = await _context.Cliente.FindAsync(id);
+            Cliente cliente = await _clienteService.GetClienteById(id);
 
             if (cliente == null)
                 return NoContent();
 
-            _context.Cliente.Remove(cliente);
-            await _context.SaveChangesAsync();
+            _clienteService.DeleteCliente(id);
             return cliente;
-        }
-
-        private bool ClienteExists(int id)
-        {
-            if (_context.Cliente is null)
-                return false;
-
-            return _context.Cliente.Any(e => e.Id == id);
         }
     }
 }

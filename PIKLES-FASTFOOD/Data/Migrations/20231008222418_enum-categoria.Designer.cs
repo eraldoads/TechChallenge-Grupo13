@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace API.Migrations
+namespace Data.Migrations
 {
     [DbContext(typeof(MySQLContext))]
     [Migration("20231008222418_enum-categoria")]

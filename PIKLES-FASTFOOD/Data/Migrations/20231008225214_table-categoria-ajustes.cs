@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace API.Migrations
+namespace Data.Migrations
 {
     public partial class tablecategoriaajustes : Migration
     {

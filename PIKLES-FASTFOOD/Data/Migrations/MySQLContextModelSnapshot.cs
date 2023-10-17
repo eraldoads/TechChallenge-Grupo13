@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace API.Migrations
+namespace Data.Migrations
 {
     [DbContext(typeof(MySQLContext))]
     partial class MySQLContextModelSnapshot : ModelSnapshot

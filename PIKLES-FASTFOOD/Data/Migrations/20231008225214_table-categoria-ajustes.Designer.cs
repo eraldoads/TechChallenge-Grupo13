@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace API.Migrations
+namespace Data.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    [Migration("20231008224100_table-categoria")]
-    partial class tablecategoria
+    [Migration("20231008225214_table-categoria-ajustes")]
+    partial class tablecategoriaajustes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

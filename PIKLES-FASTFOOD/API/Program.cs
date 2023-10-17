@@ -1,4 +1,8 @@
+using Application.Services;
 using Data.Context;
+using Data.Repository;
+using Domain.Adapters;
+using Domain.Services;
 using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -15,7 +19,7 @@ var connectionStringMysql = builder.Configuration.GetConnectionString("Connectio
 builder.Services.AddDbContext<MySQLContext>(option => option.UseMySql(
     connectionStringMysql, // Usar a string de conexão.
     ServerVersion.AutoDetect(connectionStringMysql), // Especificar a versão do servidor MySQL.
-    builder => builder.MigrationsAssembly("API") // Especifica o assembly do projeto que contém as classes de migrações do EF Core.
+    builder => builder.MigrationsAssembly("Data") // Especifica o assembly do projeto que contém as classes de migrações do EF Core.
     )
 );
 
@@ -25,6 +29,9 @@ builder.Services.AddControllers(options =>
     // Insere um formato de entrada personalizado para o JsonPatch
     options.InputFormatters.Insert(0, JsonPatchSample.MyJPIF.GetJsonPatchInputFormatter());
 });
+
+builder.Services.AddScoped<IClienteService, ClienteService>();
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
 // Adiciona o suporte ao NewtonsoftJson aos controllers
 builder.Services.AddControllers().AddNewtonsoftJson();
