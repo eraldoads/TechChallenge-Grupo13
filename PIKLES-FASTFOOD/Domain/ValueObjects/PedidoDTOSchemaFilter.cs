@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Domain.EntitiesDTO;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -16,7 +16,7 @@ namespace Domain.ValueObjects
                 var modeloPedidoDTO = new OpenApiObject
                 {
                     ["Cliente"] = new OpenApiString("[string]"),
-                    ["DataPedido"] = new OpenApiString(DateTime.Now.ToString("yyyy-MM-dd")),
+                    ["DataPedido"] = new OpenApiString(DateTime.Now.ToString("yyyy-MM-dd HH:mm")),
                     ["Quantidade"] = new OpenApiInteger(0),
                     ["NomeCategoria"] = new OpenApiString("[string]"),
                     ["CodigoProduto"] = new OpenApiInteger(0),

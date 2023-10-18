@@ -1,5 +1,6 @@
 ﻿using Data.Context;
 using Domain.Entities;
+using Domain.EntitiesDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
@@ -8,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 namespace API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
 
     [Produces("application/json", new string[] { })]
     [SwaggerResponse(204, "Requisição concluída sem dados de retorno.", null)]
@@ -29,7 +30,7 @@ namespace API.Controllers
             _context = context;
         }
 
-        // GET : /api/pedido
+        // GET : /pedido
         [HttpGet()]
         [SwaggerOperation(
             Summary = "Endpoint para retornar com todos os pedidos realizados",
@@ -37,7 +38,6 @@ namespace API.Controllers
             Tags = new[] { "Pedidos" }
         )]
         [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(List<PedidoDTO>))]
-        [SwaggerResponse(204, "Requisição concluída sem dados de retorno.", null)]
         [SwaggerResponse(206, "Conteúdo Parcial!", typeof(List<PedidoDTO>))]
         public async Task<ActionResult<IEnumerable<PedidoDTO>>> GetPedido()
         {
@@ -49,54 +49,83 @@ namespace API.Controllers
                         join pedido_produto in _context.Pedido_Produto on pedido.Id equals pedido_produto.IdPedido
                         join produto in _context.Produto on pedido_produto.IdProduto equals produto.Id
                         join categoria in _context.Categoria on (int)produto.IdCategoria equals categoria.Id
-                        select new PedidoDTO
+                        select new
                         {
-                            Cliente = cliente.Nome + " " + cliente.Sobrenome,
-                            DataPedido = pedido.DataPedido,
-                            Quantidade = pedido_produto.Quantidade,
-                            NomeCategoria = categoria.NomeCategoria,
-                            CodigoProduto = produto.CodigoProduto,
-                            NomeProduto = produto.NomeProduto,
-                            ValorProduto = produto.ValorProduto
+                            Pedido = pedido,
+                            Cliente = cliente,
+                            PedidoProduto = pedido_produto,
+                            Produto = produto,
+                            Categoria = categoria
                         };
-            query = query.OrderBy(p => p.DataPedido);
+            query = query.Distinct();
 
-            // Verifica se a consulta retornou algum resultado
-            var result = await query.ToListAsync();
-            
+            var groupedQuery = query.GroupBy(
+                        p => new
+                        {
+                            p.Pedido.Id,
+                            p.Cliente.Nome,
+                            p.Cliente.Sobrenome,
+                            p.Pedido.DataPedido,
+                            p.Pedido.StatusPedido,
+                            p.Pedido.ValorTotal
+                        },
+                        (key, items) => new PedidoDTO
+                        {
+                            IdPedido = key.Id,
+                            DataPedido = key.DataPedido,
+                            StatusPedido = key.StatusPedido,
+                            NomeCliente = key.Nome + " " + key.Sobrenome,
+                            ValorTotalPedido = key.ValorTotal,
+                            // Lista para armazenar múltiplos combos.
+                            Combo = items.GroupBy(
+                                item => new { item.PedidoProduto.IdPedido },
+                                (itemKey, itemGroup) => new ComboDTO
+                                {
+                                    Produto = itemGroup.Select(prod => new ProdutoDTO
+                                    {
+                                        IdProduto = prod.Produto.Id,
+                                        NomeProduto = prod.Produto.NomeProduto,
+                                        QuantidadeProduto = prod.PedidoProduto.Quantidade,
+                                        ValorProduto = prod.Produto.ValorProduto
+                                    }).ToList()
+                                }
+                            ).ToList()
+                        });
+
+            var result = await groupedQuery.ToListAsync();
+
             if (result == null || result.Count == 0)
-                // Retorna o status code 204 (No Content)
                 return NoContent();
             else
-                // Retorna o status code 200 (OK) com o resultado no corpo da resposta
                 return Ok(result);
         }
 
-        // POST : /api/pedido
+
+        // POST : /pedido
         [HttpPost]
         [SwaggerOperation(
             Summary = "Endpoint para criar um novo pedido",
             Description = @"Cria um novo pedido com os dados recebidos no corpo da requisição </br>
-                    <b>Parâmetros de entrada:</b>
-                    <br/> • <b>idCliente</b>: o identificador do cliente que realizou o pedido ⇒ <font color='red'><b>Obrigatório</b></font>
-                    <br/> • <b>dataPedido</b>: a data em que o pedido foi realizado ⇒ <font color='red'><b>Obrigatório</b></font>
-                    <br/> • <b>produtos</b>: uma lista de produtos incluídos no pedido, cada um contendo os seguintes parâmetros:
-                        <br/>&nbsp;&emsp; • <b>IdProduto</b>: o identificador do produto incluído no pedido ⇒ <font color='red'><b>Obrigatório</b></font>
-                        <br/>&nbsp;&emsp; • <b>Quantidade</b>: a quantidade do respectivo produto incluído no pedido ⇒ <font color='red'><b>Obrigatório</b></font>
-                    ",
+                <b>Parâmetros de entrada:</b>
+                <br/> • <b>idCliente</b>: o identificador do cliente que realizou o pedido ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>dataPedido</b>: a data em que o pedido foi realizado ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>statusPedido</b>: o status do pedido ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>combo</b>: uma lista de combos incluídos no pedido, cada um contendo uma lista de produtos:
+                    <br/>&nbsp;&emsp; • <b>produto</b>: a lista de produtos incluídos no combo, cada um contendo os seguintes parâmetros:
+                        <br/>&nbsp;&emsp;&emsp; • <b>IdProduto</b>: o identificador do produto incluído no combo ⇒ <font color='red'><b>Obrigatório</b></font>
+                        <br/>&nbsp;&emsp;&emsp; • <b>Quantidade</b>: a quantidade do respectivo produto incluído no combo ⇒ <font color='red'><b>Obrigatório</b></font>
+                ",
             Tags = new[] { "Pedidos" }
         )]
         [SwaggerResponse(201, "Pedido criado com sucesso!", typeof(Pedido))]
-        [SwaggerResponse(400, "Dados inválidos ou incompletos!", null)]
-        [SwaggerResponse(500, "Erro interno no servidor!", null)]
         public async Task<IActionResult> PostPedido([Required][FromBody] PedidoInput pedidoInput)
         {
             // Validação dos dados de entrada
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (pedidoInput.Produtos == null)
-                return BadRequest("Lista de produtos está vazia!");
+            if (pedidoInput.Combo == null)
+                return BadRequest("Lista de combo está vazia!");
 
             try
             {
@@ -107,6 +136,7 @@ namespace API.Controllers
                 {
                     IdCliente = pedidoInput.IdCliente,
                     DataPedido = pedidoInput.DataPedido,
+                    StatusPedido = pedidoInput.StatusPedido,
                     ValorTotal = 0
                 };
 
@@ -115,22 +145,30 @@ namespace API.Controllers
 
                 var pedidoProdutos = new List<Pedido_Produto>();
 
-                foreach (var produto in pedidoInput.Produtos)
+                foreach (var combo in pedidoInput.Combo)
                 {
-                    var produtoDb = await _context.Produto.AsNoTracking().FirstOrDefaultAsync(p => p.Id == produto.IdProduto);
-
-                    if (produtoDb is null || produto.Quantidade <= 0)
-                        return BadRequest("Produto e/ou quantidade inválida!");
-
-                    var pedidoProduto = new Pedido_Produto
+                    if (combo.Produto == null)
                     {
-                        IdPedido = pedido.Id,
-                        IdProduto = produto.IdProduto,
-                        Quantidade = produto.Quantidade
-                    };
+                        return BadRequest("Lista de produtos no combo está vazia!");
+                    }
 
-                    pedidoProdutos.Add(pedidoProduto);
-                    pedido.ValorTotal += produtoDb.ValorProduto * produto.Quantidade;
+                    foreach (var produto in combo.Produto)
+                    {
+                        var produtoDb = await _context.Produto.AsNoTracking().FirstOrDefaultAsync(p => p.Id == produto.IdProduto);
+
+                        if (produtoDb is null || produto.Quantidade <= 0)
+                            return BadRequest("Produto e/ou quantidade inválida!");
+
+                        var pedidoProduto = new Pedido_Produto
+                        {
+                            IdPedido = pedido.Id,
+                            IdProduto = produto.IdProduto,
+                            Quantidade = produto.Quantidade
+                        };
+
+                        pedidoProdutos.Add(pedidoProduto);
+                        pedido.ValorTotal += produtoDb.ValorProduto * produto.Quantidade;
+                    }
                 }
 
                 _context.Pedido_Produto.AddRange(pedidoProdutos);
@@ -143,5 +181,6 @@ namespace API.Controllers
                 return StatusCode(500, $"Ocorreu um erro: {ex.Message}");
             }
         }
+
     }
 }

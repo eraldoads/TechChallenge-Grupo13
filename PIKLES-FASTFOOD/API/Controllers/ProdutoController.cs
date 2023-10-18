@@ -10,7 +10,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
 
     [Produces("application/json", new string[] { })]
     [SwaggerResponse(204, "Requisição concluída sem dados de retorno.", null)]
@@ -31,7 +31,7 @@ namespace API.Controllers
             _context = context;
         }
 
-        // GET : /api/Produto
+        // GET : /Produto
         [HttpGet()]
         [SwaggerOperation(
         Summary = "Endpoint para listar todos os produtos cadastrados",
@@ -48,7 +48,7 @@ namespace API.Controllers
             return await _context.Produto.ToListAsync();
         }
 
-        // GET : /api/Produto/{id}
+        // GET : /Produto/{id}
         [HttpGet("{id?}")]
         [SwaggerOperation(
             Summary = "Endpoint para listar um produto específico pelo id",
@@ -75,7 +75,7 @@ namespace API.Controllers
             return produto;
         }
 
-        // GET : /api/Produto/categoria/{idCategoria?}
+        // GET : /Produto/categoria/{idCategoria?}
         [HttpGet("categoria/{idCategoria?}")]
         [SwaggerOperation(
             Summary = "Endpoint para listar os produtos de uma categoria específica",
@@ -102,7 +102,7 @@ namespace API.Controllers
             return produtos;
         }
 
-        // POST : /api/produto
+        // POST : /produto
         [HttpPost]
         [SwaggerOperation(
         Summary = "Endpoint para criar um novo produto",
@@ -136,7 +136,7 @@ namespace API.Controllers
             return CreatedAtAction("GetProduto", new { id = produto.Id }, produto);
         }
 
-        // PATCH : /api/produto/{id}
+        // PATCH : /produto/{id}
         [HttpPatch("{id}")]
         [SwaggerOperation(
                 Summary = "Endpoint para atualizar parcialmente um produto pelo id",
@@ -189,7 +189,7 @@ namespace API.Controllers
             }
         }
 
-        // PUT : /api/produto/{id}
+        // PUT : /produto/{id}
         [HttpPut("{id}")]
         [SwaggerOperation(
             Summary = "Endpoint para atualizar completamente um produto pelo id",
@@ -233,7 +233,7 @@ namespace API.Controllers
             return Ok();
         }
 
-        // DELETE : /api/produto/{id}
+        // DELETE : /produto/{id}
         [HttpDelete("{id}")]
         [SwaggerOperation(
             Summary = "Endpoint para deletar um produto pelo id",
@@ -260,6 +260,9 @@ namespace API.Controllers
 
         private bool ProdutoExists(int id)
         {
+            if (_context.Produto is null)
+                return false;
+
             return _context.Produto.Any(e => e.Id == id);
         }
     }

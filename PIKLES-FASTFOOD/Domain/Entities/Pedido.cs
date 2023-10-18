@@ -1,6 +1,7 @@
 ﻿using Domain.ValueObjects;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Annotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entities
 {
@@ -16,10 +17,11 @@ namespace Domain.Entities
         [JsonProperty("dataPedido")]
         public DateTimeOffset DataPedido { get; set; }
 
+        [Required(ErrorMessage = "O status do pedido é obrigatório")]
+        public string? StatusPedido { get; set; }
+
         [JsonProperty("valorTotal")]
         public float ValorTotal { get; set; }
 
     }
-
-
 }

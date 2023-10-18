@@ -17,7 +17,7 @@ namespace Domain.ValueObjects
                 {
                     ["Id"] = new OpenApiInteger(0),
                     ["IdCliente"] = new OpenApiInteger(0),
-                    ["DataPedido"] = new OpenApiString(DateTime.Now.ToString("yyyy-MM-dd")),
+                    ["DataPedido"] = new OpenApiString(DateTime.Now.ToString("yyyy-MM-dd HH:mm")),
                     ["ValorTotal"] = new OpenApiInteger(0),
                 };
                 // atribui o exemplo ao esquema

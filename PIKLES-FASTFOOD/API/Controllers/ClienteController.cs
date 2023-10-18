@@ -9,7 +9,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
 
     [Produces("application/json", new string[] { })]
     [SwaggerResponse(204, "Requisição concluída sem dados de retorno.", null)]
@@ -30,7 +30,7 @@ namespace API.Controllers
             _context = context;
         }
 
-        // GET: api/clientes
+        // GET: /clientes
         [HttpGet()]
         [SwaggerOperation(
         Summary = "Endpoint para listar todos os clientes cadastrados",
@@ -47,7 +47,7 @@ namespace API.Controllers
             return await _context.Cliente.ToListAsync();
         }
 
-        // GET: api/clientes/{id}
+        // GET: /clientes/{id}
         [HttpGet("{id?}")]
         [SwaggerOperation(
         Summary = "Endpoint para listar um cliente específico pelo id",
@@ -58,7 +58,7 @@ namespace API.Controllers
         Tags = new[] { "Clientes" }
         )]
         [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(Cliente))]
-        [SwaggerResponse(404, "Cliente não encontrado!", typeof(void))]
+        [SwaggerResponse(204, "Cliente não encontrado!", typeof(void))]
         public async Task<ActionResult<Cliente>> GetCliente(int? id)
         {
             if (_context.Cliente is null)
@@ -74,7 +74,7 @@ namespace API.Controllers
             return cliente;
         }
 
-        // POST: api/clientes
+        // POST: /clientes
         [HttpPost]
         [SwaggerOperation(
         Summary = "Endpoint para criar um novo cliente",
@@ -107,7 +107,7 @@ namespace API.Controllers
             return CreatedAtAction("GetCliente", new { id = cliente.Id }, cliente);
         }
 
-        // PATCH: api/clientes/{id}
+        // PATCH: /clientes/{id}
         [HttpPatch("{id}")]
         [SwaggerOperation(
             Summary = "Endpoint para atualizar parcialmente um cliente pelo ID",
@@ -162,7 +162,7 @@ namespace API.Controllers
             }
         }
 
-        // PUT: api/clientes/{id}
+        // PUT: /clientes/{id}
         [HttpPut("{id}")]
         [ValidateModel]
         [SwaggerOperation(
@@ -209,7 +209,7 @@ namespace API.Controllers
             return Ok();
         }
 
-        // DELETE: api/clientes/{id}
+        // DELETE: /clientes/{id}
         [HttpDelete("{id}")]
         [SwaggerOperation(
         Summary = "Endpoint para deletar um cliente pelo id",

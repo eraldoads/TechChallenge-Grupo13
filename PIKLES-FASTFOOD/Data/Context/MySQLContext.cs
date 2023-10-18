@@ -37,6 +37,7 @@ namespace Data.Context
         public DbSet<Categoria>? Categoria { get; set; }
         public DbSet<Pedido>? Pedido { get; set; }
         public DbSet<Pedido_Produto>? Pedido_Produto { get; set; }
+        //public DbSet<Combo>? Combo { get; set; }
 
     }
 }

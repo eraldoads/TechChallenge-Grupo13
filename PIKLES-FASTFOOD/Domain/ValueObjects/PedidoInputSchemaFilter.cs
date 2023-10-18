@@ -21,7 +21,7 @@ namespace Domain.ValueObjects
                 // cria um objeto OpenApiObject para a propriedade DataPedido
                 var modeloDataPedido = new OpenApiObject
                 {
-                    ["DataPedido"] = new OpenApiString(DateTime.Now.ToString("yyyy-MM-dd")),
+                    ["DataPedido"] = new OpenApiString(DateTime.Now.ToString("yyyy-MM-dd HH:mm")),
                 };
 
                 // cria um objeto OpenApiObject para a propriedade Produtos
