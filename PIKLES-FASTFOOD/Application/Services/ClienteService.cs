@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Domain.EntitiesDTO;
 using Domain.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace Application.Services
 {
@@ -31,27 +32,32 @@ namespace Application.Services
 
         public async Task<Cliente> PostCliente(ClienteDTO clienteDTO)
         {
-            if (clienteDTO == null || !ValidateClienteDTO(clienteDTO))
+            if (!ValidateClienteDTO(clienteDTO, out ICollection<ValidationResult> results))
             {
-                // Adicione a lógica para lidar com a validação incorreta
-                throw new ArgumentException("Parâmetros inválidos para criação de cliente.");
+                var errors = results.Select(r => r.ErrorMessage).ToList();
+                throw new ValidationException("Ocorreu um erro de validação", new Exception(string.Join("\n", errors)));
             }
 
-            // Verifique se o CPF já está cadastrado
-            Cliente existeCPF = await _clienteRepository.GetClienteByCpf(clienteDTO.CPF);
+            var existeCPF = await _clienteRepository.GetClienteByCpf(clienteDTO.CPF);
+
             if (existeCPF != null)
-            {
-                // Adicione a lógica para lidar com o CPF já cadastrado
-                throw new InvalidOperationException("CPF já cadastrado para outro cliente.");
-            }
+                throw new ValidationException("CPF já cadastrado para outro cliente.");
 
             var cliente = MapClienteDtoToCliente(clienteDTO);
             return await _clienteRepository.PostCliente(cliente);
         }
 
-        public async Task<int> UpdateCliente(Cliente cliente)
+        public async Task UpdateCliente(Cliente cliente)
         {
-            return await _clienteRepository.UpdateCliente(cliente);
+            if (cliente == null)
+                throw new ValidationException("cliente não pode ser nulo.");
+
+            var itemCliente = await _clienteRepository.GetClienteById(cliente.IdCliente);
+
+            if (itemCliente == null)
+                throw new ValidationException("Cliente não encontrado.");
+
+            await _clienteRepository.UpdateCliente(cliente);
         }
 
         public async Task<int> DeleteCliente(int id)
@@ -59,13 +65,11 @@ namespace Application.Services
             return await _clienteRepository.DeleteCliente(id);
         }
 
-
-        private static bool ValidateClienteDTO(ClienteDTO clienteDTO)
+        private static bool ValidateClienteDTO(ClienteDTO clienteDTO, out ICollection<ValidationResult> results)
         {
-            return !string.IsNullOrEmpty(clienteDTO.Nome) &&
-                   !string.IsNullOrEmpty(clienteDTO.Sobrenome) &&
-                   !string.IsNullOrEmpty(clienteDTO.CPF) &&
-                   !string.IsNullOrEmpty(clienteDTO.Email);
+            var context = new ValidationContext(clienteDTO, serviceProvider: null, items: null);
+            results = new List<ValidationResult>();
+            return Validator.TryValidateObject(clienteDTO, context, results, true);
         }
 
         private static Cliente MapClienteDtoToCliente(ClienteDTO clienteDto)

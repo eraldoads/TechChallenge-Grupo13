@@ -1,10 +1,11 @@
 ﻿using Domain.ValueObjects;
 using Newtonsoft.Json;
+using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entities
 {
-    //[SwaggerSchemaFilter(typeof(ClienteSchemaFilter))]
+    [SwaggerSchemaFilter(typeof(ClienteSchemaFilter))]
     public class Cliente //: IValidatableObject
     {
 

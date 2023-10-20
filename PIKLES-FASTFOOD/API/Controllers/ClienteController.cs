@@ -5,6 +5,7 @@ using Domain.ValueObjects;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace API.Controllers
 {
@@ -73,50 +74,34 @@ namespace API.Controllers
         // POST: /clientes
         [HttpPost]
         [SwaggerOperation(
-            Summary = "Endpoint para criar um novo cliente",
-            Description = @"Endpoint para criar um novo cliente </br>
-        <b>Parâmetros de entrada:</b>
-        <br/> • <b>id</b>: o identificador do cliente a ser criado ⇒ <font color='green'><b>Opcional</b></font>
-        <br/> • <b>nome</b>: o primeiro nome do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
-        <br/> • <b>sobrenome</b>: o sobrenome do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
-        <br/> • <b>cpf</b>: o CPF do cliente a ser criado - Somente números ⇒ <font color='red'><b>Obrigatório</b></font>
-        <br/> • <b>email</b>: o e-mail do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
-        ",
-            Tags = new[] { "Clientes" }
+        Summary = "Endpoint para criar um novo cliente",
+        Description = @"Endpoint para criar um novo cliente </br>
+                    <b>Parâmetros de entrada:</b>
+                    <br/> • <b>id</b>: o identificador do cliente a ser criado ⇒ <font color='green'><b>Opcional</b></font>
+                    <br/> • <b>nome</b>: o primeiro nome do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
+                    <br/> • <b>sobrenome</b>: o sobrenome do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
+                    <br/> • <b>cpf</b>: o CPF do cliente a ser criado - Somente números ⇒ <font color='red'><b>Obrigatório</b></font>
+                    <br/> • <b>email</b>: o e-mail do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
+                    ",
+        Tags = new[] { "Clientes" }
         )]
         [SwaggerResponse(201, "Cliente criado com sucesso!", typeof(Cliente))]
         public async Task<ActionResult<Cliente>> PostCliente([FromBody] ClienteDTO clienteDTO)
         {
             try
             {
-                if (clienteDTO == null)
-                    return BadRequest();
-
-                if (string.IsNullOrEmpty(clienteDTO.CPF))
-                    return BadRequest("O CPF do cliente não pode ser vazio.");
-
-                var existeCPF = await _clienteService.GetClienteByCpf(clienteDTO.CPF);
-
-                if (existeCPF != null)
-                    return Conflict(new { message = "CPF já cadastrado para outro cliente." });
-
                 var novoCliente = await _clienteService.PostCliente(clienteDTO);
                 return CreatedAtAction("GetCliente", new { id = novoCliente.IdCliente }, novoCliente);
             }
-            catch (ArgumentException ex)
+            catch (ValidationException ex)
             {
                 return BadRequest(ex.Message);
-            }
-            catch (InvalidOperationException ex)
-            {
-                return Conflict(new { message = ex.Message });
             }
             catch (Exception)
             {
                 return StatusCode(500, "Ocorreu um erro interno. Por favor, tente novamente mais tarde.");
             }
         }
-
 
         // PATCH: /clientes/{id}
         [HttpPatch("{id}")]
@@ -136,27 +121,32 @@ namespace API.Controllers
         [SwaggerResponse(204, "Cliente atualizado parcialmente com sucesso!", typeof(void))]
         public async Task<IActionResult> PatchCliente(int id, [FromBody] JsonPatchDocument<Cliente> patchDoc)
         {
-            if (patchDoc != null)
+            try
             {
-                var itemCliente = await _clienteService.GetClienteById(id);
+                var cliente = await _clienteService.GetClienteById(id);
+                if (cliente == null)
+                    return NotFound();
 
-                if (itemCliente == null)
-                    return NoContent();
-
-                patchDoc.ApplyTo(itemCliente, ModelState);
+                patchDoc.ApplyTo(cliente, ModelState);
 
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                await _clienteService.UpdateCliente(itemCliente);
+                await _clienteService.UpdateCliente(cliente);
 
                 return NoContent();
             }
-            else
+            catch (ValidationException ex)
             {
-                return BadRequest(ModelState);
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocorreu um erro interno. Por favor, tente novamente mais tarde.");
             }
         }
+
+
 
         // PUT: /clientes/{id}
         [HttpPut("{id}")]

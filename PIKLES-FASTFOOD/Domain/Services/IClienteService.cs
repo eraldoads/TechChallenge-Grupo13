@@ -9,7 +9,7 @@ namespace Domain.Services
         Task<Cliente> GetClienteById(int? id);
         Task<Cliente> GetClienteByCpf(string cpf);
         Task<Cliente> PostCliente(ClienteDTO clienteDTO);
-        Task<int> UpdateCliente(Cliente cliente);
+        Task UpdateCliente(Cliente cliente);
         Task<int> DeleteCliente(int id);
     }
 }

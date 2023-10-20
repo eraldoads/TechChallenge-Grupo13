@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using Domain.ValueObjects;
+using Newtonsoft.Json;
+using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entities
 {
-    //[SwaggerSchemaFilter(typeof(PedidoSchemaFilter))]
+    [SwaggerSchemaFilter(typeof(PedidoSchemaFilter))]
     public class Pedido
     {
         [JsonProperty("idPedido")]
