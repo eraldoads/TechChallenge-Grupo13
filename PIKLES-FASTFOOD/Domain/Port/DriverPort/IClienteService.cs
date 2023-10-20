@@ -1,7 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.EntitiesDTO;
 
-namespace Domain.Services
+namespace Domain.Port.Services
 {
     public interface IClienteService
     {

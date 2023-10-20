@@ -1,6 +1,6 @@
 ﻿using Data.Context;
-using Domain.Adapters;
 using Domain.Entities;
+using Domain.Port.Adapters;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repository

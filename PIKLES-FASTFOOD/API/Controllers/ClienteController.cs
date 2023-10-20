@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.EntitiesDTO;
-using Domain.Services;
+using Domain.Port.Services;
 using Domain.ValueObjects;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -145,7 +145,6 @@ namespace API.Controllers
                 return StatusCode(500, "Ocorreu um erro interno. Por favor, tente novamente mais tarde.");
             }
         }
-
 
 
         // PUT: /clientes/{id}

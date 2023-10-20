@@ -1,7 +1,7 @@
-﻿using Domain.Adapters;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.EntitiesDTO;
-using Domain.Services;
+using Domain.Port.Adapters;
+using Domain.Port.Services;
 using System.ComponentModel.DataAnnotations;
 
 namespace Application.Services
@@ -50,7 +50,7 @@ namespace Application.Services
         public async Task UpdateCliente(Cliente cliente)
         {
             if (cliente == null)
-                throw new ValidationException("cliente não pode ser nulo.");
+                throw new ValidationException("Cliente não pode ser nulo.");
 
             var itemCliente = await _clienteRepository.GetClienteById(cliente.IdCliente);
 
