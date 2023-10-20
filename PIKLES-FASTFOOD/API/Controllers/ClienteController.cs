@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.EntitiesDTO;
 using Domain.Services;
 using Domain.ValueObjects;
 using Microsoft.AspNetCore.JsonPatch;
@@ -21,7 +22,7 @@ namespace API.Controllers
     [Consumes("application/json", new string[] { })]
 
     public class ClienteController : ControllerBase
-    {        
+    {
         private readonly IClienteService _clienteService;
 
         public ClienteController(IClienteService clienteService)
@@ -29,7 +30,7 @@ namespace API.Controllers
             _clienteService = clienteService;
         }
 
-        // GET: api/clientes
+        // GET: /clientes
         [HttpGet()]
         [SwaggerOperation(
         Summary = "Endpoint para listar todos os clientes cadastrados",
@@ -40,11 +41,11 @@ namespace API.Controllers
         [SwaggerResponse(206, "Conteúdo Parcial!", typeof(List<Cliente>))]
         public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
         {
-            List<Cliente> clientes = await _clienteService.GetClientes();            
+            List<Cliente> clientes = await _clienteService.GetClientes();
             return clientes;
         }
 
-        // GET: api/clientes/{id}
+        // GET: /clientes/{id}
         [HttpGet("{id?}")]
         [SwaggerOperation(
         Summary = "Endpoint para listar um cliente específico pelo id",
@@ -69,36 +70,55 @@ namespace API.Controllers
             return cliente;
         }
 
-        // POST: api/clientes
+        // POST: /clientes
         [HttpPost]
         [SwaggerOperation(
-        Summary = "Endpoint para criar um novo cliente",
-        Description = @"Endpoint para criar um novo cliente </br>
-              <b>Parâmetros de entrada:</b>
-                <br/> • <b>id</b>: o identificador do cliente a ser criado ⇒ <font color='green'><b>Opcional</b></font>
-                <br/> • <b>nome</b>: o primeiro nome do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
-                <br/> • <b>sobrenome</b>: o sobrenome do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
-                <br/> • <b>cpf</b>: o CPF do cliente a ser criado - Somente números ⇒ <font color='red'><b>Obrigatório</b></font>
-                <br/> • <b>email</b>: o e-mail do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
-                ",
-        Tags = new[] { "Clientes" }
+            Summary = "Endpoint para criar um novo cliente",
+            Description = @"Endpoint para criar um novo cliente </br>
+        <b>Parâmetros de entrada:</b>
+        <br/> • <b>id</b>: o identificador do cliente a ser criado ⇒ <font color='green'><b>Opcional</b></font>
+        <br/> • <b>nome</b>: o primeiro nome do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
+        <br/> • <b>sobrenome</b>: o sobrenome do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
+        <br/> • <b>cpf</b>: o CPF do cliente a ser criado - Somente números ⇒ <font color='red'><b>Obrigatório</b></font>
+        <br/> • <b>email</b>: o e-mail do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
+        ",
+            Tags = new[] { "Clientes" }
         )]
         [SwaggerResponse(201, "Cliente criado com sucesso!", typeof(Cliente))]
-        public async Task<ActionResult<Cliente>> PostCliente([FromBody] Cliente cliente)
+        public async Task<ActionResult<Cliente>> PostCliente([FromBody] ClienteDTO clienteDTO)
         {
-            Cliente existeCPF = await _clienteService.GetClienteByCpf(cliente.CPF);
+            try
+            {
+                if (clienteDTO == null)
+                    return BadRequest();
 
-            if (existeCPF != null)
-                return Conflict(new { message = "CPF já cadastrado para outro cliente." });
+                if (string.IsNullOrEmpty(clienteDTO.CPF))
+                    return BadRequest("O CPF do cliente não pode ser vazio.");
 
-            if (cliente == null)
-                return BadRequest();
+                var existeCPF = await _clienteService.GetClienteByCpf(clienteDTO.CPF);
 
-            Cliente novoCliente = await _clienteService.PostCliente(cliente);
-            return CreatedAtAction("GetCliente", new { id = novoCliente.Id }, novoCliente);
+                if (existeCPF != null)
+                    return Conflict(new { message = "CPF já cadastrado para outro cliente." });
+
+                var novoCliente = await _clienteService.PostCliente(clienteDTO);
+                return CreatedAtAction("GetCliente", new { id = novoCliente.IdCliente }, novoCliente);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(new { message = ex.Message });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocorreu um erro interno. Por favor, tente novamente mais tarde.");
+            }
         }
 
-        // PATCH: api/clientes/{id}
+
+        // PATCH: /clientes/{id}
         [HttpPatch("{id}")]
         [SwaggerOperation(
             Summary = "Endpoint para atualizar parcialmente um cliente pelo ID",
@@ -138,7 +158,7 @@ namespace API.Controllers
             }
         }
 
-        // PUT: api/clientes/{id}
+        // PUT: /clientes/{id}
         [HttpPut("{id}")]
         [ValidateModel]
         [SwaggerOperation(
@@ -156,22 +176,22 @@ namespace API.Controllers
         [SwaggerResponse(204, "Cliente atualizado com sucesso!", typeof(void))]
         public async Task<IActionResult> PutCliente(int id, [FromBody] Cliente cliente)
         {
+            if (cliente == null || cliente.CPF == null)
+                return BadRequest();
 
-            cliente.Id = id;
+            cliente.IdCliente = id;
             Cliente existeCPF = await _clienteService.GetClienteByCpf(cliente.CPF);
 
             if (existeCPF != null)
                 return Conflict(new { message = "CPF já cadastrado para outro cliente." });
 
-            if (cliente == null)
-                return BadRequest();
 
-            _ = await _clienteService.UpdateCliente(cliente);
+            await _clienteService.UpdateCliente(cliente);
 
             return Ok();
         }
 
-        // DELETE: api/clientes/{id}
+        // DELETE: /clientes/{id}
         [HttpDelete("{id}")]
         [SwaggerOperation(
         Summary = "Endpoint para deletar um cliente pelo id",
@@ -189,7 +209,7 @@ namespace API.Controllers
             if (cliente == null)
                 return NoContent();
 
-            _clienteService.DeleteCliente(id);
+            await _clienteService.DeleteCliente(id);
             return cliente;
         }
     }

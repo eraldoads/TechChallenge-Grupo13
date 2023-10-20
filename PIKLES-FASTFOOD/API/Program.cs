@@ -6,7 +6,6 @@ using Domain.Services;
 using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using System.Globalization;
 
 // Cria um builder de aplicação web com os argumentos passados
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +18,7 @@ var connectionStringMysql = builder.Configuration.GetConnectionString("Connectio
 builder.Services.AddDbContext<MySQLContext>(option => option.UseMySql(
     connectionStringMysql, // Usar a string de conexão.
     ServerVersion.AutoDetect(connectionStringMysql), // Especificar a versão do servidor MySQL.
-    builder => builder.MigrationsAssembly("Data") // Especifica o assembly do projeto que contém as classes de migrações do EF Core.
+    builder => builder.MigrationsAssembly("API") // Especifica o assembly do projeto que contém as classes de migrações do EF Core.
     )
 );
 

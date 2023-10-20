@@ -1,16 +1,15 @@
 ﻿using Domain.ValueObjects;
 using Newtonsoft.Json;
-using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entities
 {
-    [SwaggerSchemaFilter(typeof(ClienteSchemaFilter))]
+    //[SwaggerSchemaFilter(typeof(ClienteSchemaFilter))]
     public class Cliente //: IValidatableObject
     {
 
-        [JsonProperty("id")]
-        public int Id { get; set; }
+        [JsonProperty("idCliente")]
+        public int IdCliente { get; set; }
 
         [JsonProperty("nome")]
         [Required(ErrorMessage = "O nome é obrigatório")]

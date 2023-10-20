@@ -5504,19 +5504,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lfeli\\.nuget\\packages\\": {}
+    "C:\\Users\\erald\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain.Tests\\Domain.Tests.csproj",
+      "projectUniqueName": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain.Tests\\Domain.Tests.csproj",
       "projectName": "Domain.Tests",
-      "projectPath": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain.Tests\\Domain.Tests.csproj",
-      "packagesPath": "C:\\Users\\lfeli\\.nuget\\packages\\",
-      "outputPath": "C:\\git\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain.Tests\\obj\\",
+      "projectPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain.Tests\\Domain.Tests.csproj",
+      "packagesPath": "C:\\Users\\erald\\.nuget\\packages\\",
+      "outputPath": "K:\\Users\\erald\\source\\repos\\TechChallenge-Grupo13\\PIKLES-FASTFOOD\\Domain.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\lfeli\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\erald\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.EntitiesDTO;
 
 namespace Domain.Services
 {
@@ -7,7 +8,7 @@ namespace Domain.Services
         Task<List<Cliente>> GetClientes();
         Task<Cliente> GetClienteById(int? id);
         Task<Cliente> GetClienteByCpf(string cpf);
-        Task<Cliente> PostCliente(Cliente cliente);
+        Task<Cliente> PostCliente(ClienteDTO clienteDTO);
         Task<int> UpdateCliente(Cliente cliente);
         Task<int> DeleteCliente(int id);
     }

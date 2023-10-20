@@ -33,6 +33,7 @@ namespace Data.Repository
         {
             _context.Cliente.Add(cliente);
             _context.SaveChanges();
+
             return cliente;
         }
 
@@ -46,6 +47,7 @@ namespace Data.Repository
         {
             var cliente = await _context.Cliente.FindAsync(id);
             _context.Cliente.Remove(cliente);
+
             return await _context.SaveChangesAsync();
         }
     }
