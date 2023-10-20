@@ -1,5 +1,4 @@
 ﻿using Domain.Entities.Output;
-using Domain.EntitiesDTO;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
