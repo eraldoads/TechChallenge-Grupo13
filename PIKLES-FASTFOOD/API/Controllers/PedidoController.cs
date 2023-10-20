@@ -49,22 +49,26 @@ namespace API.Controllers
             var pedidos = new List<PedidoOutput>();
             var pedidosAgrupados = new Dictionary<int, PedidoOutput>();
 
-            var query = @"  SELECT PEDI.IdPedido AS idPedido,
-                                   PEDI.DataPedido AS dataPedido,
-                                   PEDI.StatusPedido AS statusPedido,
-                                   CLIE.Nome AS nomeCliente,
-                                   PEDI.ValorTotal AS valorTotalPedido,
-                                   COMB.IdCombo AS idCombo,
-                                   PROD.IdProduto AS idProduto,
-                                   PROD.NomeProduto AS nomeProduto,
-                                   COMBP.Quantidade AS quantidadeProduto,
-                                   PROD.ValorProduto AS valorProduto
-                            FROM Pedido PEDI
-                            INNER JOIN Cliente CLIE ON PEDI.IdCliente = CLIE.IdCliente
-                            INNER JOIN Combo COMB ON COMB.PedidoId = PEDI.IdPedido
-                            INNER JOIN ComboProduto COMBP ON COMBP.ComboId = COMB.IdCombo
-                            INNER JOIN Produto PROD ON COMBP.IdProduto = PROD.IdProduto
-                            ORDER BY idPedido, nomeCliente;
+            var query = @"  SELECT  PEDI.IdPedido                           AS idPedido,
+                                    PEDI.DataPedido                         AS dataPedido,
+                                    PEDI.StatusPedido                       AS statusPedido,
+                                    CONCAT(CLIE.Nome, ' ', CLIE.Sobrenome)  AS nomeCompletoCliente,
+                                    PEDI.ValorTotal                         AS valorTotalPedido,
+                                    COMB.IdCombo                            AS idCombo,
+                                    PROD.IdProduto                          AS idProduto,
+                                    PROD.NomeProduto                        AS nomeProduto,
+                                    COMBP.Quantidade                        AS quantidadeProduto,
+                                    PROD.ValorProduto                       AS valorProduto
+                               FROM Pedido PEDI
+                         INNER JOIN Cliente CLIE
+                                 ON PEDI.IdCliente = CLIE.IdCliente
+                         INNER JOIN Combo COMB
+                                 ON COMB.PedidoId = PEDI.IdPedido
+                         INNER JOIN ComboProduto COMBP
+                                 ON COMBP.ComboId = COMB.IdCombo
+                         INNER JOIN Produto PROD
+                                 ON COMBP.IdProduto = PROD.IdProduto
+                           ORDER BY dataPedido, idCombo, nomeCompletoCliente;
                         ";
 
             // Execute a query SQL para obter os pedidos e suas informações relacionadas
@@ -86,7 +90,7 @@ namespace API.Controllers
                             IdPedido = idPedido,
                             DataPedido = Convert.ToDateTime(result["dataPedido"]),
                             StatusPedido = result["statusPedido"].ToString(),
-                            NomeCliente = result["nomeCliente"].ToString(),
+                            NomeCliente = result["nomeCompletoCliente"].ToString(),
                             ValorTotalPedido = Convert.ToSingle(result["valorTotalPedido"]),
                             Combo = new List<ComboOutput>()
                         };
@@ -98,26 +102,37 @@ namespace API.Controllers
                     {
                         if (pedidoAgrupado != null && pedidoAgrupado.Combo != null)
                         {
-                            var comboOutput = new ComboOutput
-                            {
-                                IdCombo = Convert.ToInt32(result["idCombo"]),
-                                Produto = new List<ProdutoOutput>
-                        {
-                            new ProdutoOutput
+                            var idCombo = Convert.ToInt32(result["idCombo"]);
+                            var produtoOutput = new ProdutoOutput
                             {
                                 IdProduto = Convert.ToInt32(result["idProduto"]),
                                 NomeProduto = result["nomeProduto"].ToString(),
                                 QuantidadeProduto = Convert.ToInt32(result["quantidadeProduto"]),
                                 ValorProduto = Convert.ToSingle(result["valorProduto"])
-                            }
-                        }
                             };
 
-                            pedidoAgrupado.Combo.Add(comboOutput);
+                            if (pedidoAgrupado.Combo.Any(c => c.IdCombo == idCombo))
+                            {
+                                var comboOutput = pedidoAgrupado.Combo.FirstOrDefault(c => c.IdCombo == idCombo);
+                                if (comboOutput is null || comboOutput.Produto is null)
+                                    return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
+
+                                comboOutput?.Produto.Add(produtoOutput);
+                            }
+                            else
+                            {
+                                var comboOutput = new ComboOutput
+                                {
+                                    IdCombo = idCombo,
+                                    Produto = new List<ProdutoOutput> { produtoOutput }
+                                };
+                                pedidoAgrupado.Combo.Add(comboOutput);
+                            }
                         }
                     }
                 }
             }
+
             _context.Database.CloseConnection();
 
             pedidos.AddRange(pedidosAgrupados.Values);

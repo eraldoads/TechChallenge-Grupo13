@@ -1,8 +1,8 @@
 using Application.Services;
 using Data.Context;
 using Data.Repository;
-using Domain.Adapters;
-using Domain.Services;
+using Domain.Port.Adapters;
+using Domain.Port.Services;
 using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
