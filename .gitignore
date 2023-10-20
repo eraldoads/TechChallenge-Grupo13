@@ -720,3 +720,16 @@ obj/
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,csharp,aspnetcore,dotnetcore
+/PIKLES-FASTFOOD/.vs/PIKLES-FASTFOOD/v17/.suo
+/PIKLES-FASTFOOD/API/obj/Debug/net6.0/API.assets.cache
+/PIKLES-FASTFOOD/API/obj/Debug/net6.0/API.csproj.FileListAbsolute.txt
+/PIKLES-FASTFOOD/Application/obj/Debug/net6.0/Application.csproj.FileListAbsolute.txt
+/PIKLES-FASTFOOD/Application/obj/Debug/net6.0/Application.assets.cache
+/PIKLES-FASTFOOD/Domain/obj/Debug/net6.0/Domain.assets.cache
+/PIKLES-FASTFOOD/Domain.Tests/obj/Debug/net6.0/Domain.Tests.assets.cache
+/PIKLES-FASTFOOD/Domain/obj/Debug/net6.0/Domain.csproj.FileListAbsolute.txt
+/PIKLES-FASTFOOD/Domain.Tests/obj/Debug/net6.0/Domain.Tests.csproj.FileListAbsolute.txt
+/PIKLES-FASTFOOD/.vs/PIKLES-FASTFOOD/DesignTimeBuild/.dtbcache.v2
+/PIKLES-FASTFOOD/.vs/PIKLES-FASTFOOD/v17/.futdcache.v2
+/PIKLES-FASTFOOD/.vs/ProjectEvaluation/pikles-fastfood.metadata.v7.bin
+/PIKLES-FASTFOOD/.vs/ProjectEvaluation/pikles-fastfood.projects.v7.bin
