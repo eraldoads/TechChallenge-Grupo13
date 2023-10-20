@@ -12,7 +12,7 @@ Aplicação para todo sistema de Controle de Pedidos de uma lanchonete - [API] B
 
 ## 🔗 Links do projeto
 - Documento: [DDD](https://1drv.ms/w/s!AntPAkrc0xN9q8kH5tUnZYZQgotMxQ?e=f4ur3f)
-- Miro: [Dashboard Miro](https://miro.com/app/board/uXjVMijt7dc=/)
+- Miro: [Dashboard Miro](https://miro.com/app/board/uXjVNftHwCM=/)
 - GIT: [Repositório GIT](https://github.com/eraldoads/TechChallenge-Grupo13)
 - Documentação API: [Swagger](https://www.xxxx.com)
 - Testes: [Postman](https://www.xxxx.com)

@@ -46,7 +46,7 @@
           "dependencies": {
             "Microsoft.AspNetCore.Mvc.Core": {
               "target": "Package",
-              "version": "[2.1.38, )"
+              "version": "[2.2.5, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

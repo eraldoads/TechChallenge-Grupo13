@@ -9,8 +9,8 @@ namespace Domain.Entities
     public class Cliente //: IValidatableObject
     {
 
-        [JsonProperty("id")]
-        public int Id { get; set; }
+        [JsonProperty("idCliente")]
+        public int IdCliente { get; set; }
 
         [JsonProperty("nome")]
         [Required(ErrorMessage = "O nome é obrigatório")]

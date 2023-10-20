@@ -1,8 +1,11 @@
+using Application.Services;
 using Data.Context;
+using Data.Repository;
+using Domain.Adapters;
+using Domain.Services;
 using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using System.Globalization;
 
 // Cria um builder de aplicação web com os argumentos passados
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +28,9 @@ builder.Services.AddControllers(options =>
     // Insere um formato de entrada personalizado para o JsonPatch
     options.InputFormatters.Insert(0, JsonPatchSample.MyJPIF.GetJsonPatchInputFormatter());
 });
+
+builder.Services.AddScoped<IClienteService, ClienteService>();
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
 // Adiciona o suporte ao NewtonsoftJson aos controllers
 builder.Services.AddControllers().AddNewtonsoftJson();

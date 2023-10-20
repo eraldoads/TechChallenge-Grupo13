@@ -1,5 +1,8 @@
 ﻿using Data.Context;
 using Domain.Entities;
+using Domain.Entities.Input;
+using Domain.Entities.Output;
+using Domain.EntitiesDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
@@ -8,7 +11,7 @@ using System.ComponentModel.DataAnnotations;
 namespace API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
 
     [Produces("application/json", new string[] { })]
     [SwaggerResponse(204, "Requisição concluída sem dados de retorno.", null)]
@@ -29,119 +32,195 @@ namespace API.Controllers
             _context = context;
         }
 
-        // GET : /api/pedido
+        // GET : /pedido
         [HttpGet()]
         [SwaggerOperation(
-            Summary = "Endpoint para retornar com todos os pedidos realizados",
+            Summary = "Endpoint para retornar todos os pedidos realizados",
             Description = @"Busca todos os pedidos realizados </br>",
             Tags = new[] { "Pedidos" }
         )]
-        [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(List<PedidoDTO>))]
-        [SwaggerResponse(204, "Requisição concluída sem dados de retorno.", null)]
-        [SwaggerResponse(206, "Conteúdo Parcial!", typeof(List<PedidoDTO>))]
-        public async Task<ActionResult<IEnumerable<PedidoDTO>>> GetPedido()
+        [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(List<PedidoOutput>))]
+        [SwaggerResponse(206, "Conteúdo Parcial!", typeof(List<PedidoOutput>))]
+        public ActionResult<IEnumerable<PedidoOutput>> GetPedido()
         {
-            if (_context.Pedido is null || _context.Pedido_Produto is null || _context.Cliente is null || _context.Produto is null || _context.Categoria is null)
+            if (_context is null || _context.Pedido is null || _context.Cliente is null || _context.Produto is null || _context.Categoria is null)
                 return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
 
-            var query = from pedido in _context.Pedido
-                        join cliente in _context.Cliente on pedido.IdCliente equals cliente.Id
-                        join pedido_produto in _context.Pedido_Produto on pedido.Id equals pedido_produto.IdPedido
-                        join produto in _context.Produto on pedido_produto.IdProduto equals produto.Id
-                        join categoria in _context.Categoria on (int)produto.IdCategoria equals categoria.Id
-                        select new PedidoDTO
-                        {
-                            Cliente = cliente.Nome + " " + cliente.Sobrenome,
-                            DataPedido = pedido.DataPedido,
-                            Quantidade = pedido_produto.Quantidade,
-                            NomeCategoria = categoria.NomeCategoria,
-                            CodigoProduto = produto.CodigoProduto,
-                            NomeProduto = produto.NomeProduto,
-                            ValorProduto = produto.ValorProduto
-                        };
-            query = query.OrderBy(p => p.DataPedido);
+            var pedidos = new List<PedidoOutput>();
+            var pedidosAgrupados = new Dictionary<int, PedidoOutput>();
 
-            // Verifica se a consulta retornou algum resultado
-            var result = await query.ToListAsync();
-            
-            if (result == null || result.Count == 0)
-                // Retorna o status code 204 (No Content)
-                return NoContent();
-            else
-                // Retorna o status code 200 (OK) com o resultado no corpo da resposta
-                return Ok(result);
+            var query = @"  SELECT PEDI.IdPedido AS idPedido,
+                                   PEDI.DataPedido AS dataPedido,
+                                   PEDI.StatusPedido AS statusPedido,
+                                   CLIE.Nome AS nomeCliente,
+                                   PEDI.ValorTotal AS valorTotalPedido,
+                                   COMB.IdCombo AS idCombo,
+                                   PROD.IdProduto AS idProduto,
+                                   PROD.NomeProduto AS nomeProduto,
+                                   COMBP.Quantidade AS quantidadeProduto,
+                                   PROD.ValorProduto AS valorProduto
+                            FROM Pedido PEDI
+                            INNER JOIN Cliente CLIE ON PEDI.IdCliente = CLIE.IdCliente
+                            INNER JOIN Combo COMB ON COMB.PedidoId = PEDI.IdPedido
+                            INNER JOIN ComboProduto COMBP ON COMBP.ComboId = COMB.IdCombo
+                            INNER JOIN Produto PROD ON COMBP.IdProduto = PROD.IdProduto
+                            ORDER BY idPedido, nomeCliente;
+                        ";
+
+            // Execute a query SQL para obter os pedidos e suas informações relacionadas
+            var command = _context.Database.GetDbConnection().CreateCommand();
+
+            command.CommandText = query;
+            _context.Database.OpenConnection();
+
+            using (var result = command.ExecuteReader())
+            {
+                while (result.Read())
+                {
+                    var idPedido = Convert.ToInt32(result["idPedido"]);
+
+                    if (!pedidosAgrupados.ContainsKey(idPedido))
+                    {
+                        var pedidoOutput = new PedidoOutput
+                        {
+                            IdPedido = idPedido,
+                            DataPedido = Convert.ToDateTime(result["dataPedido"]),
+                            StatusPedido = result["statusPedido"].ToString(),
+                            NomeCliente = result["nomeCliente"].ToString(),
+                            ValorTotalPedido = Convert.ToSingle(result["valorTotalPedido"]),
+                            Combo = new List<ComboOutput>()
+                        };
+
+                        pedidosAgrupados[idPedido] = pedidoOutput;
+                    }
+
+                    if (pedidosAgrupados.TryGetValue(idPedido, out PedidoOutput? pedidoAgrupado))
+                    {
+                        if (pedidoAgrupado != null && pedidoAgrupado.Combo != null)
+                        {
+                            var comboOutput = new ComboOutput
+                            {
+                                IdCombo = Convert.ToInt32(result["idCombo"]),
+                                Produto = new List<ProdutoOutput>
+                        {
+                            new ProdutoOutput
+                            {
+                                IdProduto = Convert.ToInt32(result["idProduto"]),
+                                NomeProduto = result["nomeProduto"].ToString(),
+                                QuantidadeProduto = Convert.ToInt32(result["quantidadeProduto"]),
+                                ValorProduto = Convert.ToSingle(result["valorProduto"])
+                            }
+                        }
+                            };
+
+                            pedidoAgrupado.Combo.Add(comboOutput);
+                        }
+                    }
+                }
+            }
+            _context.Database.CloseConnection();
+
+            pedidos.AddRange(pedidosAgrupados.Values);
+
+            // Verifique se há pedidos e retorne uma resposta adequada
+            if (pedidos.Count == 0)
+                return StatusCode(204);
+
+            return Ok(pedidos);
         }
 
-        // POST : /api/pedido
+
+        // POST : /pedido
         [HttpPost]
         [SwaggerOperation(
             Summary = "Endpoint para criar um novo pedido",
             Description = @"Cria um novo pedido com os dados recebidos no corpo da requisição </br>
-                    <b>Parâmetros de entrada:</b>
-                    <br/> • <b>idCliente</b>: o identificador do cliente que realizou o pedido ⇒ <font color='red'><b>Obrigatório</b></font>
-                    <br/> • <b>dataPedido</b>: a data em que o pedido foi realizado ⇒ <font color='red'><b>Obrigatório</b></font>
-                    <br/> • <b>produtos</b>: uma lista de produtos incluídos no pedido, cada um contendo os seguintes parâmetros:
-                        <br/>&nbsp;&emsp; • <b>IdProduto</b>: o identificador do produto incluído no pedido ⇒ <font color='red'><b>Obrigatório</b></font>
-                        <br/>&nbsp;&emsp; • <b>Quantidade</b>: a quantidade do respectivo produto incluído no pedido ⇒ <font color='red'><b>Obrigatório</b></font>
-                    ",
+                <b>Parâmetros de entrada:</b>
+                <br/> • <b>idCliente</b>: o identificador do cliente que realizou o pedido ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>dataPedido</b>: a data em que o pedido foi realizado ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>statusPedido</b>: o status atual do pedido ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>combo</b>: uma lista de combos incluídos no pedido, cada um contendo uma lista de produtos:
+                    <br/>&nbsp;&emsp;&emsp;  • <b>produto</b>: a lista de produtos incluídos no combo, cada um contendo os seguintes parâmetros:
+                        <br/>&nbsp;&emsp;&emsp;&nbsp;&emsp;&emsp;   • <b>idProduto</b>: o identificador do produto incluído no combo ⇒ <font color='red'><b>Obrigatório</b></font>
+                        <br/>&nbsp;&emsp;&emsp;&nbsp;&emsp;&emsp;   • <b>quantidade</b>: a quantidade do respectivo produto incluído no combo ⇒ <font color='red'><b>Obrigatório</b></font>
+                ",
             Tags = new[] { "Pedidos" }
         )]
-        [SwaggerResponse(201, "Pedido criado com sucesso!", typeof(Pedido))]
-        [SwaggerResponse(400, "Dados inválidos ou incompletos!", null)]
-        [SwaggerResponse(500, "Erro interno no servidor!", null)]
+
+        [SwaggerResponse(201, "Pedido criado com sucesso!", typeof(PedidoDTO))]
         public async Task<IActionResult> PostPedido([Required][FromBody] PedidoInput pedidoInput)
         {
             // Validação dos dados de entrada
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (pedidoInput.Produtos == null)
-                return BadRequest("Lista de produtos está vazia!");
+            // Criando um novo objeto Pedido com base nos dados fornecidos
+            var novoPedido = new Pedido
+            {
+                IdCliente = pedidoInput.IdCliente,
+                DataPedido = pedidoInput.DataPedido,
+                StatusPedido = pedidoInput.StatusPedido,
+                ValorTotal = 0
+            };
+
+            if (_context is null || _context.Produto is null || _context.Pedido is null || pedidoInput.Combo is null)
+                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
+
+            // Adicionando combos e produtos ao pedido
+            foreach (var comboInput in pedidoInput.Combo)
+            {
+                var novoCombo = new Combo();
+
+                if (comboInput.Produto is null)
+                    return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
+
+                // Adicionar produtos ao combo e calcular o valor total do pedido
+                foreach (var produtoInput in comboInput.Produto)
+                {
+                    var produto = await _context.Produto.FindAsync(produtoInput.IdProduto);
+                    if (produto == null)
+                        return StatusCode(404, $"Produto com Id {produtoInput.IdProduto} não encontrado.");
+
+                    var novoProdutoCombo = new ComboProduto
+                    {
+                        IdProduto = produtoInput.IdProduto,
+                        Quantidade = produtoInput.Quantidade
+                    };
+
+                    // Adicionar novoProdutoCombo à lista de produtos no novoCombo
+                    novoCombo.Produtos.Add(novoProdutoCombo);
+
+                    // Atualizar o valor total do pedido com o valor do produto atual
+                    novoPedido.ValorTotal += produto.ValorProduto * produtoInput.Quantidade;
+                }
+
+                // Adicionar novoCombo ao novoPedido
+                novoPedido.Combos.Add(novoCombo);
+            }
+
+            // Adicionar o novo pedido ao contexto
+            _context.Pedido.Add(novoPedido);
 
             try
             {
-                if (_context is null || _context.Produto is null || _context.Pedido_Produto is null || _context.Pedido is null)
-                    return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
-
-                var pedido = new Pedido
-                {
-                    IdCliente = pedidoInput.IdCliente,
-                    DataPedido = pedidoInput.DataPedido,
-                    ValorTotal = 0
-                };
-
-                _context.Pedido.Add(pedido);
+                // Salvar as mudanças no banco de dados
                 await _context.SaveChangesAsync();
-
-                var pedidoProdutos = new List<Pedido_Produto>();
-
-                foreach (var produto in pedidoInput.Produtos)
-                {
-                    var produtoDb = await _context.Produto.AsNoTracking().FirstOrDefaultAsync(p => p.Id == produto.IdProduto);
-
-                    if (produtoDb is null || produto.Quantidade <= 0)
-                        return BadRequest("Produto e/ou quantidade inválida!");
-
-                    var pedidoProduto = new Pedido_Produto
-                    {
-                        IdPedido = pedido.Id,
-                        IdProduto = produto.IdProduto,
-                        Quantidade = produto.Quantidade
-                    };
-
-                    pedidoProdutos.Add(pedidoProduto);
-                    pedido.ValorTotal += produtoDb.ValorProduto * produto.Quantidade;
-                }
-
-                _context.Pedido_Produto.AddRange(pedidoProdutos);
-                await _context.SaveChangesAsync();
-
-                return CreatedAtAction(nameof(GetPedido), new { id = pedido.Id }, pedido);
             }
-            catch (Exception ex)
+            catch (DbUpdateException)
             {
-                return StatusCode(500, $"Ocorreu um erro: {ex.Message}");
+                // Se houver um erro ao salvar no banco de dados, retorne um erro 500
+                return StatusCode(500, "Ocorreu um erro ao salvar o pedido no banco de dados.");
             }
+
+            // Retornar o novo pedido criado
+            return StatusCode(201, new PedidoDTO
+            {
+                IdPedido = novoPedido.IdPedido,
+                DataPedido = novoPedido.DataPedido,
+                ValorTotal = novoPedido.ValorTotal
+            });
         }
+
+
     }
 }

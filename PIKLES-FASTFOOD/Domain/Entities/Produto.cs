@@ -9,13 +9,8 @@ namespace Domain.Entities
     [SwaggerSchemaFilter(typeof(ProdutoSchemaFilter))]
     public class Produto
     {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("codigoProduto")]
-        [Required(ErrorMessage = "O código do produto é obrigatório")]
-        [Range(1, int.MaxValue, ErrorMessage = "O código do produto deve ser um número positivo")]
-        public int CodigoProduto { get; set; }
+        [JsonProperty("idProduto")]
+        public int IdProduto { get; set; }
 
         [JsonProperty("nomeProduto")]
         [Required(ErrorMessage = "O nome do produto é obrigatório")]
@@ -29,12 +24,13 @@ namespace Domain.Entities
 
         [JsonProperty("idCategoriaProduto")]
         [Required(ErrorMessage = "O IdCategoria do produto é obrigatória")]
-        public EnumCategoria IdCategoria { get; set; }
+        public EnumCategoria IdCategoriaProduto { get; set; }
 
         [JsonProperty("descricaoProduto")]
         [Required(ErrorMessage = "A descrição do produto é obrigatória")]
         [StringLength(500, ErrorMessage = "A descrição do produto deve ter no máximo 500 caracteres")]
-        public string? Descricao { get; set; }
+        public string? DescricaoProduto { get; set; }
+
 
     }
 }

@@ -7,7 +7,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
 
     [Produces("application/json", new string[] { })]
     [SwaggerResponse(204, "Requisição concluída sem dados de retorno.", null)]
@@ -28,7 +28,7 @@ namespace API.Controllers
             _context = context;
         }
 
-        // POST: api/Login
+        // POST: /Login
         [HttpPost]
         [SwaggerOperation(
             Summary = "Endpoint para fazer login do cliente via CPF",
