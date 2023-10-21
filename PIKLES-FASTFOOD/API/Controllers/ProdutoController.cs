@@ -1,12 +1,13 @@
-﻿using Data.Context;
+﻿using Application.Services;
+using Data.Context;
 using Domain.Base;
 using Domain.Entities;
 using Domain.EntitiesDTO;
+using Domain.Port.Services;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace API.Controllers
 {
@@ -26,10 +27,11 @@ namespace API.Controllers
     public class ProdutoController : ControllerBase
     {
         private readonly MySQLContext _context;
+        private IProdutoService _produtoService;
 
-        public ProdutoController(MySQLContext context)
+        public ProdutoController(IProdutoService produtoService)
         {
-            _context = context;
+            _produtoService = produtoService;
         }
 
         // GET : /Produto
@@ -43,10 +45,8 @@ namespace API.Controllers
         [SwaggerResponse(206, "Conteúdo Parcial!", typeof(List<Produto>))]
         public async Task<ActionResult<IEnumerable<Produto>>> GetProdutos()
         {
-            if (_context.Produto is null)
-                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
-
-            return await _context.Produto.ToListAsync();
+            List<Produto> produtos = await _produtoService.GetProdutos();
+            return produtos;
         }
 
         // GET : /Produto/{id}
@@ -62,13 +62,10 @@ namespace API.Controllers
         [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(Produto))]
         public async Task<ActionResult<Produto>> GetProduto(int? id)
         {
-            if (_context.Produto is null)
-                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
-
             if (id == null)
                 return BadRequest();
 
-            var produto = await _context.Produto.FindAsync(id);
+            Produto produto = await _produtoService.GetProdutoById(id);
 
             if (produto == null)
                 return NoContent();
@@ -89,13 +86,10 @@ namespace API.Controllers
         [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(List<Produto>))]
         public async Task<ActionResult<List<Produto>>> GetProdutosPorIdCategoria(EnumCategoria? idCategoria)
         {
-            if (_context.Produto is null)
-                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
-
             if (idCategoria == null)
                 return BadRequest();
 
-            var produtos = await _context.Produto.Where(x => x.IdCategoriaProduto == idCategoria).ToListAsync();
+            var produtos = await _produtoService.GetProdutosByIdCategoria(idCategoria);
 
             if (produtos == null || produtos.Count == 0)
                 return NoContent();
@@ -125,22 +119,9 @@ namespace API.Controllers
             if (produtoDTO == null)
                 return BadRequest();
 
-            // Aqui você pode converter o DTO para a entidade de Produto e adicionar ao contexto
-            var novoProduto = new Produto
-            {
-                NomeProduto = produtoDTO.NomeProduto,
-                ValorProduto = produtoDTO.ValorProduto,
-                IdCategoriaProduto = produtoDTO.IdCategoriaProduto,
-                DescricaoProduto = produtoDTO.DescricaoProduto
-            };
+            var novoProduto = await _produtoService.PostProduto(produtoDTO);           
 
-            if (_context.Produto is null)
-                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
-
-            _context.Produto.Add(novoProduto);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProduto", new { id = novoProduto.IdProduto }, novoProduto);
+            return CreatedAtAction("PostProduto", new { id = novoProduto.IdProduto }, novoProduto);
         }
 
 
@@ -150,7 +131,7 @@ namespace API.Controllers
             Summary = "Endpoint para atualizar parcialmente um produto pelo id",
             Description = @"Endpoint para atualizar parcialmente um produto pelo id </br>
                           <b>Parâmetros de entrada:</b>
-                          <br/> • <b>ID</b>: o identificador do cliente. ⇒ <font color='red'><b>Obrigatório</b></font>
+                          <br/> • <b>ID</b>: o identificador do produto. ⇒ <font color='red'><b>Obrigatório</b></font>
                           <br/> • <b>operationType</b>: Este é um número que representa o tipo de operação a ser realizada. Os valores possíveis são 0 (Adicionar), 1 (Remover), 2 (Substituir), 3 (Mover), 4 (Copiar) e 5 (Testar). ⇒ <font color='green'><b>Opcional</b></font>
                           <br/> • <b>path</b>: Este é o caminho do valor a ser alterado na estrutura de dados JSON. Por exemplo, se você tem um objeto com uma propriedade chamada ‘nomeProduto’, o path seria ' ""path"": ""nomeProduto"" '. ⇒ <font color='red'><b>Obrigatório</b></font>
                           <br/> • <b>op</b>: Esta é a operação a ser realizada. Os valores possíveis são ‘add’, ‘remove’, ‘replace’, ‘move’, ‘copy’ e ‘test. ⇒ <font color='green'><b>Opcional</b></font>
@@ -159,41 +140,32 @@ namespace API.Controllers
                           ",
             Tags = new[] { "Produtos" }
         )]
-        [SwaggerResponse(204, "Cliente atualizado parcialmente com sucesso!", typeof(void))]
+        [SwaggerResponse(204, "Produto atualizado parcialmente com sucesso!", typeof(void))]
         public async Task<IActionResult> PatchProduto(int id, [FromBody] JsonPatchDocument<Produto> patchDoc)
         {
-            if (_context.Produto is null)
-                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
-
-            if (patchDoc != null)
+            try
             {
-                var itemProduto = await _context.Produto.FindAsync(id);
-                if (itemProduto == null)
+                var produto = await _produtoService.GetProdutoById(id);
+                if (produto == null)
                     return NoContent();
 
-                patchDoc.ApplyTo(itemProduto, ModelState);
+                patchDoc.ApplyTo(produto, ModelState);
 
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                _context.Entry(itemProduto).State = EntityState.Modified;
-                try
-                {
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProdutoExists(id))
-                        return NoContent();
-                    else
-                        throw;
-                }
+                await _produtoService.UpdateProduto(produto);
 
                 return NoContent();
+          
             }
-            else
+            catch (ValidationException ex)
             {
-                return BadRequest(ModelState);
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocorreu um erro interno. Por favor, tente novamente mais tarde.");
             }
         }
 
@@ -215,29 +187,33 @@ namespace API.Controllers
                 ",
             Tags = new[] { "Produtos" }
             )]
-        [SwaggerResponse(204, "Cliente atualizado com sucesso!", typeof(void))]
-        public async Task<IActionResult> PutProduto(int id, Produto produto)
+        [SwaggerResponse(204, "Produto atualizado com sucesso!", typeof(void))]
+        public async Task<IActionResult> PutProduto(int id, [FromBody] Produto produtoInput)
         {
-            produto.IdProduto = id;
-
-            if (produto == null)
-                return BadRequest();
-
-            _context.Entry(produto).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProdutoExists(id))
-                    return Ok();
-                else
-                    throw;
-            }
+                var produto = await _produtoService.GetProdutoById(id);
 
-            return Ok();
+                if (produto == null)
+                    return NotFound();
+
+                produto.NomeProduto = produtoInput.NomeProduto;
+                produto.DescricaoProduto = produtoInput.DescricaoProduto;
+                produto.ValorProduto = produtoInput.ValorProduto;
+                produto.IdCategoriaProduto = produto.IdCategoriaProduto;                
+
+                await _produtoService.UpdateProduto(produto);
+
+                return Ok();
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocorreu um erro interno. Por favor, tente novamente mais tarde.");
+            }
         }
 
         // DELETE : /produto/{id}
@@ -253,24 +229,13 @@ namespace API.Controllers
         [SwaggerResponse(200, "Produto deletado com sucesso!", typeof(Produto))]
         public async Task<ActionResult<Produto>> DeleteProduto(int id)
         {
-            if (_context.Produto is null)
-                return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
+            Produto produto = await _produtoService.GetProdutoById(id);
 
-            var produto = await _context.Produto.FindAsync(id);
             if (produto == null)
                 return NoContent();
 
-            _context.Produto.Remove(produto);
-            await _context.SaveChangesAsync();
+            await _produtoService.DeleteProduto(id);
             return produto;
-        }
-
-        private bool ProdutoExists(int id)
-        {
-            if (_context.Produto is null)
-                return false;
-
-            return _context.Produto.Any(e => e.IdProduto == id);
         }
     }
 }

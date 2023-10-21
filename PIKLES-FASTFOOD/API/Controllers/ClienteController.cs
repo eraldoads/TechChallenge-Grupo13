@@ -91,7 +91,7 @@ namespace API.Controllers
             try
             {
                 var novoCliente = await _clienteService.PostCliente(clienteDTO);
-                return CreatedAtAction("GetCliente", new { id = novoCliente.IdCliente }, novoCliente);
+                return CreatedAtAction("PostCliente", new { id = novoCliente.IdCliente }, novoCliente);
             }
             catch (ValidationException ex)
             {
@@ -162,16 +162,33 @@ namespace API.Controllers
         Tags = new[] { "Clientes" }
         )]
         [SwaggerResponse(204, "Cliente atualizado com sucesso!", typeof(void))]
-        public async Task<IActionResult> PutCliente(int id, [FromBody] Cliente cliente)
+        public async Task<IActionResult> PutCliente(int id, [FromBody] Cliente clienteInput)
         {
-            if (cliente == null)
-                return BadRequest();
+            try
+            {
+                var cliente = await _clienteService.GetClienteById(id);
 
-            cliente.IdCliente = id;
+                if (cliente == null)
+                    return NotFound();
 
-            await _clienteService.PutCliente(cliente);
+                cliente.Email = clienteInput.Email;
+                cliente.CPF = clienteInput.CPF;
+                cliente.Nome = clienteInput.Nome;
+                cliente.Sobrenome = clienteInput.Sobrenome;
 
-            return Ok();
+                await _clienteService.UpdateCliente(cliente);
+
+                return Ok();
+
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocorreu um erro interno. Por favor, tente novamente mais tarde.");
+            }
         }
 
         // DELETE: /clientes/{id}
