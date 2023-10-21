@@ -74,6 +74,7 @@ namespace Application.Services
             return await _clienteRepository.DeleteCliente(id);
         }
 
+
         private async Task UpdateCliente(Cliente cliente)
         {
             if (!cliente.IsValid())

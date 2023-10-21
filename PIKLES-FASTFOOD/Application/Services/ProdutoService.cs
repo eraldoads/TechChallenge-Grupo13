@@ -65,6 +65,7 @@ namespace Application.Services
             return await _produtoRepository.DeleteProduto(id);
         }
 
+
         private async Task UpdateProduto(Produto produto)
         {
             if (!produto.IsValid())
