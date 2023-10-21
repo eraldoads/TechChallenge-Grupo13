@@ -4,6 +4,7 @@ using Domain.Base;
 using Domain.Entities;
 using Domain.EntitiesDTO;
 using Domain.Port.Services;
+using Domain.ValueObjects;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -145,19 +146,12 @@ namespace API.Controllers
         {
             try
             {
-                var produto = await _produtoService.GetProdutoById(id);
-                if (produto == null)
-                    return NoContent();
-
-                patchDoc.ApplyTo(produto, ModelState);
-
-                if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
-
-                await _produtoService.UpdateProduto(produto);
-
+                await _produtoService.PatchProduto(id, patchDoc);
                 return NoContent();
-          
+            }
+            catch (ResourceNotFoundException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (ValidationException ex)
             {
@@ -187,24 +181,17 @@ namespace API.Controllers
                 ",
             Tags = new[] { "Produtos" }
             )]
-        [SwaggerResponse(204, "Produto atualizado com sucesso!", typeof(void))]
+        [SwaggerResponse(240, "Produto atualizado com sucesso!", typeof(void))]
         public async Task<IActionResult> PutProduto(int id, [FromBody] Produto produtoInput)
         {
             try
             {
-                var produto = await _produtoService.GetProdutoById(id);
-
-                if (produto == null)
-                    return NotFound();
-
-                produto.NomeProduto = produtoInput.NomeProduto;
-                produto.DescricaoProduto = produtoInput.DescricaoProduto;
-                produto.ValorProduto = produtoInput.ValorProduto;
-                produto.IdCategoriaProduto = produto.IdCategoriaProduto;                
-
-                await _produtoService.UpdateProduto(produto);
-
-                return Ok();
+                await _produtoService.PutProduto(id, produtoInput);
+                return NoContent();
+            }
+            catch (ResourceNotFoundException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (ValidationException ex)
             {

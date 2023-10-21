@@ -3,6 +3,8 @@ using Domain.Entities;
 using Domain.EntitiesDTO;
 using Domain.Port.DrivenPort;
 using Domain.Port.Services;
+using Domain.ValueObjects;
+using Microsoft.AspNetCore.JsonPatch;
 using System.ComponentModel.DataAnnotations;
 
 namespace Application.Services
@@ -38,24 +40,32 @@ namespace Application.Services
             return await _produtoRepository.PostProduto(produto);
         }
 
-        public async Task UpdateProduto(Produto produto)
+        public async Task PutProduto(int idProduto, Produto produtoInput)
         {
-            if (produto == null)
-                throw new ValidationException("Produto não pode ser nulo.");
+            var produto = await _produtoRepository.GetProdutoById(idProduto) ?? throw new ResourceNotFoundException("Produto não encontrado.");
 
-            var itemProduto = await _produtoRepository.GetProdutoById(produto.IdProduto);
+            produto.NomeProduto = produtoInput.NomeProduto;
+            produto.DescricaoProduto = produtoInput.DescricaoProduto;
+            produto.ValorProduto = produtoInput.ValorProduto;
+            produto.IdCategoriaProduto = produto.IdCategoriaProduto;
 
-            if (itemProduto == null)
-            {
-                throw new ValidationException("Produto não encontrado.");
-            }
-            else
-            {
-                itemProduto = produto;
-            }
+            if (!produto.IsValid())
+                throw new ValidationException("Dados inválidos.");
 
-            await _produtoRepository.UpdateProduto(itemProduto);
+            await _produtoRepository.UpdateProduto(produto);
         }
+
+        public async Task PatchProduto(int idProduto, JsonPatchDocument<Produto> patchDoc)
+        {
+            var produto = await _produtoRepository.GetProdutoById(idProduto) ?? throw new ResourceNotFoundException("Produto não encontrado.");
+            patchDoc.ApplyTo(produto);
+
+            if (!produto.IsValid())
+                throw new ValidationException("Dados inválidos.");
+
+            await _produtoRepository.UpdateProduto(produto);
+        }
+
 
         public async Task<int> DeleteProduto(int id)
         {

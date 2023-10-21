@@ -34,6 +34,12 @@ namespace Domain.Entities
         [EmailAddress(ErrorMessage = "O e-mail informado é inválido")]
         public string? Email { get; set; }
 
+        public bool IsValid()
+        {
+            var validationContext = new ValidationContext(this);
+            var validationResults = new List<ValidationResult>();
+            return Validator.TryValidateObject(this, validationContext, validationResults, true);
+        }
 
         //// Define um método virtual que valida o contexto de validação de outra forma que um DataAnnotation não atenda.
         //public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

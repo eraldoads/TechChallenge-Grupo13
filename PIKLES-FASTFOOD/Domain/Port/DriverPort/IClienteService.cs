@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.EntitiesDTO;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace Domain.Port.Services
 {
@@ -9,7 +10,8 @@ namespace Domain.Port.Services
         Task<Cliente> GetClienteById(int? id);
         Task<Cliente> GetClienteByCpf(string cpf);
         Task<Cliente> PostCliente(ClienteDTO clienteDTO);
-        Task UpdateCliente(Cliente cliente);
+        Task PatchCliente(int idCliente, JsonPatchDocument<Cliente> patchDoc);
+        Task PutCliente(int idCliente, Cliente clienteInput);
         Task<int> DeleteCliente(int id);
     }
 }
