@@ -52,16 +52,13 @@ namespace Application.Services
         public async Task PutCliente(int idCliente, Cliente clienteInput)
         {
             var cliente = await _clienteRepository.GetClienteById(idCliente) ?? throw new ResourceNotFoundException("Cliente não encontrado.");
-            
+
             cliente.Email = clienteInput.Email;
             cliente.CPF = clienteInput.CPF;
             cliente.Nome = clienteInput.Nome;
             cliente.Sobrenome = clienteInput.Sobrenome;
 
-            if (!cliente.IsValid())
-                throw new ValidationException("Dados inválidos.");
-
-            await _clienteRepository.UpdateCliente(cliente);
+            await UpdateCliente(cliente);
         }
 
         public async Task PatchCliente(int idCliente, JsonPatchDocument<Cliente> patchDoc)
@@ -69,16 +66,20 @@ namespace Application.Services
             var cliente = await _clienteRepository.GetClienteById(idCliente) ?? throw new ResourceNotFoundException("Cliente não encontrado.");
             patchDoc.ApplyTo(cliente);
 
-            if (!cliente.IsValid())
-                throw new ValidationException("Dados inválidos.");
-
-            await _clienteRepository.UpdateCliente(cliente);
+            await UpdateCliente(cliente);
         }
-
 
         public async Task<int> DeleteCliente(int id)
         {
             return await _clienteRepository.DeleteCliente(id);
+        }
+
+        private async Task UpdateCliente(Cliente cliente)
+        {
+            if (!cliente.IsValid())
+                throw new ValidationException("Dados inválidos.");
+
+            await _clienteRepository.UpdateCliente(cliente);
         }
 
         private static bool ValidateClienteDTO(ClienteDTO clienteDTO, out ICollection<ValidationResult> results)

@@ -49,10 +49,7 @@ namespace Application.Services
             produto.ValorProduto = produtoInput.ValorProduto;
             produto.IdCategoriaProduto = produto.IdCategoriaProduto;
 
-            if (!produto.IsValid())
-                throw new ValidationException("Dados inválidos.");
-
-            await _produtoRepository.UpdateProduto(produto);
+            await UpdateProduto(produto);
         }
 
         public async Task PatchProduto(int idProduto, JsonPatchDocument<Produto> patchDoc)
@@ -60,16 +57,20 @@ namespace Application.Services
             var produto = await _produtoRepository.GetProdutoById(idProduto) ?? throw new ResourceNotFoundException("Produto não encontrado.");
             patchDoc.ApplyTo(produto);
 
-            if (!produto.IsValid())
-                throw new ValidationException("Dados inválidos.");
-
-            await _produtoRepository.UpdateProduto(produto);
+            await UpdateProduto(produto);
         }
-
 
         public async Task<int> DeleteProduto(int id)
         {
             return await _produtoRepository.DeleteProduto(id);
+        }
+
+        private async Task UpdateProduto(Produto produto)
+        {
+            if (!produto.IsValid())
+                throw new ValidationException("Dados inválidos.");
+
+            await _produtoRepository.UpdateProduto(produto);
         }
 
         private static bool ValidateProdutoDTO(ProdutoDTO produtoDTO, out ICollection<ValidationResult> results)
