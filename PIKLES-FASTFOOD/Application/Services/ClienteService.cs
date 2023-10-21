@@ -60,6 +60,11 @@ namespace Application.Services
             await _clienteRepository.UpdateCliente(cliente);
         }
 
+        public async Task<int> PutCliente(Cliente cliente)
+        {
+            return await _clienteRepository.UpdateCliente(cliente);
+        }
+
         public async Task<int> DeleteCliente(int id)
         {
             return await _clienteRepository.DeleteCliente(id);
