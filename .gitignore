@@ -733,3 +733,15 @@ obj/
 /PIKLES-FASTFOOD/.vs/PIKLES-FASTFOOD/v17/.futdcache.v2
 /PIKLES-FASTFOOD/.vs/ProjectEvaluation/pikles-fastfood.metadata.v7.bin
 /PIKLES-FASTFOOD/.vs/ProjectEvaluation/pikles-fastfood.projects.v7.bin
+/PIKLES-FASTFOOD/API/obj/API.csproj.nuget.dgspec.json
+/PIKLES-FASTFOOD/API/obj/API.csproj.nuget.g.props
+/PIKLES-FASTFOOD/API/obj/project.assets.json
+/PIKLES-FASTFOOD/Application/obj/Application.csproj.nuget.dgspec.json
+/PIKLES-FASTFOOD/Application/obj/project.assets.json
+/PIKLES-FASTFOOD/Application/obj/Application.csproj.nuget.g.props
+/PIKLES-FASTFOOD/Domain/obj/Domain.csproj.nuget.dgspec.json
+/PIKLES-FASTFOOD/Domain/obj/Domain.csproj.nuget.g.props
+/PIKLES-FASTFOOD/Domain/obj/project.assets.json
+/PIKLES-FASTFOOD/Domain.Tests/obj/Domain.Tests.csproj.nuget.dgspec.json
+/PIKLES-FASTFOOD/Domain.Tests/obj/Domain.Tests.csproj.nuget.g.props
+/PIKLES-FASTFOOD/Domain.Tests/obj/project.assets.json
