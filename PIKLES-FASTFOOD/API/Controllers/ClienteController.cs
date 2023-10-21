@@ -146,7 +146,6 @@ namespace API.Controllers
             }
         }
 
-
         // PUT: /clientes/{id}
         [HttpPut("{id}")]
         [ValidateModel]
@@ -165,17 +164,12 @@ namespace API.Controllers
         [SwaggerResponse(204, "Cliente atualizado com sucesso!", typeof(void))]
         public async Task<IActionResult> PutCliente(int id, [FromBody] Cliente cliente)
         {
-            if (cliente == null || cliente.CPF == null)
+            if (cliente == null)
                 return BadRequest();
 
             cliente.IdCliente = id;
-            Cliente existeCPF = await _clienteService.GetClienteByCpf(cliente.CPF);
 
-            if (existeCPF != null)
-                return Conflict(new { message = "CPF já cadastrado para outro cliente." });
-
-
-            await _clienteService.UpdateCliente(cliente);
+            await _clienteService.PutCliente(cliente);
 
             return Ok();
         }

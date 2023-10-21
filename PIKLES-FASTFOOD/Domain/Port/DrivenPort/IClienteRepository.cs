@@ -9,6 +9,7 @@ namespace Domain.Port.Adapters
         Task<Cliente> GetClienteByCpf(string cpf);
         Task<Cliente> PostCliente(Cliente cliente);
         Task<int> UpdateCliente(Cliente cliente);
+        Task<int> PutCliente(Cliente cliente);
         Task<int> DeleteCliente(int id);
     }
 }

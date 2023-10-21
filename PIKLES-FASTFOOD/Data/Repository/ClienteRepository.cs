@@ -43,6 +43,12 @@ namespace Data.Repository
             return await _context.SaveChangesAsync();
         }
 
+        public async Task<int> PutCliente(Cliente cliente)
+        {
+            _context.Entry(cliente).State = EntityState.Modified;
+            return await _context.SaveChangesAsync();
+        }
+
         public async Task<int> DeleteCliente(int id)
         {
             var cliente = await _context.Cliente.FindAsync(id);
