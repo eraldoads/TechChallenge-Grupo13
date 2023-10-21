@@ -1,7 +1,7 @@
 using Application.Services;
 using Data.Context;
 using Data.Repository;
-using Domain.Port.Adapters;
+using Domain.Port.DrivenPort;
 using Domain.Port.Services;
 using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +30,10 @@ builder.Services.AddControllers(options =>
 });
 
 builder.Services.AddScoped<IClienteService, ClienteService>();
+builder.Services.AddScoped<IProdutoService, ProdutoService>();
+
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped  <IProdutoRepository, ProdutoRepository>();
 
 // Adiciona o suporte ao NewtonsoftJson aos controllers
 builder.Services.AddControllers().AddNewtonsoftJson();

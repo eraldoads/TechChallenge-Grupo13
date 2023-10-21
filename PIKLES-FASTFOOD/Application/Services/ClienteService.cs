@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.EntitiesDTO;
-using Domain.Port.Adapters;
+using Domain.Port.DrivenPort;
 using Domain.Port.Services;
 using System.ComponentModel.DataAnnotations;
 
@@ -49,20 +49,7 @@ namespace Application.Services
 
         public async Task UpdateCliente(Cliente cliente)
         {
-            if (cliente == null)
-                throw new ValidationException("Cliente não pode ser nulo.");
-
-            var itemCliente = await _clienteRepository.GetClienteById(cliente.IdCliente);
-
-            if (itemCliente == null)
-                throw new ValidationException("Cliente não encontrado.");
-
             await _clienteRepository.UpdateCliente(cliente);
-        }
-
-        public async Task<int> PutCliente(Cliente cliente)
-        {
-            return await _clienteRepository.UpdateCliente(cliente);
         }
 
         public async Task<int> DeleteCliente(int id)
