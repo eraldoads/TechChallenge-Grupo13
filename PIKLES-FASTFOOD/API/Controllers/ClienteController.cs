@@ -51,9 +51,9 @@ namespace API.Controllers
         [SwaggerOperation(
         Summary = "Endpoint para listar um cliente específico pelo id",
         Description = @"Endpoint para listar um cliente específico pelo id </br>
-                      <b>Parâmetros de entrada:</b>
-                       <br/> • <b>id</b>: o identificador do cliente ⇒ <font color='red'><b>Obrigatório</b></font>
-                        ",
+              <b>Parâmetros de entrada:</b>
+                <br/> • <b>id</b>: o identificador do cliente ⇒ <font color='red'><b>Obrigatório</b></font>
+                ",
         Tags = new[] { "Clientes" }
         )]
         [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(Cliente))]
@@ -76,13 +76,13 @@ namespace API.Controllers
         [SwaggerOperation(
         Summary = "Endpoint para criar um novo cliente",
         Description = @"Endpoint para criar um novo cliente </br>
-                    <b>Parâmetros de entrada:</b>
-                    <br/> • <b>id</b>: o identificador do cliente a ser criado ⇒ <font color='green'><b>Opcional</b></font>
-                    <br/> • <b>nome</b>: o primeiro nome do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
-                    <br/> • <b>sobrenome</b>: o sobrenome do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
-                    <br/> • <b>cpf</b>: o CPF do cliente a ser criado - Somente números ⇒ <font color='red'><b>Obrigatório</b></font>
-                    <br/> • <b>email</b>: o e-mail do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
-                    ",
+              <b>Parâmetros de entrada:</b>
+                <br/> • <b>id</b>: o identificador do cliente a ser criado ⇒ <font color='green'><b>Opcional</b></font>
+                <br/> • <b>nome</b>: o primeiro nome do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>sobrenome</b>: o sobrenome do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>cpf</b>: o CPF do cliente a ser criado - Somente números ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>email</b>: o e-mail do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
+                ",
         Tags = new[] { "Clientes" }
         )]
         [SwaggerResponse(201, "Cliente criado com sucesso!", typeof(Cliente))]
@@ -123,18 +123,12 @@ namespace API.Controllers
         {
             try
             {
-                var cliente = await _clienteService.GetClienteById(id);
-                if (cliente == null)
-                    return NotFound();
-
-                patchDoc.ApplyTo(cliente, ModelState);
-
-                if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
-
-                await _clienteService.UpdateCliente(cliente);
-
+                await _clienteService.PatchCliente(id, patchDoc);
                 return NoContent();
+            }
+            catch (ResourceNotFoundException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (ValidationException ex)
             {
@@ -166,20 +160,12 @@ namespace API.Controllers
         {
             try
             {
-                var cliente = await _clienteService.GetClienteById(id);
-
-                if (cliente == null)
-                    return NotFound();
-
-                cliente.Email = clienteInput.Email;
-                cliente.CPF = clienteInput.CPF;
-                cliente.Nome = clienteInput.Nome;
-                cliente.Sobrenome = clienteInput.Sobrenome;
-
-                await _clienteService.UpdateCliente(cliente);
-
-                return Ok();
-
+                await _clienteService.PutCliente(id, clienteInput);
+                return NoContent();
+            }
+            catch (ResourceNotFoundException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (ValidationException ex)
             {
@@ -197,7 +183,7 @@ namespace API.Controllers
         Summary = "Endpoint para deletar um cliente pelo id",
         Description = @"Endpoint para deletar um cliente pelo id </br>
               <b>Parâmetros de entrada:</b>
-               <br/> • <b>id</b>: o identificador do cliente a ser deletado ⇒ <font color='red'><b>Obrigatório</b></font>
+                <br/> • <b>id</b>: o identificador do cliente a ser deletado ⇒ <font color='red'><b>Obrigatório</b></font>
                 ",
         Tags = new[] { "Clientes" }
         )]

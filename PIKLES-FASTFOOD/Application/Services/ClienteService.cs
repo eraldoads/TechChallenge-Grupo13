@@ -2,6 +2,8 @@
 using Domain.EntitiesDTO;
 using Domain.Port.DrivenPort;
 using Domain.Port.Services;
+using Domain.ValueObjects;
+using Microsoft.AspNetCore.JsonPatch;
 using System.ComponentModel.DataAnnotations;
 
 namespace Application.Services
@@ -47,10 +49,32 @@ namespace Application.Services
             return await _clienteRepository.PostCliente(cliente);
         }
 
-        public async Task UpdateCliente(Cliente cliente)
+        public async Task PutCliente(int idCliente, Cliente clienteInput)
         {
+            var cliente = await _clienteRepository.GetClienteById(idCliente) ?? throw new ResourceNotFoundException("Cliente não encontrado.");
+            
+            cliente.Email = clienteInput.Email;
+            cliente.CPF = clienteInput.CPF;
+            cliente.Nome = clienteInput.Nome;
+            cliente.Sobrenome = clienteInput.Sobrenome;
+
+            if (!cliente.IsValid())
+                throw new ValidationException("Dados inválidos.");
+
             await _clienteRepository.UpdateCliente(cliente);
         }
+
+        public async Task PatchCliente(int idCliente, JsonPatchDocument<Cliente> patchDoc)
+        {
+            var cliente = await _clienteRepository.GetClienteById(idCliente) ?? throw new ResourceNotFoundException("Cliente não encontrado.");
+            patchDoc.ApplyTo(cliente);
+
+            if (!cliente.IsValid())
+                throw new ValidationException("Dados inválidos.");
+
+            await _clienteRepository.UpdateCliente(cliente);
+        }
+
 
         public async Task<int> DeleteCliente(int id)
         {
@@ -74,5 +98,6 @@ namespace Application.Services
                 Email = clienteDto.Email
             };
         }
+
     }
 }

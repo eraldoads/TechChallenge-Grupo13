@@ -31,6 +31,11 @@ namespace Domain.Entities
         [StringLength(500, ErrorMessage = "A descrição do produto deve ter no máximo 500 caracteres")]
         public string? DescricaoProduto { get; set; }
 
-
+        public bool IsValid()
+        {
+            var validationContext = new ValidationContext(this);
+            var validationResults = new List<ValidationResult>();
+            return Validator.TryValidateObject(this, validationContext, validationResults, true);
+        }
     }
 }

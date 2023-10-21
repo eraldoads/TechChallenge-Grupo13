@@ -1,6 +1,7 @@
 ﻿using Domain.Base;
 using Domain.Entities;
 using Domain.EntitiesDTO;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace Domain.Port.Services
 {
@@ -9,7 +10,8 @@ namespace Domain.Port.Services
         Task<List<Produto>> GetProdutos();
         Task<Produto> GetProdutoById(int? id);        
         Task<Produto> PostProduto(ProdutoDTO produtoDTO);
-        Task UpdateProduto(Produto produto);        
+        Task PutProduto(int idProduto, Produto produtoInput);
+        Task PatchProduto(int idProduto, JsonPatchDocument<Produto> patchDoc);
         Task<int> DeleteProduto(int id);
         Task<List<Produto>> GetProdutosByIdCategoria(EnumCategoria? idCategoria);
     }
