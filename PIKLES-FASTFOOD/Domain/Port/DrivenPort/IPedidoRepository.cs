@@ -7,6 +7,6 @@ namespace Domain.Port.DrivenPort
     {
         Task<List<PedidoOutput>> GetPedidos();
 
-        Task PostPedido(Pedido pedido);
+        Task<Pedido> PostPedido(Pedido pedido);
     }
 }

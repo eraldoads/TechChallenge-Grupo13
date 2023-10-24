@@ -55,13 +55,13 @@ namespace Application.Services
                 novoPedido.Combos.Add(novoCombo);
             }
 
-            await _pedidoRepository.PostPedido(novoPedido);            
+            var novoPedidoCriado = await _pedidoRepository.PostPedido(novoPedido);            
             
             return new PedidoDTO
             {
-                IdPedido = novoPedido.IdPedido,
-                DataPedido = novoPedido.DataPedido,
-                ValorTotal = novoPedido.ValorTotal
+                IdPedido = novoPedidoCriado.IdPedido,
+                DataPedido = novoPedidoCriado.DataPedido,
+                ValorTotal = novoPedidoCriado.ValorTotal
             };
         }
     }    
