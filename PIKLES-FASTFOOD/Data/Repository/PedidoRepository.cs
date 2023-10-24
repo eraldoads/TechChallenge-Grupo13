@@ -108,10 +108,12 @@ namespace Data.Repository
             return pedidos;
         }
 
-        public async Task PostPedido(Pedido pedido)
+        public async Task<Pedido> PostPedido(Pedido pedido)
         {         
             _context.Pedido.Add(pedido);         
-            _context.SaveChangesAsync();         
+            _context.SaveChanges();
+
+            return pedido;
         }
     }
 }
