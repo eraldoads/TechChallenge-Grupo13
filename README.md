@@ -17,7 +17,6 @@ Aplicação para todo sistema de Controle de Pedidos de uma lanchonete - [API] B
 - Documentação API: [Swagger](https://www.xxxx.com)
 - Testes: [Postman](https://www.xxxx.com)
 
-
 </br>
 
 ## 🔗 Tecnologias
@@ -26,6 +25,19 @@ Aplicação para todo sistema de Controle de Pedidos de uma lanchonete - [API] B
 ![Badge](https://img.shields.io/static/v1?label=csharp&message=linguagem&color=blue&style=for-the-badge&logo=Csharp)
 ![Badge](https://img.shields.io/static/v1?label=mysql&message=banco-de-dados&color=blue&style=for-the-badge&logo=mysql)
 ![Badge](https://img.shields.io/static/v1?label=docker&message=Plataforma&color=blue&style=for-the-badge&logo=docker)
+
+</br>
+
+## 🔗 Testes
+
+Para executar esta solução, basta rodar o comando <b>docker-compose up</b> dentro da pasta <b>PIKLES-FASTFOOD</b>.
+
+Serão criados os containeres da API e do Banco de Dados MySQL.
+Também será criado um container para uma interface de admin do banco, onde será possível visualizar as tabelas criadas.
+
+Como acessar:
+API: http://localhost/swagger/index.html
+Interface admin Mysql: http://localhost:8080/
 
 </br>
 
