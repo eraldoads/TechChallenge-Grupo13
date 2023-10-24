@@ -73,8 +73,8 @@ builder.Services.AddSwaggerGen(
         // Define a versão da documentação Swagger como "v1".
         c.SwaggerDoc("v1", new OpenApiInfo
         {
-            Title = "Swagger Documentação Web API",
-            Description = "Um exemplo de como fornecer a documentação para APIs.",
+            Title = "Tech Challenge - Grupo 13 - Fase I",
+            Description = "Documentacao dos endpoints da API.",
             Contact = new OpenApiContact() { Name = "Tech Challenge - Grupo 13", Email = "grupo13@fiap.com" },
             License = new OpenApiLicense() { Name = "MIT License", Url = new Uri("https://opensource.org/licenses/MIT") },
             Version = "1.0.11"
