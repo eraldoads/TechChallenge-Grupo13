@@ -1,5 +1,6 @@
 ﻿using Data.Context;
 using Domain.Entities;
+using Domain.Port.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
@@ -21,11 +22,11 @@ namespace API.Controllers
 
     public class LoginController : ControllerBase
     {
-        private readonly MySQLContext _context;
+        private readonly IClienteService _clienteService;
 
-        public LoginController(MySQLContext context)
+        public LoginController(IClienteService clienteService)
         {
-            _context = context;
+            _clienteService = clienteService;
         }
 
         // POST: /Login
@@ -42,29 +43,12 @@ namespace API.Controllers
         [SwaggerResponse(404, "Cliente não encontrado")]
         public async Task<ActionResult<Cliente>> LoginCliente([FromBody] Login model)
         {
-            try
-            {
-                if (_context != null && _context.Cliente != null)
-                {
-                    var cliente = await _context.Cliente.FirstOrDefaultAsync(c => c.CPF == model.CPF);
+            var cliente = await _clienteService.GetClienteByCpf(model.CPF);
 
-                    if (cliente == null)
-                        return NotFound("Cliente não encontrado");
+            if (cliente == null)
+                return NotFound("Cliente não encontrado");
 
-                    return cliente;
-                }
-                else
-                {
-                    // Lidar com a situação em que _context.Cliente é nulo
-                    return StatusCode(500, "Ocorreu um erro interno no servidor. Entre em contato com o suporte técnico.");
-                }
-            }
-            catch (Exception ex)
-            {
-                // Lidar com a exceção aqui
-                return StatusCode(500, $"Ocorreu um erro: {ex.Message}");
-            }
+            return cliente;
         }
-
     }
 }
