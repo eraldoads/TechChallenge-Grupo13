@@ -26,8 +26,7 @@ namespace API.Controllers
     [Consumes("application/json", new string[] { })]
 
     public class ProdutoController : ControllerBase
-    {
-        private readonly MySQLContext _context;
+    {        
         private IProdutoService _produtoService;
 
         public ProdutoController(IProdutoService produtoService)

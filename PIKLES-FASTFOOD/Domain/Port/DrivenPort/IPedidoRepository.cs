@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Entities;
+using Domain.Entities.Output;
 
 namespace Domain.Port.DrivenPort
 {
     public interface IPedidoRepository
     {
+        Task<List<PedidoOutput>> GetPedidos();
+
+        Task PostPedido(Pedido pedido);
     }
 }

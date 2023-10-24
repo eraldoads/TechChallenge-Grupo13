@@ -2,10 +2,13 @@ using Application.Services;
 using Data.Context;
 using Data.Repository;
 using Domain.Port.DrivenPort;
+using Domain.Port.DriverPort;
 using Domain.Port.Services;
 using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 
 // Cria um builder de aplicação web com os argumentos passados
 var builder = WebApplication.CreateBuilder(args);
@@ -31,9 +34,11 @@ builder.Services.AddControllers(options =>
 
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
+builder.Services.AddScoped<IPedidoService, PedidoService>();
 
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
-builder.Services.AddScoped  <IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 
 // Adiciona o suporte ao NewtonsoftJson aos controllers
 builder.Services.AddControllers().AddNewtonsoftJson();
@@ -49,6 +54,11 @@ builder.Services.Configure<RouteOptions>(options =>
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add(typeof(ValidateModelAttribute));
+}).AddNewtonsoftJson(options =>
+{
+    // Use the default property (Pascal) casing
+    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 });
 
 // Saiba mais sobre como configurar o Swagger/OpenAPI em https://aka.ms/aspnetcore/swashbuckle

@@ -5,7 +5,7 @@ CREATE TABLE Cliente (
   CPF text NOT NULL,
   Email text NOT NULL,
   PRIMARY KEY (IdCliente)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE Pedido (
   IdPedido int NOT NULL AUTO_INCREMENT,
@@ -14,7 +14,7 @@ CREATE TABLE Pedido (
   StatusPedido text NOT NULL,
   ValorTotal float NOT NULL,
   PRIMARY KEY (IdPedido)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE Produto (
   IdProduto int NOT NULL AUTO_INCREMENT,
@@ -23,13 +23,13 @@ CREATE TABLE Produto (
   idCategoriaProduto int DEFAULT NULL,
   DescricaoProduto varchar(500) DEFAULT NULL,
   PRIMARY KEY (IdProduto)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE Combo (
   IdCombo int NOT NULL AUTO_INCREMENT,
   PedidoId int DEFAULT NULL,
   PRIMARY KEY (IdCombo)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE ComboProduto (
   IdProdutoCombo int NOT NULL AUTO_INCREMENT,
@@ -37,21 +37,21 @@ CREATE TABLE ComboProduto (
   ComboId int DEFAULT NULL,
   Quantidade int NOT NULL,
   PRIMARY KEY (IdProdutoCombo)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE Categoria (
   IdCategoria int NOT NULL AUTO_INCREMENT,
   NomeCategoria text,
   PRIMARY KEY (IdCategoria)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Massa de dados para testes
 -- Categorias
-INSERT INTO Categoria (IdCategoria, NomeCategoria) VALUES
-(1, 'Lanche'),
-(2, 'Acompanhamento'),
-(3, 'Bebida'),
-(4, 'Sobremesa');
+INSERT INTO Categoria (NomeCategoria) VALUES
+('Lanche'),
+('Acompanhamento'),
+('Bebida'),
+('Sobremesa');
 
 -- Produtos
 INSERT INTO Produto (NomeProduto, ValorProduto, idCategoriaProduto, DescricaoProduto) VALUES ('Burguer de Carne', '26.99', '1', 'Hamburguer de carne suculento, grelhado à perfeição, servido com queijo cheddar derretido, vegetais frescos e um molho especial da casa.');
