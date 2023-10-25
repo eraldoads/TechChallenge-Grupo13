@@ -1,6 +1,4 @@
-﻿using Application.Services;
-using Data.Context;
-using Domain.Base;
+﻿using Domain.Base;
 using Domain.Entities;
 using Domain.EntitiesDTO;
 using Domain.Port.Services;
@@ -26,7 +24,7 @@ namespace API.Controllers
     [Consumes("application/json", new string[] { })]
 
     public class ProdutoController : ControllerBase
-    {        
+    {
         private IProdutoService _produtoService;
 
         public ProdutoController(IProdutoService produtoService)
@@ -50,7 +48,7 @@ namespace API.Controllers
         }
 
         // GET : /Produto/{id}
-        [HttpGet("{id?}")]
+        [HttpGet("{id}")]
         [SwaggerOperation(
             Summary = "Endpoint para listar um produto específico pelo id",
             Description = @"Endpoint para listar um produto específico pelo id </br>
@@ -60,14 +58,11 @@ namespace API.Controllers
             Tags = new[] { "Produtos" }
             )]
         [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(Produto))]
-        public async Task<ActionResult<Produto>> GetProduto(int? id)
+        public async Task<ActionResult<Produto?>> GetProduto(int id)
         {
-            if (id == null)
-                return BadRequest();
+            Produto? produto = await _produtoService.GetProdutoById(id);
 
-            Produto produto = await _produtoService.GetProdutoById(id);
-
-            if (produto == null)
+            if (produto is null)
                 return NoContent();
 
             return produto;
@@ -86,12 +81,12 @@ namespace API.Controllers
         [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(List<Produto>))]
         public async Task<ActionResult<List<Produto>>> GetProdutosPorIdCategoria(EnumCategoria? idCategoria)
         {
-            if (idCategoria == null)
+            if (idCategoria is null)
                 return BadRequest();
 
             var produtos = await _produtoService.GetProdutosByIdCategoria(idCategoria);
 
-            if (produtos == null || produtos.Count == 0)
+            if (produtos is null || produtos.Count == 0)
                 return NoContent();
 
             return produtos;
@@ -116,10 +111,10 @@ namespace API.Controllers
         [SwaggerResponse(201, "Produto criado com sucesso!", typeof(Produto))]
         public async Task<ActionResult<Produto>> PostProduto([FromBody] ProdutoDTO produtoDTO)
         {
-            if (produtoDTO == null)
+            if (produtoDTO is null)
                 return BadRequest();
 
-            var novoProduto = await _produtoService.PostProduto(produtoDTO);           
+            var novoProduto = await _produtoService.PostProduto(produtoDTO);
 
             return CreatedAtAction("PostProduto", new { id = novoProduto.IdProduto }, novoProduto);
         }
@@ -215,13 +210,27 @@ namespace API.Controllers
         [SwaggerResponse(200, "Produto deletado com sucesso!", typeof(Produto))]
         public async Task<ActionResult<Produto>> DeleteProduto(int id)
         {
-            Produto produto = await _produtoService.GetProdutoById(id);
+            try
+            {
+                var deletedProduto = await _produtoService.DeleteProduto(id);
 
-            if (produto == null)
-                return NoContent();
+                if (deletedProduto is null)
+                    return NoContent();
 
-            await _produtoService.DeleteProduto(id);
-            return produto;
+                return deletedProduto;
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound(new { id, error = "Produto não encontrado" });
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocorreu um erro interno. Por favor, tente novamente mais tarde.");
+            }
         }
     }
 }

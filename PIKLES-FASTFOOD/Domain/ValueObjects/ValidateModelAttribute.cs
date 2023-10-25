@@ -6,6 +6,14 @@ namespace Domain.ValueObjects
 {
     public class ValidateModelAttribute : ActionFilterAttribute
     {
+        /// <summary>
+        /// Este método é chamado antes da execução de uma ação e verifica se o estado do modelo é válido.
+        /// </summary>
+        /// <param name="context">O contexto da execução da ação.</param>
+        /// <remarks>
+        /// Se o estado do modelo não for válido, este método define o resultado do contexto como um objeto 
+        /// que contém os detalhes do problema de validação e um código de status HTTP 412 - Precondition Failed.
+        /// </remarks>
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             if (!context.ModelState.IsValid)
@@ -16,5 +24,6 @@ namespace Domain.ValueObjects
                 };
             }
         }
+
     }
 }

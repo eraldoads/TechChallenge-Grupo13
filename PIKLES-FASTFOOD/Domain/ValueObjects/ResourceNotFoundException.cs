@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using System.Net;
-
-namespace Domain.ValueObjects
+﻿namespace Domain.ValueObjects
 {
     public class ResourceNotFoundException : Exception
     {
-        public ResourceNotFoundException(string message) : base(message)
-        {
-        }
+        /// <summary>
+        /// Construtor para a classe ResourceNotFoundException.
+        /// </summary>
+        /// <param name="message">A mensagem de erro a ser associada à exceção.</param>
+        public ResourceNotFoundException(string message) : base(message) { }
+
     }
 }

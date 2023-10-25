@@ -1,8 +1,6 @@
-﻿using Data.Context;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Port.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace API.Controllers
@@ -43,10 +41,13 @@ namespace API.Controllers
         [SwaggerResponse(404, "Cliente não encontrado")]
         public async Task<ActionResult<Cliente>> LoginCliente([FromBody] Login model)
         {
+            if (string.IsNullOrEmpty(model.CPF))
+                return BadRequest("O CPF não pode ser nulo ou vazio.");
+
             var cliente = await _clienteService.GetClienteByCpf(model.CPF);
 
-            if (cliente == null)
-                return NotFound("Cliente não encontrado");
+            if (cliente is null)
+                return NotFound(new { model.CPF, error = "Cliente não encontrado" });
 
             return cliente;
         }
