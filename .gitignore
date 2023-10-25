@@ -745,3 +745,6 @@ obj/
 /PIKLES-FASTFOOD/Domain.Tests/obj/Domain.Tests.csproj.nuget.dgspec.json
 /PIKLES-FASTFOOD/Domain.Tests/obj/Domain.Tests.csproj.nuget.g.props
 /PIKLES-FASTFOOD/Domain.Tests/obj/project.assets.json
+/.vs/TechChallenge-Grupo13/v17/.wsuo
+/.vs/slnx.sqlite
+/.vs/VSWorkspaceState.json
