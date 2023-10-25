@@ -72,40 +72,6 @@ Para testar os endpoints da API, você pode usar a collection do POSTMAN, dispon
 ![Badge](https://img.shields.io/static/v1?label=mysql&message=banco-de-dados&color=blue&style=for-the-badge&logo=mysql)
 ![Badge](https://img.shields.io/static/v1?label=docker&message=Plataforma&color=blue&style=for-the-badge&logo=docker)
 
-
-</br>
-
-## 🔗 Testes
-
-Para executar esta solução, basta executar o comando <b>docker-compose up</b> dentro da pasta <b>PIKLES-FASTFOOD</b>, na qual está localizado o arquivo <b>docker-compose.yml</b>. Nesse momento, serão criados os containers da API e do Banco de Dados MySQL.
-</br>
-</br>
-Também será criado um container para uma interface de admin do banco, onde será possível visualizar as tabelas criadas.
-</br>
-</br>
-Após a criação do banco, serão executados os comandos definidos no arquivo <b>init.sql</b>, o qual contém a criação das tabelas e inserts para criação de uma massa de dados para os testes.
-
-
-<b>Como acessar</b>:
-</br>
-
-<b>API</b>: http://localhost/swagger/index.html
-</br>
-<b>Interface admin MySQL</b>: http://localhost:8080/
-</br>
-</br>
-<b>Servidor</b>: db
-</br>
-<b>Usuário</b>: pikles
-</br>
-<b>Senha</b>: fastfood
-</br>
-<b>Base de Dados</b>: piklesfastfood
-</br>
-![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/e7cb3296-c50c-413f-b055-723bb0dca25e)
-
-
-
 </br>
 
 ## 🔛 Fluxo:
