@@ -8,11 +8,11 @@ namespace Domain.Port.Services
     public interface IProdutoService
     {
         Task<List<Produto>> GetProdutos();
-        Task<Produto> GetProdutoById(int? id);        
+        Task<Produto?> GetProdutoById(int id);
         Task<Produto> PostProduto(ProdutoDTO produtoDTO);
         Task PutProduto(int idProduto, Produto produtoInput);
         Task PatchProduto(int idProduto, JsonPatchDocument<Produto> patchDoc);
-        Task<int> DeleteProduto(int id);
+        Task<Produto> DeleteProduto(int id);
         Task<List<Produto>> GetProdutosByIdCategoria(EnumCategoria? idCategoria);
     }
 }

@@ -1,11 +1,8 @@
-﻿using Data.Context;
-using Domain.Entities;
-using Domain.Entities.Input;
+﻿using Domain.Entities.Input;
 using Domain.Entities.Output;
 using Domain.EntitiesDTO;
 using Domain.Port.DriverPort;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
 
@@ -43,8 +40,8 @@ namespace API.Controllers
         [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(List<PedidoOutput>))]
         [SwaggerResponse(206, "Conteúdo Parcial!", typeof(List<PedidoOutput>))]
         public async Task<ActionResult<IEnumerable<PedidoOutput>>> GetPedidos()
-        {            
-            List<PedidoOutput> pedidos = await _pedidoService.GetPedidos();                                    
+        {
+            List<PedidoOutput> pedidos = await _pedidoService.GetPedidos();
             return pedidos;
         }
 

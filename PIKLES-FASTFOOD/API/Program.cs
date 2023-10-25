@@ -7,56 +7,58 @@ using Domain.Port.Services;
 using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
-// Cria um builder de aplicação web com os argumentos passados
+// Cria um builder de aplicação web com os argumentos passados.
 var builder = WebApplication.CreateBuilder(args);
 
 // Adiciona serviços ao contêiner.
-// Criar uma variável que armazena a string de conexão com o banco de dados MySQL.
+
+// Cria uma variável que armazena a string de conexão com o banco de dados MySQL.
 var connectionStringMysql = builder.Configuration.GetConnectionString("ConnectionMysql");
 
-// Adicionar um serviço do tipo MySQLContext ao objeto builder.Services.
+// Adiciona um serviço do tipo MySQLContext ao objeto builder.Services.
 builder.Services.AddDbContext<MySQLContext>(option => option.UseMySql(
-    connectionStringMysql, // Usar a string de conexão.
-    ServerVersion.AutoDetect(connectionStringMysql), // Especificar a versão do servidor MySQL.
+    connectionStringMysql, // Usa a string de conexão.
+    ServerVersion.AutoDetect(connectionStringMysql), // Especifica a versão do servidor MySQL.
     builder => builder.MigrationsAssembly("API") // Especifica o assembly do projeto que contém as classes de migrações do EF Core.
-    )
-);
+));
 
-// Adiciona os serviços de controllers ao builder
+// Adiciona os serviços de controllers ao builder.
 builder.Services.AddControllers(options =>
 {
-    // Insere um formato de entrada personalizado para o JsonPatch
+    // Insere um formato de entrada personalizado para o JsonPatch.
     options.InputFormatters.Insert(0, JsonPatchSample.MyJPIF.GetJsonPatchInputFormatter());
 });
 
+// Adiciona os serviços específicos ao contêiner.
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
 builder.Services.AddScoped<IPedidoService, PedidoService>();
 
+// Adiciona os repositórios específicos ao contêiner.
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 
-// Adiciona o suporte ao NewtonsoftJson aos controllers
+// Adiciona o suporte ao NewtonsoftJson aos controllers.
 builder.Services.AddControllers().AddNewtonsoftJson();
 
-// Configura as opções de rota para usar URLs e query strings em minúsculo
+// Configura as opções de rota para usar URLs e query strings em minúsculo.
 builder.Services.Configure<RouteOptions>(options =>
 {
     options.LowercaseUrls = true;
     options.LowercaseQueryStrings = true;
 });
 
-// Configurar os serviços relacionados aos controladores.
+// Configura os serviços relacionados aos controladores.
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add(typeof(ValidateModelAttribute));
 }).AddNewtonsoftJson(options =>
 {
-    // Use the default property (Pascal) casing
+    // Usa a formatação padrão (PascalCase) para as propriedades.
     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 });
@@ -80,14 +82,14 @@ builder.Services.AddSwaggerGen(
             Version = "1.0.11"
         });
 
-        // Habilita o uso para registrar o SchemaFilter
+        // Habilita o uso para registrar o SchemaFilter.
         c.SchemaFilter<ClienteSchemaFilter>();
     }
 );
 
 var app = builder.Build();
 
-// Configure a pipeline de solicitação HTTP.
+// Configura a pipeline de solicitação HTTP.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -100,8 +102,14 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+// Adiciona o middleware de autorização à pipeline de solicitação HTTP.
+// Este middleware é responsável por garantir que o usuário esteja autorizado a acessar os recursos solicitados.
 app.UseAuthorization();
 
+// Adiciona o middleware de roteamento de controladores à pipeline de solicitação HTTP.
+// Este middleware é responsável por rotear as solicitações HTTP para os controladores apropriados.
 app.MapControllers();
 
+// Inicia a execução da aplicação.
+// Este método bloqueia o thread chamado e aguarda até que a aplicação seja encerrada.
 app.Run();

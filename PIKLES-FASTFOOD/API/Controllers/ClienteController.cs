@@ -47,7 +47,7 @@ namespace API.Controllers
         }
 
         // GET: /clientes/{id}
-        [HttpGet("{id?}")]
+        [HttpGet("{id}")]
         [SwaggerOperation(
         Summary = "Endpoint para listar um cliente específico pelo id",
         Description = @"Endpoint para listar um cliente específico pelo id </br>
@@ -58,14 +58,11 @@ namespace API.Controllers
         )]
         [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(Cliente))]
         [SwaggerResponse(204, "Cliente não encontrado!", typeof(void))]
-        public async Task<ActionResult<Cliente>> GetCliente(int? id)
+        public async Task<ActionResult<Cliente?>> GetCliente(int id)
         {
-            if (id == null)
-                return BadRequest();
+            Cliente? cliente = await _clienteService.GetClienteById(id);
 
-            Cliente cliente = await _clienteService.GetClienteById(id);
-
-            if (cliente == null)
+            if (cliente is null)
                 return NoContent();
 
             return cliente;
@@ -190,13 +187,27 @@ namespace API.Controllers
         [SwaggerResponse(200, "Cliente deletado com sucesso!", typeof(Cliente))]
         public async Task<ActionResult<Cliente>> DeleteCliente(int id)
         {
-            Cliente cliente = await _clienteService.GetClienteById(id);
+            try
+            {
+                var deletedCliente = await _clienteService.DeleteCliente(id);
 
-            if (cliente == null)
-                return NoContent();
+                if (deletedCliente is null)
+                    return NoContent();
 
-            await _clienteService.DeleteCliente(id);
-            return cliente;
+                return deletedCliente;
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound(new { id, error = "Cliente não encontrado" });
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocorreu um erro interno. Por favor, tente novamente mais tarde.");
+            }
         }
     }
 }
