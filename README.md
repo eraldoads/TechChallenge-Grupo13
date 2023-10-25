@@ -115,4 +115,3 @@ graph LR
 A[Cliente] --> B[API Backend]
 B --> C[Databases]
 ```
-
