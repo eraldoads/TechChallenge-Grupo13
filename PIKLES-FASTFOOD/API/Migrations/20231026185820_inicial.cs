@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace API.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -76,12 +77,18 @@ namespace API.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ValorProduto = table.Column<float>(type: "float", nullable: false),
                     IdCategoria = table.Column<int>(type: "int", nullable: false),
-                    Descricao = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false)
+                    DescricaoProduto = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Produto", x => x.IdProduto);
+                    table.ForeignKey(
+                        name: "FK_Produto_Categoria_IdCategoria",
+                        column: x => x.IdCategoria,
+                        principalTable: "Categoria",
+                        principalColumn: "IdCategoria",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -91,17 +98,17 @@ namespace API.Migrations
                 {
                     IdCombo = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    IdPedido = table.Column<int>(type: "int", nullable: false),
-                    PedidoIdPedido = table.Column<int>(type: "int", nullable: true)
+                    PedidoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Combo", x => x.IdCombo);
                     table.ForeignKey(
-                        name: "FK_Combo_Pedido_PedidoIdPedido",
-                        column: x => x.PedidoIdPedido,
+                        name: "FK_Combo_Pedido_PedidoId",
+                        column: x => x.PedidoId,
                         principalTable: "Pedido",
-                        principalColumn: "IdPedido");
+                        principalColumn: "IdPedido",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -112,37 +119,39 @@ namespace API.Migrations
                     IdProdutoCombo = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     IdProduto = table.Column<int>(type: "int", nullable: false),
-                    IdCombo = table.Column<int>(type: "int", nullable: false),
-                    Quantidade = table.Column<int>(type: "int", nullable: false),
-                    ComboIdCombo = table.Column<int>(type: "int", nullable: true)
+                    ComboId = table.Column<int>(type: "int", nullable: false),
+                    Quantidade = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ComboProduto", x => x.IdProdutoCombo);
                     table.ForeignKey(
-                        name: "FK_ComboProduto_Combo_ComboIdCombo",
-                        column: x => x.ComboIdCombo,
+                        name: "FK_ComboProduto_Combo_ComboId",
+                        column: x => x.ComboId,
                         principalTable: "Combo",
-                        principalColumn: "IdCombo");
+                        principalColumn: "IdCombo",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Combo_PedidoIdPedido",
+                name: "IX_Combo_PedidoId",
                 table: "Combo",
-                column: "PedidoIdPedido");
+                column: "PedidoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ComboProduto_ComboIdCombo",
+                name: "IX_ComboProduto_ComboId",
                 table: "ComboProduto",
-                column: "ComboIdCombo");
+                column: "ComboId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Produto_IdCategoria",
+                table: "Produto",
+                column: "IdCategoria");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Categoria");
-
             migrationBuilder.DropTable(
                 name: "Cliente");
 
@@ -154,6 +163,9 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Combo");
+
+            migrationBuilder.DropTable(
+                name: "Categoria");
 
             migrationBuilder.DropTable(
                 name: "Pedido");

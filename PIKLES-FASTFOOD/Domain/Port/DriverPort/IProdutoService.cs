@@ -13,6 +13,6 @@ namespace Domain.Port.Services
         Task PutProduto(int idProduto, Produto produtoInput);
         Task PatchProduto(int idProduto, JsonPatchDocument<Produto> patchDoc);
         Task<Produto> DeleteProduto(int id);
-        Task<List<Produto>> GetProdutosByIdCategoria(EnumCategoria? idCategoria);
+        Task<List<Categoria>> GetProdutosByIdCategoria(EnumCategoria? idCategoria);
     }
 }

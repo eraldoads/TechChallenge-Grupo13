@@ -72,7 +72,7 @@ namespace Application.Services
             produto.NomeProduto = produtoInput.NomeProduto;
             produto.DescricaoProduto = produtoInput.DescricaoProduto;
             produto.ValorProduto = produtoInput.ValorProduto;
-            produto.IdCategoriaProduto = produto.IdCategoriaProduto;
+            produto.IdCategoria = produto.IdCategoria;
 
             await UpdateProduto(produto);
         }
@@ -115,7 +115,7 @@ namespace Application.Services
         /// </summary>
         /// <param name="idCategoria">A categoria dos produtos a serem obtidos.</param>
         /// <returns>Retorna uma lista de produtos da categoria especificada.</returns>
-        public async Task<List<Produto>> GetProdutosByIdCategoria(EnumCategoria? idCategoria)
+        public async Task<List<Categoria>> GetProdutosByIdCategoria(EnumCategoria? idCategoria)
         {
             return await _produtoRepository.GetProdutosByIdCategoria(idCategoria);
         }
@@ -161,7 +161,7 @@ namespace Application.Services
                 NomeProduto = produtoDto.NomeProduto,
                 DescricaoProduto = produtoDto.DescricaoProduto,
                 ValorProduto = produtoDto.ValorProduto,
-                IdCategoriaProduto = produtoDto.IdCategoriaProduto
+                IdCategoria = produtoDto.IdCategoria
             };
         }
         #endregion

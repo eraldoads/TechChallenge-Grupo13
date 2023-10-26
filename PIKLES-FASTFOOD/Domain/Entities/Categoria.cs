@@ -2,7 +2,6 @@
 
 namespace Domain.Entities
 {
-    //[SwaggerSchemaFilter(typeof(ProdutoSchemaFilter))]
     public class Categoria
     {
         [JsonProperty("idCategoria")]
@@ -10,5 +9,8 @@ namespace Domain.Entities
 
         [JsonProperty("nomeCategoria")]
         public string? NomeCategoria { get; set; }
+
+        [JsonProperty("produtos")]
+        public List<Produto>? Produtos { get; set; }
     }
 }

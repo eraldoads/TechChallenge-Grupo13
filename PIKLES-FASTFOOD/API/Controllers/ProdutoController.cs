@@ -78,8 +78,8 @@ namespace API.Controllers
                 ",
             Tags = new[] { "Produtos" }
             )]
-        [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(List<Produto>))]
-        public async Task<ActionResult<List<Produto>>> GetProdutosPorIdCategoria(EnumCategoria? idCategoria)
+        [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(List<Categoria>))]
+        public async Task<ActionResult<List<Categoria>>> GetProdutosPorIdCategoria(EnumCategoria? idCategoria)
         {
             if (idCategoria is null)
                 return BadRequest();
@@ -100,7 +100,7 @@ namespace API.Controllers
                           <b>Parâmetros de entrada:</b>
                           <br/> • <b>nomeProduto</b>: o nome do produto a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>
                           <br/> • <b>valorProduto</b>: o valor do produto a ser criado⇒ <font color='red'><b>Obrigatório</b></font>
-                          <br/> • <b>idCategoriaProduto</b>: a categoria do produto a ser criado, tem como definição os valores:⇒ <font color='red'><b>Obrigatório</b></font>
+                          <br/> • <b>IdCategoria</b>: a categoria do produto a ser criado, tem como definição os valores:⇒ <font color='red'><b>Obrigatório</b></font>
                               <br/>&nbsp;&emsp;&emsp;• <b>1</b> - Lanche
                               <br/>&nbsp;&emsp;&emsp;• <b>2</b> - Acompanhamento
                               <br/>&nbsp;&emsp;&emsp;• <b>3</b> - Bebida
