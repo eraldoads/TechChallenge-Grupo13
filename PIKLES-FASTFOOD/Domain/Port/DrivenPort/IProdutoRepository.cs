@@ -10,6 +10,6 @@ namespace Domain.Port.DrivenPort
         Task<Produto> PostProduto(Produto produto);
         Task<int> UpdateProduto(Produto produto);
         Task<int> DeleteProduto(int id);
-        Task<List<Produto>> GetProdutosByIdCategoria(EnumCategoria? idCategoria);
+        Task<List<Categoria>> GetProdutosByIdCategoria(EnumCategoria? idCategoria);
     }
 }

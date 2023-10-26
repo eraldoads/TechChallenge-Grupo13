@@ -55,7 +55,7 @@ builder.Services.Configure<RouteOptions>(options =>
 // Configura os serviços relacionados aos controladores.
 builder.Services.AddControllers(options =>
 {
-    options.Filters.Add(typeof(ValidateModelAttribute));
+    options.Filters.Add(typeof(AjustaDataHoraLocal));
 }).AddNewtonsoftJson(options =>
 {
     // Usa a formatação padrão (PascalCase) para as propriedades.

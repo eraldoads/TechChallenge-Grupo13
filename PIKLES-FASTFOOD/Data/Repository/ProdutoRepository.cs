@@ -3,6 +3,8 @@ using Domain.Base;
 using Domain.Entities;
 using Domain.Port.DrivenPort;
 using Microsoft.EntityFrameworkCore;
+using MySqlConnector;
+using System.Data;
 
 namespace Data.Repository
 {
@@ -30,6 +32,8 @@ namespace Data.Repository
 
             return new List<Produto>();
         }
+
+
 
         /// <summary>
         /// Obtém um produto pelo ID no contexto do banco de dados.
@@ -101,18 +105,75 @@ namespace Data.Repository
         }
 
         /// <summary>
-        /// Obtém todos os produtos de uma determinada categoria do contexto do banco de dados.
+        /// Obtém uma lista de produtos por id de categoria usando uma consulta SQL.
         /// </summary>
-        /// <param name="idCategoria">O ID da categoria de produtos.</param>
-        /// <returns>Uma lista de produtos correspondentes à categoria fornecida.</returns>
-        public async Task<List<Produto>> GetProdutosByIdCategoria(EnumCategoria? idCategoria)
+        /// <param name="idCategoria">O id da categoria dos produtos desejados.</param>
+        /// <returns>Uma lista de objetos Produto com os dados dos produtos da categoria especificada.</returns>
+        /// <exception cref="MySqlException">Se ocorrer um erro ao executar a consulta SQL.</exception>
+        public async Task<List<Categoria>> GetProdutosByIdCategoria(EnumCategoria? idCategoria)
         {
-            List<Produto> produtos = new();
+            List<Categoria> categorias = new();
 
-            if (_context.Produto is not null)
-                produtos = await _context.Produto.Where(x => x.IdCategoriaProduto == idCategoria).ToListAsync();
+            if (_context.Categoria is not null)
+            {
+                var sqlQuery = @" SELECT PROD.IdProduto     AS IdProduto
+                                , PROD.NomeProduto          AS NomeProduto
+                                , PROD.ValorProduto         AS ValorProduto
+                                , PROD.IdCategoria          AS IdCategoria
+                                , CATE.NomeCategoria        AS NomeCategoria
+                                , PROD.DescricaoProduto     AS DescricaoProduto
+                             FROM Produto PROD
+                        LEFT JOIN Categoria CATE
+                               ON PROD.IdCategoria = CATE.IdCategoria
+                            WHERE PROD.IdCategoria = @idCategoria;";
 
-            return produtos;
+                await using var command = _context.Database.GetDbConnection().CreateCommand();
+                command.CommandText = sqlQuery;
+
+                if (idCategoria.HasValue)
+                {
+                    command.Parameters.Add(new MySqlParameter("@idCategoria", idCategoria.Value));
+                }
+
+                await _context.Database.OpenConnectionAsync();
+
+                await using var result = await command.ExecuteReaderAsync();
+
+                if (result.HasRows)
+                {
+                    while (await result.ReadAsync())
+                    {
+                        var categoriaId = result.GetInt32("IdCategoria");
+
+                        var categoria = categorias.FirstOrDefault(c => c.IdCategoria == categoriaId);
+
+                        if (categoria == null)
+                        {
+                            categoria = new Categoria
+                            {
+                                IdCategoria = categoriaId,
+                                NomeCategoria = result.GetString("NomeCategoria"),
+                                Produtos = new List<Produto>()
+                            };
+                            categorias.Add(categoria);
+                        }
+
+                        categoria.Produtos?.Add(new Produto
+                        {
+                            IdProduto = result.GetInt32("IdProduto"),
+                            NomeProduto = result.GetString("NomeProduto"),
+                            ValorProduto = result.GetFloat("ValorProduto"),
+                            IdCategoria = result.GetInt32("IdCategoria"),
+                            DescricaoProduto = result.GetString("DescricaoProduto")
+                        });
+                    }
+                }
+
+                _context.Database.CloseConnection();
+            }
+
+            return categorias;
         }
+
     }
 }

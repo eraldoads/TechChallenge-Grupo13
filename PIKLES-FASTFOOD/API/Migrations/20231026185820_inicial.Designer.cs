@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    [Migration("20231019193923_Inicial")]
-    partial class Inicial
+    [Migration("20231026185820_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,15 +70,12 @@ namespace API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("IdPedido")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PedidoIdPedido")
+                    b.Property<int>("PedidoId")
                         .HasColumnType("int");
 
                     b.HasKey("IdCombo");
 
-                    b.HasIndex("PedidoIdPedido");
+                    b.HasIndex("PedidoId");
 
                     b.ToTable("Combo");
                 });
@@ -89,10 +86,7 @@ namespace API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("ComboIdCombo")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdCombo")
+                    b.Property<int>("ComboId")
                         .HasColumnType("int");
 
                     b.Property<int>("IdProduto")
@@ -103,7 +97,7 @@ namespace API.Migrations
 
                     b.HasKey("IdProdutoCombo");
 
-                    b.HasIndex("ComboIdCombo");
+                    b.HasIndex("ComboId");
 
                     b.ToTable("ComboProduto");
                 });
@@ -138,7 +132,7 @@ namespace API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Descricao")
+                    b.Property<string>("DescricaoProduto")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("varchar(500)");
@@ -156,6 +150,8 @@ namespace API.Migrations
 
                     b.HasKey("IdProduto");
 
+                    b.HasIndex("IdCategoria");
+
                     b.ToTable("Produto");
                 });
 
@@ -163,14 +159,34 @@ namespace API.Migrations
                 {
                     b.HasOne("Domain.Entities.Pedido", null)
                         .WithMany("Combos")
-                        .HasForeignKey("PedidoIdPedido");
+                        .HasForeignKey("PedidoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.ComboProduto", b =>
                 {
                     b.HasOne("Domain.Entities.Combo", null)
                         .WithMany("Produtos")
-                        .HasForeignKey("ComboIdCombo");
+                        .HasForeignKey("ComboId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.Produto", b =>
+                {
+                    b.HasOne("Domain.Entities.Categoria", "Categoria")
+                        .WithMany("Produtos")
+                        .HasForeignKey("IdCategoria")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Categoria", b =>
+                {
+                    b.Navigation("Produtos");
                 });
 
             modelBuilder.Entity("Domain.Entities.Combo", b =>

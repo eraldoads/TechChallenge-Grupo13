@@ -12,7 +12,7 @@ namespace Data.Context
             // Aqui você pode configurar as opções do DbContext, como a string de conexão, o provedor do banco de dados, etc.
             if (!optionsBuilder.IsConfigured)
             {
-                // Configurações do DbContext
+                // Configurações do DbContext.
             }
         }
 
@@ -20,7 +20,7 @@ namespace Data.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            // Aqui você pode configurar as entidades do modelo, como as chaves primárias, os relacionamentos, os índices, etc.
+            // Configuração das entidades do modelo, incluindo chaves primárias, chaves estrangeiras e outros relacionamentos.
             modelBuilder.Entity<Cliente>().HasKey(c => c.IdCliente);
             modelBuilder.Entity<Produto>().HasKey(p => p.IdProduto);
             modelBuilder.Entity<Categoria>().HasKey(c => c.IdCategoria);
@@ -28,7 +28,16 @@ namespace Data.Context
             modelBuilder.Entity<Combo>().HasKey(c => c.IdCombo);
             modelBuilder.Entity<ComboProduto>().HasKey(pc => pc.IdProdutoCombo);
 
-            // Defina relacionamentos e outras configurações aqui
+            modelBuilder.Entity<Produto>()
+                        .HasOne(p => p.Categoria)
+                        .WithMany(c => c.Produtos)
+                        .HasForeignKey(p => p.IdCategoria);
+
+            modelBuilder.Entity<Produto>()
+                        .Navigation(p => p.Categoria)
+                        .UsePropertyAccessMode(PropertyAccessMode.Property);
+
+            // Mais configurações e relacionamentos podem ser definidos aqui.
         }
 
         public DbSet<Cliente>? Cliente { get; set; }

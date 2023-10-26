@@ -8,7 +8,7 @@ using Domain.Port.Services;
 
 namespace Application.Services
 {
-    public class PedidoService : IPedidoService
+    public class PedidoService : DateTimeAdjuster, IPedidoService
     {
         private readonly IPedidoRepository _pedidoRepository;
         private readonly IProdutoService _produtoService;
@@ -40,10 +40,12 @@ namespace Application.Services
         /// <returns>Retorna o pedido criado.</returns>
         public async Task<PedidoDTO> PostPedido(PedidoInput pedidoInput)
         {
+            DateTime dataPedidoAjustada = AjustaDataHoraLocal(pedidoInput);
+
             var novoPedido = new Pedido
             {
                 IdCliente = pedidoInput.IdCliente,
-                DataPedido = pedidoInput.DataPedido,
+                DataPedido = dataPedidoAjustada, // usa a data ajustada
                 StatusPedido = pedidoInput.StatusPedido,
             };
 
@@ -75,6 +77,5 @@ namespace Application.Services
                 ValorTotal = novoPedidoCriado.ValorTotal
             };
         }
-
     }
 }

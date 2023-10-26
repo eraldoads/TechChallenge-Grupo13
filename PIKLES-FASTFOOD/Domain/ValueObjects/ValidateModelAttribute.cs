@@ -4,7 +4,7 @@ using System.Net;
 
 namespace Domain.ValueObjects
 {
-    public class ValidateModelAttribute : ActionFilterAttribute
+    public class AjustaDataHoraLocal : ActionFilterAttribute
     {
         /// <summary>
         /// Este método é chamado antes da execução de uma ação e verifica se o estado do modelo é válido.

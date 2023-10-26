@@ -22,9 +22,9 @@ namespace Domain.EntitiesDTO
         [Range(0.01, float.MaxValue, ErrorMessage = "O valor do produto deve ser um número positivo maior que zero")]
         public float ValorProduto { get; set; }
 
-        [JsonProperty("idCategoriaProduto")]
+        [JsonProperty("IdCategoria")]
         [Required(ErrorMessage = "O IdCategoria do produto é obrigatória")]
-        public EnumCategoria IdCategoriaProduto { get; set; }
+        public int IdCategoria { get; set; }
 
         [JsonProperty("descricaoProduto")]
         [Required(ErrorMessage = "A descrição do produto é obrigatória")]

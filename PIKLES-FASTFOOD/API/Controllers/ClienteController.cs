@@ -139,7 +139,7 @@ namespace API.Controllers
 
         // PUT: /clientes/{id}
         [HttpPut("{id}")]
-        [ValidateModel]
+        [AjustaDataHoraLocal]
         [SwaggerOperation(
         Summary = "Endpoint para atualizar completamente um cliente pelo id",
         Description = @"Endpoint para atualizar completamente um cliente pelo id </br>
