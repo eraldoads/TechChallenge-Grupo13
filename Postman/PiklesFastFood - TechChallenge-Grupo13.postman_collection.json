@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "cca5baf4-6224-44dc-91ba-377c4f5e9fc5",
+		"_postman_id": "68774d70-4b27-4f78-83da-e074faf50b3c",
 		"name": "PiklesFastFood - TechChallenge/Grupo13",
 		"description": "StartFragmentAplicação para todo sistema de Controle de Pedidos de uma lanchonete - \\[API\\] Backend (monolito).",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "13215309"
+		"_exporter_id": "5024741"
 	},
 	"item": [
 		{
@@ -2425,7 +2425,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"idCliente\": 1,\n  \"dataPedido\": \"2023-10-20 21:49\",\n  \"statusPedido\": \"Realizado\",\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": 1,\n          \"quantidade\": 1\n        },\n        {\n          \"idProduto\": 2,\n          \"quantidade\": 1\n        },\n        {\n          \"idProduto\": 3,\n          \"quantidade\": 1\n        }\n      ]\n    },\n    {\n      \"produto\": [\n        {\n          \"idProduto\": 4,\n          \"quantidade\": 2\n        },\n        {\n          \"idProduto\": 5,\n          \"quantidade\": 3\n        }\n      ]\n    }\n  ]\n}",
+							"raw": "{\n  \"idCliente\": 1,\n  \"dataPedido\": \"2023-10-20 21:49\",\n  \"statusPedido\": \"Realizado\",\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": 3,\n          \"quantidade\": 1\n        },\n        {\n          \"idProduto\": 8,\n          \"quantidade\": 1\n        },\n        {\n          \"idProduto\": 13,\n          \"quantidade\": 1\n        },\n        {\n          \"idProduto\": 20,\n          \"quantidade\": 1\n        }\n      ]\n    },\n    {\n      \"produto\": [\n        {\n          \"idProduto\": 4,\n          \"quantidade\": 2\n        },\n        {\n          \"idProduto\": 9,\n          \"quantidade\": 1\n        },\n        {\n          \"idProduto\": 15,\n          \"quantidade\": 1\n        }\n      ]\n    },\n    {\n      \"produto\": [\n        {\n          \"idProduto\": 18,\n          \"quantidade\": 1\n        }\n      ]\n    }\n  ]\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
