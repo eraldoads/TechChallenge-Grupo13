@@ -30,6 +30,7 @@ services:
       - db
     environment:
       - ConnectionStrings__ConnectionMysql=server=172.16.238.10;port=3306;userid=pikles;password=fastfood;database=piklesfastfood;
+      - LANG=C.UTF-8
     restart: always
     image: ${DOCKER_REGISTRY-}api
     build:
