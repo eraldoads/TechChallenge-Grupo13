@@ -1,4 +1,4 @@
-using Application.Services;
+ï»¿using Application.Services;
 using Data.Context;
 using Data.Repository;
 using Domain.Port.DrivenPort;
@@ -9,35 +9,37 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Swashbuckle.AspNetCore.SwaggerUI;
+using System.Globalization;
 
-// Cria um builder de aplicação web com os argumentos passados.
+// Cria um builder de aplicaÃ§Ã£o web com os argumentos passados.
 var builder = WebApplication.CreateBuilder(args);
 
-// Adiciona serviços ao contêiner.
+// Adiciona serviÃ‡os ao contÃªiner.
 
-// Cria uma variável que armazena a string de conexão com o banco de dados MySQL.
+// Cria uma variÃ¡vel que armazena a string de conexÃ£o com o banco de dados MySQL.
 var connectionStringMysql = builder.Configuration.GetConnectionString("ConnectionMysql");
 
-// Adiciona um serviço do tipo MySQLContext ao objeto builder.Services.
+// Adiciona um serviÃ§o do tipo MySQLContext ao objeto builder.Services.
 builder.Services.AddDbContext<MySQLContext>(option => option.UseMySql(
-    connectionStringMysql, // Usa a string de conexão.
-    ServerVersion.AutoDetect(connectionStringMysql), // Especifica a versão do servidor MySQL.
-    builder => builder.MigrationsAssembly("API") // Especifica o assembly do projeto que contém as classes de migrações do EF Core.
+    connectionStringMysql, // Usa a string de conexÃ£o.
+    ServerVersion.AutoDetect(connectionStringMysql), // Especifica a versÃ£o do servidor MySQL.
+    builder => builder.MigrationsAssembly("API") // Especifica o assembly do projeto que contÃ©m as classes de migraÃ§Ãµes do EF Core.
 ));
 
-// Adiciona os serviços de controllers ao builder.
+// Adiciona os serviÃ‡os de controllers ao builder.
 builder.Services.AddControllers(options =>
 {
     // Insere um formato de entrada personalizado para o JsonPatch.
     options.InputFormatters.Insert(0, JsonPatchSample.MyJPIF.GetJsonPatchInputFormatter());
 });
 
-// Adiciona os serviços específicos ao contêiner.
+// Adiciona os serviÃ‡os especÃ­ficos ao contÃªiner.
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
 builder.Services.AddScoped<IPedidoService, PedidoService>();
 
-// Adiciona os repositórios específicos ao contêiner.
+// Adiciona os repositÃ³rios especÃ­ficos ao contÃªiner.
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
@@ -45,20 +47,20 @@ builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 // Adiciona o suporte ao NewtonsoftJson aos controllers.
 builder.Services.AddControllers().AddNewtonsoftJson();
 
-// Configura as opções de rota para usar URLs e query strings em minúsculo.
+// Configura as opÃ§Ãµes de rota para usar URLs e query strings em minÃºsculo.
 builder.Services.Configure<RouteOptions>(options =>
 {
     options.LowercaseUrls = true;
     options.LowercaseQueryStrings = true;
 });
 
-// Configura os serviços relacionados aos controladores.
+// Configura os serviÃ‡os relacionados aos controladores.
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add(typeof(AjustaDataHoraLocal));
 }).AddNewtonsoftJson(options =>
 {
-    // Usa a formatação padrão (PascalCase) para as propriedades.
+    // Usa a formataÃ§Ã£o padrÃ£o (PascalCase) para as propriedades.
     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 });
@@ -66,17 +68,17 @@ builder.Services.AddControllers(options =>
 // Saiba mais sobre como configurar o Swagger/OpenAPI em https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-// Configuração do SwaggerGen para gerar a documentação da Web API.
+// ConfiguraÃ§Ã£o do SwaggerGen para gerar a documentaÃ§Ã£o da Web API.
 builder.Services.AddSwaggerGen(
     c =>
     {
-        // Habilita o uso de anotações (como [SwaggerOperation]) para melhorar a documentação.
+        // Habilita o uso de anotaÃ§Ãµes (como [SwaggerOperation]) para melhorar a documentaÃ§Ã£o.
         c.EnableAnnotations();
-        // Define a versão da documentação Swagger como "v1".
+        // Define a versÃ£o da documentaÃ§Ã£o Swagger como "v1".
         c.SwaggerDoc("v1", new OpenApiInfo
         {
             Title = "Tech Challenge - Grupo 13 - Fase I",
-            Description = "Documentacao dos endpoints da API.",
+            Description = "DocumentaÃ§Ã£o dos endpoints da API.",
             Contact = new OpenApiContact() { Name = "Tech Challenge - Grupo 13", Email = "grupo13@fiap.com" },
             License = new OpenApiLicense() { Name = "MIT License", Url = new Uri("https://opensource.org/licenses/MIT") },
             Version = "1.0.11"
@@ -89,11 +91,34 @@ builder.Services.AddSwaggerGen(
 
 var app = builder.Build();
 
-// Configura a pipeline de solicitação HTTP.
+// Adiciona o middleware de codificaÃ§Ã£o para garantir a codificaÃ§Ã£o correta em todas as respostas.
+app.Use((context, next) =>
+{
+    context.Response.Headers["Content-Type"] = "application/json; charset=utf-8";
+    context.Response.Headers["Content-Encoding"] = "utf-8";
+    context.Response.Headers["Content-Language"] = CultureInfo.CurrentCulture.Name;
+    return next();
+});
+
+// Configura a pipeline de solicitaÃ§Ã£o HTTP.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
+        c.DefaultModelRendering(ModelRendering.Example);
+        //c.DefaultModelExpandDepth(-1);
+        //c.DefaultModelsExpandDepth(-1);
+        //c.DocExpansion(DocExpansion.None);
+        //c.DisplayRequestDuration();
+        c.DisplayOperationId();
+        c.EnableDeepLinking();
+        c.EnableFilter();
+        c.ShowExtensions();
+        c.EnableValidator();
+        //c.SupportedSubmitMethods(SubmitMethod.Get, SubmitMethod.Post, SubmitMethod.Put, SubmitMethod.Delete);
+    });
 
     app.UseReDoc(c =>
     {
@@ -102,14 +127,14 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-// Adiciona o middleware de autorização à pipeline de solicitação HTTP.
-// Este middleware é responsável por garantir que o usuário esteja autorizado a acessar os recursos solicitados.
+// Adiciona o middleware de autorizaÃ§Ã£o Ã  pipeline de solicitaÃ§Ã£o HTTP.
+// Este middleware Ã© responsÃ¡vel por garantir que o usuÃ¡rio esteja autorizado a acessar os recursos solicitados.
 app.UseAuthorization();
 
-// Adiciona o middleware de roteamento de controladores à pipeline de solicitação HTTP.
-// Este middleware é responsável por rotear as solicitações HTTP para os controladores apropriados.
+// Adiciona o middleware de roteamento de controladores Ã  pipeline de solicitaÃ§Ã£o HTTP.
+// Este middleware Ã© responsÃ¡vel por rotear as solicitaÃ§Ãµes HTTP para os controladores apropriados.
 app.MapControllers();
 
-// Inicia a execução da aplicação.
-// Este método bloqueia o thread chamado e aguarda até que a aplicação seja encerrada.
+// Inicia a execuÃ§Ã£o da aplicaÃ§Ã£o.
+// Este mÃ©todo bloqueia o thread chamado e aguarda atÃ© que a aplicaÃ§Ã£o seja encerrada.
 app.Run();

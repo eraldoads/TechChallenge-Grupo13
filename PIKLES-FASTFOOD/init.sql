@@ -1,4 +1,4 @@
-CREATE TABLE Cliente (
+﻿CREATE TABLE Cliente (
   IdCliente int NOT NULL AUTO_INCREMENT,
   Nome varchar(50) NOT NULL,
   Sobrenome varchar(50) NOT NULL,
