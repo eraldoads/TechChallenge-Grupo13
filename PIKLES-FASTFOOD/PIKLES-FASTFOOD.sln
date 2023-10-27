@@ -27,6 +27,7 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{BE0F3C3C-7804-417C-A7E0-3E6143227AFE}"
 	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
 		init.sql = init.sql
 	EndProjectSection
 EndProject
