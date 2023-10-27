@@ -58,6 +58,7 @@ Base de Dados: piklesfastfood
 
 [![Badge](https://img.shields.io/static/v1?label=swagger&message=Documentação&color=darkgreen&style=for-the-badge&logo=swagger)](https://www.postman.com/martian-resonance-699333/workspace/grupo-13-tech-challenge-fase-i/collection/13215309-ff36e055-fccf-48db-9965-b76e4ace4e93?tab=overview)
 
+Também é necessário selecionar o “PikklesFastFood” dentro dos environments.
 
 Para testar os endpoints da API, você pode usar a collection do POSTMAN, disponível no endereço público, clicando na imagem abaixo:
 
