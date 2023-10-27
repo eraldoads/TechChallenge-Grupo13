@@ -1,0 +1,4857 @@
+{
+	"info": {
+		"_postman_id": "cca5baf4-6224-44dc-91ba-377c4f5e9fc5",
+		"name": "PiklesFastFood - TechChallenge/Grupo13",
+		"description": "StartFragmentAplicação para todo sistema de Controle de Pedidos de uma lanchonete - \\[API\\] Backend (monolito).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13215309"
+	},
+	"item": [
+		{
+			"name": "cliente",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "Endpoint para listar um cliente específico pelo id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/cliente/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "12"
+										}
+									]
+								},
+								"description": "Endpoint para listar um cliente específico pelo id </br>\r\n                      <b>Parâmetros de entrada:</b>\r\n                       <br/> • <b>id</b>: o identificador do cliente ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                        "
+							},
+							"response": [
+								{
+									"name": "Consulta executada com sucesso!",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"cpf\": \"3\",\n  \"email\": \"<email>\",\n  \"nome\": \"NoGUuoWiEx\",\n  \"sobrenome\": \"<string>\",\n  \"idCliente\": \"<integer>\"\n}"
+								},
+								{
+									"name": "Cliente não encontrado!",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "A requisição requer autenticação do usuário.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Privilégios insuficientes.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "O recurso solicitado não existe.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Condição prévia dada em um ou mais dos campos avaliada como falsa.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Precondition Failed",
+									"code": 412,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "O servidor encontrou uma condição inesperada.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Endpoint para atualizar parcialmente um cliente pelo ID",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n    \"path\": \"nome\",\n    \"value\": \"Maria\"\n  },\n  {\n    \"path\": \"sobrenome\",\n    \"value\": \"das Coves Esfomeado\"\n  },\n  {\n    \"path\": \"email\",\n    \"value\": \"maria@esfomeado.com.br\"\n      \n  }\n]",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cliente/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "11"
+										}
+									]
+								},
+								"description": "Endpoint para atualizar parcialmente um Cliente pelo ID </br>\r\n              <b>Parâmetros de entrada:</b>\r\n                <br/> • <b>ID</b>: o identificador do cliente. ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>operationType</b>: Este é um número que representa o tipo de operação a ser realizada. Os valores possíveis são 0 (Adicionar), 1 (Remover), 2 (Substituir), 3 (Mover), 4 (Copiar) e 5 (Testar). ⇒ <font color='green'><b>Opcional</b></font>\r\n                <br/> • <b>path</b>: Este é o caminho do valor a ser alterado na estrutura de dados JSON. Por exemplo, se você tem um objeto com uma propriedade chamada ‘cpf’, o path seria ' \"path\": \"cpf\" ',. ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>op</b>: Esta é a operação a ser realizada. Os valores possíveis são ‘add’, ‘remove’, ‘replace’, ‘move’, ‘copy’ e ‘test. ⇒ <font color='green'><b>Opcional</b></font>\r\n                <br/> • <b>from</b>: Este campo é usado apenas para as operações ‘move’ e ‘copy’. Ele especifica o caminho do local de onde o valor deve ser movido ou copiado. ⇒ <font color='green'><b>Opcional</b></font>\r\n                <br/> • <b>value</b>:  Este é o valor a ser adicionado, substituído ou testado. ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                "
+							},
+							"response": [
+								{
+									"name": "Cliente atualizado parcialmente com sucesso!",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"operationType\": 3,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  },\n  {\n    \"operationType\": 1,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  }\n]",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"operationType\": 3,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  },\n  {\n    \"operationType\": 1,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  }\n]",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "A requisição requer autenticação do usuário.",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"operationType\": 3,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  },\n  {\n    \"operationType\": 1,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  }\n]",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Privilégios insuficientes.",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"operationType\": 3,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  },\n  {\n    \"operationType\": 1,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  }\n]",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "O recurso solicitado não existe.",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"operationType\": 3,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  },\n  {\n    \"operationType\": 1,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  }\n]",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Condição prévia dada em um ou mais dos campos avaliada como falsa.",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"operationType\": 3,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  },\n  {\n    \"operationType\": 1,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  }\n]",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Precondition Failed",
+									"code": 412,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "O servidor encontrou uma condição inesperada.",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"operationType\": 3,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  },\n  {\n    \"operationType\": 1,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  }\n]",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Endpoint para atualizar completamente um cliente pelo id",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Kiko\",\n    \"sobrenome\": \"Pipipipi\",\n    \"cpf\": \"72529947082\",\n    \"email\": \"kiko@chaves.com.br\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cliente/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "12"
+										}
+									]
+								},
+								"description": "Endpoint para atualizar completamente um cliente pelo id </br>\r\n              <b>Parâmetros de entrada:</b>\r\n                <br/> • <b>id</b>: o identificador do cliente a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>nome</b>: o primeiro nome do cliente a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>sobrenome</b>: o sobrenome do cliente a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>cpf</b>: o CPF do cliente a ser atualizado - Somente números ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>email</b>: o e-mail do cliente a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                "
+							},
+							"response": [
+								{
+									"name": "Cliente atualizado com sucesso!",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cpf\": \"3\",\n  \"email\": \"<email>\",\n  \"nome\": \"NoGUuoWiEx\",\n  \"sobrenome\": \"<string>\",\n  \"idCliente\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cpf\": \"3\",\n  \"email\": \"<email>\",\n  \"nome\": \"NoGUuoWiEx\",\n  \"sobrenome\": \"<string>\",\n  \"idCliente\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "A requisição requer autenticação do usuário.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cpf\": \"3\",\n  \"email\": \"<email>\",\n  \"nome\": \"NoGUuoWiEx\",\n  \"sobrenome\": \"<string>\",\n  \"idCliente\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Privilégios insuficientes.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cpf\": \"3\",\n  \"email\": \"<email>\",\n  \"nome\": \"NoGUuoWiEx\",\n  \"sobrenome\": \"<string>\",\n  \"idCliente\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "O recurso solicitado não existe.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cpf\": \"3\",\n  \"email\": \"<email>\",\n  \"nome\": \"NoGUuoWiEx\",\n  \"sobrenome\": \"<string>\",\n  \"idCliente\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Condição prévia dada em um ou mais dos campos avaliada como falsa.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cpf\": \"3\",\n  \"email\": \"<email>\",\n  \"nome\": \"NoGUuoWiEx\",\n  \"sobrenome\": \"<string>\",\n  \"idCliente\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Precondition Failed",
+									"code": 412,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "O servidor encontrou uma condição inesperada.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cpf\": \"3\",\n  \"email\": \"<email>\",\n  \"nome\": \"NoGUuoWiEx\",\n  \"sobrenome\": \"<string>\",\n  \"idCliente\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Endpoint para deletar um cliente pelo id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/cliente/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "12"
+										}
+									]
+								},
+								"description": "Endpoint para deletar um cliente pelo id </br>\r\n              <b>Parâmetros de entrada:</b>\r\n               <br/> • <b>id</b>: o identificador do cliente a ser deletado ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                "
+							},
+							"response": [
+								{
+									"name": "Cliente deletado com sucesso!",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"cpf\": \"3\",\n  \"email\": \"<email>\",\n  \"nome\": \"NoGUuoWiEx\",\n  \"sobrenome\": \"<string>\",\n  \"idCliente\": \"<integer>\"\n}"
+								},
+								{
+									"name": "Requisição concluída sem dados de retorno.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "A requisição requer autenticação do usuário.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Privilégios insuficientes.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "O recurso solicitado não existe.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Condição prévia dada em um ou mais dos campos avaliada como falsa.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Precondition Failed",
+									"code": 412,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "O servidor encontrou uma condição inesperada.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/cliente/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"cliente",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Endpoint para listar todos os clientes cadastrados",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/cliente",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cliente"
+							]
+						},
+						"description": "Busca todos os Clientes</br>"
+					},
+					"response": [
+						{
+							"name": "Consulta executada com sucesso!",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/cliente",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"cpf\": \"5551945\",\n    \"email\": \"<email>\",\n    \"nome\": \"CRQ\",\n    \"sobrenome\": \"<string>\",\n    \"idCliente\": \"<integer>\"\n  },\n  {\n    \"cpf\": \"153\",\n    \"email\": \"<email>\",\n    \"nome\": \"tGskphcgBkn\",\n    \"sobrenome\": \"<string>\",\n    \"idCliente\": \"<integer>\"\n  }\n]"
+						},
+						{
+							"name": "Requisição concluída sem dados de retorno.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/cliente",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Conteúdo Parcial!",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/cliente",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"status": "Partial Content",
+							"code": 206,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"cpf\": \"5551945\",\n    \"email\": \"<email>\",\n    \"nome\": \"CRQ\",\n    \"sobrenome\": \"<string>\",\n    \"idCliente\": \"<integer>\"\n  },\n  {\n    \"cpf\": \"153\",\n    \"email\": \"<email>\",\n    \"nome\": \"tGskphcgBkn\",\n    \"sobrenome\": \"<string>\",\n    \"idCliente\": \"<integer>\"\n  }\n]"
+						},
+						{
+							"name": "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/cliente",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "A requisição requer autenticação do usuário.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/cliente",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Privilégios insuficientes.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/cliente",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "O recurso solicitado não existe.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/cliente",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Condição prévia dada em um ou mais dos campos avaliada como falsa.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/cliente",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"status": "Precondition Failed",
+							"code": 412,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "O servidor encontrou uma condição inesperada.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/cliente",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Endpoint para criar um novo cliente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cpf\": \"16111548042\",\n  \"email\": \"joao@esfomeado.com.br\",\n  \"nome\": \"Joao\",\n  \"sobrenome\": \"do Oito\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cliente",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cliente"
+							]
+						},
+						"description": "Endpoint para criar um novo cliente </br>\r\n                    <b>Parâmetros de entrada:</b>\r\n                    <br/> • <b>id</b>: o identificador do cliente a ser criado ⇒ <font color='green'><b>Opcional</b></font>\r\n                    <br/> • <b>nome</b>: o primeiro nome do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                    <br/> • <b>sobrenome</b>: o sobrenome do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                    <br/> • <b>cpf</b>: o CPF do cliente a ser criado - Somente números ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                    <br/> • <b>email</b>: o e-mail do cliente a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                    "
+					},
+					"response": [
+						{
+							"name": "Cliente criado com sucesso!",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"282922\",\n  \"email\": \"<email>\",\n  \"nome\": \"lq\",\n  \"sobrenome\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cliente",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"cpf\": \"3\",\n  \"email\": \"<email>\",\n  \"nome\": \"NoGUuoWiEx\",\n  \"sobrenome\": \"<string>\",\n  \"idCliente\": \"<integer>\"\n}"
+						},
+						{
+							"name": "Requisição concluída sem dados de retorno.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"282922\",\n  \"email\": \"<email>\",\n  \"nome\": \"lq\",\n  \"sobrenome\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cliente",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"282922\",\n  \"email\": \"<email>\",\n  \"nome\": \"lq\",\n  \"sobrenome\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cliente",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "A requisição requer autenticação do usuário.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"282922\",\n  \"email\": \"<email>\",\n  \"nome\": \"lq\",\n  \"sobrenome\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cliente",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Privilégios insuficientes.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"282922\",\n  \"email\": \"<email>\",\n  \"nome\": \"lq\",\n  \"sobrenome\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cliente",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "O recurso solicitado não existe.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"282922\",\n  \"email\": \"<email>\",\n  \"nome\": \"lq\",\n  \"sobrenome\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cliente",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Condição prévia dada em um ou mais dos campos avaliada como falsa.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"282922\",\n  \"email\": \"<email>\",\n  \"nome\": \"lq\",\n  \"sobrenome\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cliente",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"status": "Precondition Failed",
+							"code": 412,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "O servidor encontrou uma condição inesperada.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"282922\",\n  \"email\": \"<email>\",\n  \"nome\": \"lq\",\n  \"sobrenome\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cliente",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "Endpoint para fazer login do cliente via CPF",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cpf\": \"57512533020\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": "Endpoint para fazer login do cliente via CPF </br>\r\n                <b>Parâmetros de entrada:</b>\r\n                    <br/> • <b>cpf</b>: o CPF do cliente - Somente números. ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                "
+					},
+					"response": [
+						{
+							"name": "Cliente encontrado com sucesso!",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"9613\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"cpf\": \"3\",\n  \"email\": \"<email>\",\n  \"nome\": \"NoGUuoWiEx\",\n  \"sobrenome\": \"<string>\",\n  \"idCliente\": \"<integer>\"\n}"
+						},
+						{
+							"name": "Requisição concluída sem dados de retorno.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"9613\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"9613\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "A requisição requer autenticação do usuário.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"9613\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Privilégios insuficientes.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"9613\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Cliente não encontrado",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"9613\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Condição prévia dada em um ou mais dos campos avaliada como falsa.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"9613\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Precondition Failed",
+							"code": 412,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "O servidor encontrou uma condição inesperada.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"9613\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "pedido",
+			"item": [
+				{
+					"name": "Endpoint para retornar todos os pedidos realizados",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/pedido",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedido"
+							]
+						},
+						"description": "Busca todos os pedidos realizados </br>"
+					},
+					"response": [
+						{
+							"name": "Consulta executada com sucesso!",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"idPedido\": \"<integer>\",\n    \"dataPedido\": \"<dateTime>\",\n    \"statusPedido\": \"<string>\",\n    \"nomeCliente\": \"<string>\",\n    \"valorTotalPedido\": \"<float>\",\n    \"combo\": [\n      {\n        \"produto\": [\n          {\n            \"idProduto\": \"<integer>\",\n            \"nomeProduto\": \"<string>\",\n            \"quantidadeProduto\": \"<integer>\",\n            \"valorProduto\": \"<float>\"\n          },\n          {\n            \"idProduto\": \"<integer>\",\n            \"nomeProduto\": \"<string>\",\n            \"quantidadeProduto\": \"<integer>\",\n            \"valorProduto\": \"<float>\"\n          }\n        ]\n      },\n      {\n        \"produto\": [\n          {\n            \"idProduto\": \"<integer>\",\n            \"nomeProduto\": \"<string>\",\n            \"quantidadeProduto\": \"<integer>\",\n            \"valorProduto\": \"<float>\"\n          },\n          {\n            \"idProduto\": \"<integer>\",\n            \"nomeProduto\": \"<string>\",\n            \"quantidadeProduto\": \"<integer>\",\n            \"valorProduto\": \"<float>\"\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"idPedido\": \"<integer>\",\n    \"dataPedido\": \"<dateTime>\",\n    \"statusPedido\": \"<string>\",\n    \"nomeCliente\": \"<string>\",\n    \"valorTotalPedido\": \"<float>\",\n    \"combo\": [\n      {\n        \"produto\": [\n          {\n            \"idProduto\": \"<integer>\",\n            \"nomeProduto\": \"<string>\",\n            \"quantidadeProduto\": \"<integer>\",\n            \"valorProduto\": \"<float>\"\n          },\n          {\n            \"idProduto\": \"<integer>\",\n            \"nomeProduto\": \"<string>\",\n            \"quantidadeProduto\": \"<integer>\",\n            \"valorProduto\": \"<float>\"\n          }\n        ]\n      },\n      {\n        \"produto\": [\n          {\n            \"idProduto\": \"<integer>\",\n            \"nomeProduto\": \"<string>\",\n            \"quantidadeProduto\": \"<integer>\",\n            \"valorProduto\": \"<float>\"\n          },\n          {\n            \"idProduto\": \"<integer>\",\n            \"nomeProduto\": \"<string>\",\n            \"quantidadeProduto\": \"<integer>\",\n            \"valorProduto\": \"<float>\"\n          }\n        ]\n      }\n    ]\n  }\n]"
+						},
+						{
+							"name": "Requisição concluída sem dados de retorno.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Conteúdo Parcial!",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Partial Content",
+							"code": 206,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"idPedido\": \"<integer>\",\n    \"dataPedido\": \"<dateTime>\",\n    \"statusPedido\": \"<string>\",\n    \"nomeCliente\": \"<string>\",\n    \"valorTotalPedido\": \"<float>\",\n    \"combo\": [\n      {\n        \"produto\": [\n          {\n            \"idProduto\": \"<integer>\",\n            \"nomeProduto\": \"<string>\",\n            \"quantidadeProduto\": \"<integer>\",\n            \"valorProduto\": \"<float>\"\n          },\n          {\n            \"idProduto\": \"<integer>\",\n            \"nomeProduto\": \"<string>\",\n            \"quantidadeProduto\": \"<integer>\",\n            \"valorProduto\": \"<float>\"\n          }\n        ]\n      },\n      {\n        \"produto\": [\n          {\n            \"idProduto\": \"<integer>\",\n            \"nomeProduto\": \"<string>\",\n            \"quantidadeProduto\": \"<integer>\",\n            \"valorProduto\": \"<float>\"\n          },\n          {\n            \"idProduto\": \"<integer>\",\n            \"nomeProduto\": \"<string>\",\n            \"quantidadeProduto\": \"<integer>\",\n            \"valorProduto\": \"<float>\"\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"idPedido\": \"<integer>\",\n    \"dataPedido\": \"<dateTime>\",\n    \"statusPedido\": \"<string>\",\n    \"nomeCliente\": \"<string>\",\n    \"valorTotalPedido\": \"<float>\",\n    \"combo\": [\n      {\n        \"produto\": [\n          {\n            \"idProduto\": \"<integer>\",\n            \"nomeProduto\": \"<string>\",\n            \"quantidadeProduto\": \"<integer>\",\n            \"valorProduto\": \"<float>\"\n          },\n          {\n            \"idProduto\": \"<integer>\",\n            \"nomeProduto\": \"<string>\",\n            \"quantidadeProduto\": \"<integer>\",\n            \"valorProduto\": \"<float>\"\n          }\n        ]\n      },\n      {\n        \"produto\": [\n          {\n            \"idProduto\": \"<integer>\",\n            \"nomeProduto\": \"<string>\",\n            \"quantidadeProduto\": \"<integer>\",\n            \"valorProduto\": \"<float>\"\n          },\n          {\n            \"idProduto\": \"<integer>\",\n            \"nomeProduto\": \"<string>\",\n            \"quantidadeProduto\": \"<integer>\",\n            \"valorProduto\": \"<float>\"\n          }\n        ]\n      }\n    ]\n  }\n]"
+						},
+						{
+							"name": "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "A requisição requer autenticação do usuário.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Privilégios insuficientes.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "O recurso solicitado não existe.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Condição prévia dada em um ou mais dos campos avaliada como falsa.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Precondition Failed",
+							"code": 412,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "O servidor encontrou uma condição inesperada.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Endpoint para criar um novo pedido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"idCliente\": 1,\n  \"dataPedido\": \"2023-10-20 21:49\",\n  \"statusPedido\": \"Realizado\",\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": 1,\n          \"quantidade\": 1\n        },\n        {\n          \"idProduto\": 2,\n          \"quantidade\": 1\n        },\n        {\n          \"idProduto\": 3,\n          \"quantidade\": 1\n        }\n      ]\n    },\n    {\n      \"produto\": [\n        {\n          \"idProduto\": 4,\n          \"quantidade\": 2\n        },\n        {\n          \"idProduto\": 5,\n          \"quantidade\": 3\n        }\n      ]\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pedido",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedido"
+							]
+						},
+						"description": "Cria um novo pedido com os dados recebidos no corpo da requisição </br>\r\n                <b>Parâmetros de entrada:</b>\r\n                <br/> • <b>idCliente</b>: o identificador do cliente que realizou o pedido ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>dataPedido</b>: a data em que o pedido foi realizado ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>statusPedido</b>: o status atual do pedido ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>combo</b>: uma lista de combos incluídos no pedido, cada um contendo uma lista de produtos:\r\n                    <br/>&nbsp;&emsp;&emsp;  • <b>produto</b>: a lista de produtos incluídos no combo, cada um contendo os seguintes parâmetros:\r\n                        <br/>&nbsp;&emsp;&emsp;&nbsp;&emsp;&emsp;   • <b>idProduto</b>: o identificador do produto incluído no combo ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                        <br/>&nbsp;&emsp;&emsp;&nbsp;&emsp;&emsp;   • <b>quantidade</b>: a quantidade do respectivo produto incluído no combo ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                "
+					},
+					"response": [
+						{
+							"name": "Pedido criado com sucesso!",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": \"<integer>\",\n          \"quantidade\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"dataPedido\": \"<dateTime>\",\n  \"idCliente\": \"<integer>\",\n  \"statusPedido\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"idPedido\": \"<integer>\",\n  \"dataPedido\": \"<dateTime>\",\n  \"valorTotal\": \"<float>\"\n}"
+						},
+						{
+							"name": "Requisição concluída sem dados de retorno.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": \"<integer>\",\n          \"quantidade\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"dataPedido\": \"<dateTime>\",\n  \"idCliente\": \"<integer>\",\n  \"statusPedido\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": \"<integer>\",\n          \"quantidade\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"dataPedido\": \"<dateTime>\",\n  \"idCliente\": \"<integer>\",\n  \"statusPedido\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "A requisição requer autenticação do usuário.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": \"<integer>\",\n          \"quantidade\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"dataPedido\": \"<dateTime>\",\n  \"idCliente\": \"<integer>\",\n  \"statusPedido\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Privilégios insuficientes.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": \"<integer>\",\n          \"quantidade\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"dataPedido\": \"<dateTime>\",\n  \"idCliente\": \"<integer>\",\n  \"statusPedido\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "O recurso solicitado não existe.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": \"<integer>\",\n          \"quantidade\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"dataPedido\": \"<dateTime>\",\n  \"idCliente\": \"<integer>\",\n  \"statusPedido\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Condição prévia dada em um ou mais dos campos avaliada como falsa.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": \"<integer>\",\n          \"quantidade\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"dataPedido\": \"<dateTime>\",\n  \"idCliente\": \"<integer>\",\n  \"statusPedido\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Precondition Failed",
+							"code": 412,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "O servidor encontrou uma condição inesperada.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": \"<integer>\",\n          \"quantidade\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"dataPedido\": \"<dateTime>\",\n  \"idCliente\": \"<integer>\",\n  \"statusPedido\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "produto",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "Endpoint para listar um produto específico pelo id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/produto/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								},
+								"description": "Endpoint para listar um produto específico pelo id </br>\r\n                <b>Parâmetros de entrada:</b>\r\n                <br/> • <b>id</b>: o identificador do produto ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                "
+							},
+							"response": [
+								{
+									"name": "Consulta executada com sucesso!",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"descricaoProduto\": \"<string>\",\n  \"idCategoriaProduto\": 4,\n  \"nomeProduto\": \"<string>\",\n  \"valorProduto\": \"<float>\",\n  \"idProduto\": \"<integer>\"\n}"
+								},
+								{
+									"name": "Requisição concluída sem dados de retorno.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "A requisição requer autenticação do usuário.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Privilégios insuficientes.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "O recurso solicitado não existe.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Condição prévia dada em um ou mais dos campos avaliada como falsa.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Precondition Failed",
+									"code": 412,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "O servidor encontrou uma condição inesperada.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Endpoint para atualizar parcialmente um produto pelo id",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n    \"path\": \"valorProduto\",\n    \"value\": 11.99\n  },\n  {\n    \"path\": \"nomeProduto\",\n    \"value\": \"Cheesecake de Chocolate Meio Amargo\"\n  }\n]",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/produto/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "46"
+										}
+									]
+								},
+								"description": "Endpoint para atualizar parcialmente um produto pelo id </br>\r\n                          <b>Parâmetros de entrada:</b>\r\n                          <br/> • <b>ID</b>: o identificador do cliente. ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                          <br/> • <b>operationType</b>: Este é um número que representa o tipo de operação a ser realizada. Os valores possíveis são 0 (Adicionar), 1 (Remover), 2 (Substituir), 3 (Mover), 4 (Copiar) e 5 (Testar). ⇒ <font color='green'><b>Opcional</b></font>\r\n                          <br/> • <b>path</b>: Este é o caminho do valor a ser alterado na estrutura de dados JSON. Por exemplo, se você tem um objeto com uma propriedade chamada ‘nomeProduto’, o path seria ' \"path\": \"nomeProduto\" '. ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                          <br/> • <b>op</b>: Esta é a operação a ser realizada. Os valores possíveis são ‘add’, ‘remove’, ‘replace’, ‘move’, ‘copy’ e ‘test. ⇒ <font color='green'><b>Opcional</b></font>\r\n                          <br/> • <b>from</b>: Este campo é usado apenas para as operações ‘move’ e ‘copy’. Ele especifica o caminho do local de onde o valor deve ser movido ou copiado. ⇒ <font color='green'><b>Opcional</b></font>\r\n                          <br/> • <b>value</b>:  Este é o valor a ser adicionado, substituído ou testado. ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                          "
+							},
+							"response": [
+								{
+									"name": "Cliente atualizado parcialmente com sucesso!",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"operationType\": 3,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  },\n  {\n    \"operationType\": 1,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  }\n]",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"operationType\": 3,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  },\n  {\n    \"operationType\": 1,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  }\n]",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "A requisição requer autenticação do usuário.",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"operationType\": 3,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  },\n  {\n    \"operationType\": 1,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  }\n]",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Privilégios insuficientes.",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"operationType\": 3,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  },\n  {\n    \"operationType\": 1,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  }\n]",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "O recurso solicitado não existe.",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"operationType\": 3,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  },\n  {\n    \"operationType\": 1,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  }\n]",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Condição prévia dada em um ou mais dos campos avaliada como falsa.",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"operationType\": 3,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  },\n  {\n    \"operationType\": 1,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  }\n]",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Precondition Failed",
+									"code": 412,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "O servidor encontrou uma condição inesperada.",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"operationType\": 3,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  },\n  {\n    \"operationType\": 1,\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": {\n      \"nullable\": true\n    }\n  }\n]",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Endpoint para atualizar completamente um produto pelo id",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nomeProduto\": \"Cheesecake de Chocolate Meio Amargo\",\n    \"valorProduto\": 11.99,\n    \"idCategoriaProduto\": 4,\n    \"descricaoProduto\": \"Cheesecake cremoso e suave com uma cobertura de chocolate meio amargo. Uma sobremesa elegante e saborosa para os amantes de doces.\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/produto/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "46"
+										}
+									]
+								},
+								"description": "Endpoint para atualizar completamente um produto pelo id </br>\r\n              <b>Parâmetros de entrada:</b>\r\n                <br/> • <b>id</b>: o identificador do produto a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>nomeProduto</b>: o nome do produto a ser atualizado ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>valorProduto</b>: o valor do produto a ser atualizado⇒ <font color='red'><b>Obrigatório</b></font>\r\n                        <br/> • <b>categoriaProduto</b>: a categoria do produto a ser criado, tem como definição os valores:⇒ <font color='red'><b>Obrigatório</b></font>\r\n                            <br/>&nbsp;&emsp;&emsp;• <b>1</b> - Lanche\r\n                            <br/>&nbsp;&emsp;&emsp;• <b>2</b> - Acompanhamento\r\n                            <br/>&nbsp;&emsp;&emsp;• <b>3</b> - Bebida\r\n                            <br/>&nbsp;&emsp;&emsp;• <b>4</b> - Sobremesa\r\n                <br/> • <b>descricaoProduto</b>: a descrição do produto a ser  atualizado⇒ <font color='red'><b>Obrigatório</b></font>\r\n                "
+							},
+							"response": [
+								{
+									"name": "Cliente atualizado com sucesso!",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"descricaoProduto\": \"<string>\",\n  \"idCategoriaProduto\": 4,\n  \"nomeProduto\": \"<string>\",\n  \"valorProduto\": \"<float>\",\n  \"idProduto\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"descricaoProduto\": \"<string>\",\n  \"idCategoriaProduto\": 4,\n  \"nomeProduto\": \"<string>\",\n  \"valorProduto\": \"<float>\",\n  \"idProduto\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "A requisição requer autenticação do usuário.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"descricaoProduto\": \"<string>\",\n  \"idCategoriaProduto\": 4,\n  \"nomeProduto\": \"<string>\",\n  \"valorProduto\": \"<float>\",\n  \"idProduto\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Privilégios insuficientes.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"descricaoProduto\": \"<string>\",\n  \"idCategoriaProduto\": 4,\n  \"nomeProduto\": \"<string>\",\n  \"valorProduto\": \"<float>\",\n  \"idProduto\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "O recurso solicitado não existe.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"descricaoProduto\": \"<string>\",\n  \"idCategoriaProduto\": 4,\n  \"nomeProduto\": \"<string>\",\n  \"valorProduto\": \"<float>\",\n  \"idProduto\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Condição prévia dada em um ou mais dos campos avaliada como falsa.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"descricaoProduto\": \"<string>\",\n  \"idCategoriaProduto\": 4,\n  \"nomeProduto\": \"<string>\",\n  \"valorProduto\": \"<float>\",\n  \"idProduto\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Precondition Failed",
+									"code": 412,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "O servidor encontrou uma condição inesperada.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"descricaoProduto\": \"<string>\",\n  \"idCategoriaProduto\": 4,\n  \"nomeProduto\": \"<string>\",\n  \"valorProduto\": \"<float>\",\n  \"idProduto\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Endpoint para deletar um produto pelo id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/produto/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "47"
+										}
+									]
+								},
+								"description": "Endpoint para deletar um produto pelo id </br>\r\n              <b>Parâmetros de entrada:</b>\r\n               <br/> • <b>id</b>: o identificador do produto a ser deletado ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                "
+							},
+							"response": [
+								{
+									"name": "Produto deletado com sucesso!",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"descricaoProduto\": \"<string>\",\n  \"idCategoriaProduto\": 4,\n  \"nomeProduto\": \"<string>\",\n  \"valorProduto\": \"<float>\",\n  \"idProduto\": \"<integer>\"\n}"
+								},
+								{
+									"name": "Requisição concluída sem dados de retorno.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "A requisição requer autenticação do usuário.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Privilégios insuficientes.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "O recurso solicitado não existe.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Condição prévia dada em um ou mais dos campos avaliada como falsa.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Precondition Failed",
+									"code": 412,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "O servidor encontrou uma condição inesperada.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/produto/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "categoria",
+					"item": [
+						{
+							"name": "{idCategoria}",
+							"item": [
+								{
+									"name": "Endpoint para listar os produtos de uma categoria específica",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/produto/categoria/:idCategoria",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produto",
+												"categoria",
+												":idCategoria"
+											],
+											"variable": [
+												{
+													"key": "idCategoria",
+													"value": "1"
+												}
+											]
+										},
+										"description": "Endpoint para listar os produtos de uma categoria específica </br>\r\n                <b>Parâmetros de entrada:</b>\r\n                <br/> • <b>idCategoria</b>: o id da categoria do produto ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                "
+									},
+									"response": [
+										{
+											"name": "Consulta executada com sucesso!",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/produto/categoria/:idCategoria",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"produto",
+														"categoria",
+														":idCategoria"
+													],
+													"variable": [
+														{
+															"key": "idCategoria"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"descricaoProduto\": \"<string>\",\n    \"idCategoriaProduto\": 4,\n    \"nomeProduto\": \"<string>\",\n    \"valorProduto\": \"<float>\",\n    \"idProduto\": \"<integer>\"\n  },\n  {\n    \"descricaoProduto\": \"<string>\",\n    \"idCategoriaProduto\": 2,\n    \"nomeProduto\": \"<string>\",\n    \"valorProduto\": \"<float>\",\n    \"idProduto\": \"<integer>\"\n  }\n]"
+										},
+										{
+											"name": "Requisição concluída sem dados de retorno.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/produto/categoria/:idCategoria",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"produto",
+														"categoria",
+														":idCategoria"
+													],
+													"variable": [
+														{
+															"key": "idCategoria"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/produto/categoria/:idCategoria",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"produto",
+														"categoria",
+														":idCategoria"
+													],
+													"variable": [
+														{
+															"key": "idCategoria"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "A requisição requer autenticação do usuário.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/produto/categoria/:idCategoria",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"produto",
+														"categoria",
+														":idCategoria"
+													],
+													"variable": [
+														{
+															"key": "idCategoria"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Privilégios insuficientes.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/produto/categoria/:idCategoria",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"produto",
+														"categoria",
+														":idCategoria"
+													],
+													"variable": [
+														{
+															"key": "idCategoria"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "O recurso solicitado não existe.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/produto/categoria/:idCategoria",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"produto",
+														"categoria",
+														":idCategoria"
+													],
+													"variable": [
+														{
+															"key": "idCategoria"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Condição prévia dada em um ou mais dos campos avaliada como falsa.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/produto/categoria/:idCategoria",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"produto",
+														"categoria",
+														":idCategoria"
+													],
+													"variable": [
+														{
+															"key": "idCategoria"
+														}
+													]
+												}
+											},
+											"status": "Precondition Failed",
+											"code": 412,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "O servidor encontrou uma condição inesperada.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/produto/categoria/:idCategoria",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"produto",
+														"categoria",
+														":idCategoria"
+													],
+													"variable": [
+														{
+															"key": "idCategoria"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Endpoint para listar todos os produtos cadastrados",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/produto",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"produto"
+							]
+						},
+						"description": "Busca todos os produtos </br>"
+					},
+					"response": [
+						{
+							"name": "Consulta executada com sucesso!",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"descricaoProduto\": \"<string>\",\n    \"idCategoriaProduto\": 4,\n    \"nomeProduto\": \"<string>\",\n    \"valorProduto\": \"<float>\",\n    \"idProduto\": \"<integer>\"\n  },\n  {\n    \"descricaoProduto\": \"<string>\",\n    \"idCategoriaProduto\": 2,\n    \"nomeProduto\": \"<string>\",\n    \"valorProduto\": \"<float>\",\n    \"idProduto\": \"<integer>\"\n  }\n]"
+						},
+						{
+							"name": "Requisição concluída sem dados de retorno.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Conteúdo Parcial!",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Partial Content",
+							"code": 206,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"descricaoProduto\": \"<string>\",\n    \"idCategoriaProduto\": 4,\n    \"nomeProduto\": \"<string>\",\n    \"valorProduto\": \"<float>\",\n    \"idProduto\": \"<integer>\"\n  },\n  {\n    \"descricaoProduto\": \"<string>\",\n    \"idCategoriaProduto\": 2,\n    \"nomeProduto\": \"<string>\",\n    \"valorProduto\": \"<float>\",\n    \"idProduto\": \"<integer>\"\n  }\n]"
+						},
+						{
+							"name": "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "A requisição requer autenticação do usuário.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Privilégios insuficientes.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "O recurso solicitado não existe.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Condição prévia dada em um ou mais dos campos avaliada como falsa.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Precondition Failed",
+							"code": 412,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "O servidor encontrou uma condição inesperada.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Endpoint para criar um novo produto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nomeProduto\": \"Cheesecake de Chocolate\",\n  \"valorProduto\": 101.99,\n  \"idCategoriaProduto\": 4,\n  \"descricaoProduto\": \"Cheesecake cremoso e suave com uma cobertura de chocolate meio amargo. Uma sobremesa elegante e saborosa para os amantes de doces.\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/produto",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"produto"
+							]
+						},
+						"description": "Endpoint para criar um novo produto </br>\r\n                          <b>Parâmetros de entrada:</b>\r\n                          <br/> • <b>nomeProduto</b>: o nome do produto a ser criado ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                          <br/> • <b>valorProduto</b>: o valor do produto a ser criado⇒ <font color='red'><b>Obrigatório</b></font>\r\n                          <br/> • <b>idCategoriaProduto</b>: a categoria do produto a ser criado, tem como definição os valores:⇒ <font color='red'><b>Obrigatório</b></font>\r\n                              <br/>&nbsp;&emsp;&emsp;• <b>1</b> - Lanche\r\n                              <br/>&nbsp;&emsp;&emsp;• <b>2</b> - Acompanhamento\r\n                              <br/>&nbsp;&emsp;&emsp;• <b>3</b> - Bebida\r\n                              <br/>&nbsp;&emsp;&emsp;• <b>4</b> - Sobremesa\r\n                          <br/> • <b>descricaoProduto</b>: a descrição do produto a ser criado⇒ <font color='red'><b>Obrigatório</b></font>"
+					},
+					"response": [
+						{
+							"name": "Produto criado com sucesso!",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"descricaoProduto\": \"<string>\",\n  \"idCategoriaProduto\": 4,\n  \"nomeProduto\": \"<string>\",\n  \"valorProduto\": \"<float>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"descricaoProduto\": \"<string>\",\n  \"idCategoriaProduto\": 4,\n  \"nomeProduto\": \"<string>\",\n  \"valorProduto\": \"<float>\",\n  \"idProduto\": \"<integer>\"\n}"
+						},
+						{
+							"name": "Requisição concluída sem dados de retorno.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"descricaoProduto\": \"<string>\",\n  \"idCategoriaProduto\": 4,\n  \"nomeProduto\": \"<string>\",\n  \"valorProduto\": \"<float>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"descricaoProduto\": \"<string>\",\n  \"idCategoriaProduto\": 4,\n  \"nomeProduto\": \"<string>\",\n  \"valorProduto\": \"<float>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "A requisição requer autenticação do usuário.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"descricaoProduto\": \"<string>\",\n  \"idCategoriaProduto\": 4,\n  \"nomeProduto\": \"<string>\",\n  \"valorProduto\": \"<float>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Privilégios insuficientes.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"descricaoProduto\": \"<string>\",\n  \"idCategoriaProduto\": 4,\n  \"nomeProduto\": \"<string>\",\n  \"valorProduto\": \"<float>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "O recurso solicitado não existe.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"descricaoProduto\": \"<string>\",\n  \"idCategoriaProduto\": 4,\n  \"nomeProduto\": \"<string>\",\n  \"valorProduto\": \"<float>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Condição prévia dada em um ou mais dos campos avaliada como falsa.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"descricaoProduto\": \"<string>\",\n  \"idCategoriaProduto\": 4,\n  \"nomeProduto\": \"<string>\",\n  \"valorProduto\": \"<float>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Precondition Failed",
+							"code": 412,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "O servidor encontrou uma condição inesperada.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"descricaoProduto\": \"<string>\",\n  \"idCategoriaProduto\": 4,\n  \"nomeProduto\": \"<string>\",\n  \"valorProduto\": \"<float>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/produto",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produto"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/"
+		}
+	]
+}

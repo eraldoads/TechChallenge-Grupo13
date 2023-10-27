@@ -58,12 +58,13 @@ Base de Dados: piklesfastfood
 
 [![Badge](https://img.shields.io/static/v1?label=swagger&message=Documentação&color=darkgreen&style=for-the-badge&logo=swagger)](https://www.postman.com/martian-resonance-699333/workspace/grupo-13-tech-challenge-fase-i/collection/13215309-ff36e055-fccf-48db-9965-b76e4ace4e93?tab=overview)
 
-Também é necessário selecionar o “PikklesFastFood” dentro dos environments.
+Para testar os endpoints da API via Postman, você deverá importar o json da collection e do enviroment, os quais estão disponíveis na pasta <b>Postman</b> dentro do projeto:
 
-Para testar os endpoints da API, você pode usar a collection do POSTMAN, disponível no endereço público, clicando na imagem abaixo:
-
-[![Badge](https://img.shields.io/static/v1?label=postman&message=Collection&color=orange&style=for-the-badge&logo=postman)](https://www.postman.com/martian-resonance-699333/workspace/grupo-13-tech-challenge-fase-i/collection/13215309-ff36e055-fccf-48db-9965-b76e4ace4e93?tab=overview)
-
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/69488ce6-4a61-4028-8c4a-ae9855e86eed)
+</br>
+</br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/1f85cdac-dceb-4908-94f9-408e69d7dd4e)
+</br>
 </br>
 
 ## 🔗 Tecnologias
