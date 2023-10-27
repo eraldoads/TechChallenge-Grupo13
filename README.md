@@ -60,12 +60,11 @@ Base de Dados: piklesfastfood
 
 Para testar os endpoints da API via Postman, você deverá importar o json da collection e do enviroment, os quais estão disponíveis na pasta <b>Postman</b> dentro do projeto:
 
-![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/a1a6179e-e6b5-41c4-bf67-17df5319abec)
-
-
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/69488ce6-4a61-4028-8c4a-ae9855e86eed)
 </br>
-![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/9a48fa68-c035-4e5f-b908-c74ffacef6a1)
-
+</br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/1f85cdac-dceb-4908-94f9-408e69d7dd4e)
+</br>
 </br>
 
 ## 🔗 Tecnologias
