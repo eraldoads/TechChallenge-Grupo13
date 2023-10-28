@@ -1,5 +1,4 @@
-﻿using Domain.Base;
-using Domain.ValueObjects;
+﻿using Domain.ValueObjects;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
@@ -32,6 +31,9 @@ namespace Domain.Entities
         [Required(ErrorMessage = "A descrição do produto é obrigatória")]
         [StringLength(500, ErrorMessage = "A descrição do produto deve ter no máximo 500 caracteres")]
         public string? DescricaoProduto { get; set; }
+
+        [JsonProperty("imagem")]
+        public string? ImagemProduto { get; set; }
 
         [JsonIgnore]
         public virtual Categoria? Categoria { get; set; }

@@ -1,4 +1,6 @@
-﻿namespace Domain.Entities.Output
+﻿using Newtonsoft.Json;
+
+namespace Domain.Entities.Output
 {
     public class ProdutoOutput
     {

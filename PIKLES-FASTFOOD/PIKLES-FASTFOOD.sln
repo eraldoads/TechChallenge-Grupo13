@@ -23,14 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Data", "4 - Data", "{FF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{F04C1E62-2962-444A-B67B-6188191CE126}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{016A83A2-1630-4089-AA18-EA79B624C791}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{BE0F3C3C-7804-417C-A7E0-3E6143227AFE}"
-	ProjectSection(SolutionItems) = preProject
-		Dockerfile = Dockerfile
-		init.sql = init.sql
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,10 +49,6 @@ Global
 		{F04C1E62-2962-444A-B67B-6188191CE126}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F04C1E62-2962-444A-B67B-6188191CE126}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F04C1E62-2962-444A-B67B-6188191CE126}.Release|Any CPU.Build.0 = Release|Any CPU
-		{016A83A2-1630-4089-AA18-EA79B624C791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{016A83A2-1630-4089-AA18-EA79B624C791}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{016A83A2-1630-4089-AA18-EA79B624C791}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{016A83A2-1630-4089-AA18-EA79B624C791}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
