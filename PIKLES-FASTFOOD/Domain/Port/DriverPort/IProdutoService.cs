@@ -10,7 +10,7 @@ namespace Domain.Port.Services
         Task<List<Produto>> GetProdutos();
         Task<Produto?> GetProdutoById(int id);
         Task<Produto> PostProduto(ProdutoDTO produtoDTO);
-        Task PutProduto(int idProduto, Produto produtoInput);
+        Task PutProduto(int idProduto, ProdutoDTO produtoInput);
         Task PatchProduto(int idProduto, JsonPatchDocument<Produto> patchDoc);
         Task<Produto> DeleteProduto(int id);
         Task<List<Categoria>> GetProdutosByIdCategoria(EnumCategoria? idCategoria);

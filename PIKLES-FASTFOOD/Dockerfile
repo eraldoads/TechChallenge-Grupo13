@@ -2,15 +2,6 @@
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 
-RUN apt-get update \
-    && apt-get install -y locales \
-    && echo "pt_BR.UTF-8 UTF-8" > /etc/locale.gen \
-    && locale-gen
-
-ENV LC_ALL pt_BR.UTF-8
-ENV LANG pt_BR.UTF-8
-ENV LANGUAGE pt_BR:pt:en
-
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["API/API.csproj", "API/"]

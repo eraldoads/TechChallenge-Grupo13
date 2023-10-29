@@ -32,7 +32,7 @@ namespace Domain.Entities
         [StringLength(500, ErrorMessage = "A descrição do produto deve ter no máximo 500 caracteres")]
         public string? DescricaoProduto { get; set; }
 
-        [JsonProperty("imagem")]
+        [JsonProperty("imagemProduto")]
         public string? ImagemProduto { get; set; }
 
         [JsonIgnore]

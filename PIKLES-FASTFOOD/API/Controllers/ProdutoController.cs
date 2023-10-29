@@ -176,7 +176,7 @@ namespace API.Controllers
             Tags = new[] { "Produtos" }
             )]
         [SwaggerResponse(240, "Produto atualizado com sucesso!", typeof(void))]
-        public async Task<IActionResult> PutProduto(int id, [FromBody] Produto produtoInput)
+        public async Task<IActionResult> PutProduto(int id, [FromBody] ProdutoDTO produtoInput)
         {
             try
             {

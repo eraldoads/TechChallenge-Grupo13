@@ -64,15 +64,16 @@ namespace Application.Services
         /// Atualiza um produto existente.
         /// </summary>
         /// <param name="idProduto">O ID do produto a ser atualizado.</param>
-        /// <param name="produtoInput">O produto com as informações atualizadas.</param>
-        public async Task PutProduto(int idProduto, Produto produtoInput)
+        /// <param name="produtoPut">O produto com as informações atualizadas.</param>
+        public async Task PutProduto(int idProduto, ProdutoDTO produtoPut)
         {
             var produto = await _produtoRepository.GetProdutoById(idProduto) ?? throw new ResourceNotFoundException("Produto não encontrado.");
 
-            produto.NomeProduto = produtoInput.NomeProduto;
-            produto.DescricaoProduto = produtoInput.DescricaoProduto;
-            produto.ValorProduto = produtoInput.ValorProduto;
+            produto.NomeProduto = produtoPut.NomeProduto;
+            produto.DescricaoProduto = produtoPut.DescricaoProduto;
+            produto.ValorProduto = produtoPut.ValorProduto;
             produto.IdCategoria = produto.IdCategoria;
+            produto.ImagemProduto = produtoPut.ImagemProduto;
 
             await UpdateProduto(produto);
         }
@@ -161,7 +162,8 @@ namespace Application.Services
                 NomeProduto = produtoDto.NomeProduto,
                 DescricaoProduto = produtoDto.DescricaoProduto,
                 ValorProduto = produtoDto.ValorProduto,
-                IdCategoria = produtoDto.IdCategoria
+                IdCategoria = produtoDto.IdCategoria,
+                ImagemProduto = produtoDto.ImagemProduto
             };
         }
         #endregion
