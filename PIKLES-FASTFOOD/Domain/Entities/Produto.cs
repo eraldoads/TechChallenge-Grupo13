@@ -22,7 +22,7 @@ namespace Domain.Entities
         [Range(0.01, float.MaxValue, ErrorMessage = "O valor do produto deve ser um número positivo maior que zero")]
         public float ValorProduto { get; set; }
 
-        [JsonProperty("IdCategoria")]
+        [JsonProperty("idCategoria")]
         [Required(ErrorMessage = "O IdCategoria do produto é obrigatória")]
         [ForeignKey("Categoria")]
         public int IdCategoria { get; set; }

@@ -23,6 +23,7 @@ namespace Data.Context
             // Configuração das entidades do modelo, incluindo chaves primárias, chaves estrangeiras e outros relacionamentos.
             modelBuilder.Entity<Cliente>().HasKey(c => c.IdCliente);
             modelBuilder.Entity<Produto>().HasKey(p => p.IdProduto);
+            modelBuilder.Entity<ProdutoLista>().HasKey(p => p.IdProduto);
             modelBuilder.Entity<Categoria>().HasKey(c => c.IdCategoria);
             modelBuilder.Entity<Pedido>().HasKey(p => p.IdPedido);
             modelBuilder.Entity<Combo>().HasKey(c => c.IdCombo);
@@ -42,6 +43,7 @@ namespace Data.Context
 
         public DbSet<Cliente>? Cliente { get; set; }
         public DbSet<Produto>? Produto { get; set; }
+        public DbSet<ProdutoLista>? ProdutoLista { get; set; }
         public DbSet<Categoria>? Categoria { get; set; }
         public DbSet<Pedido>? Pedido { get; set; }
         public DbSet<Combo>? Combo { get; set; }

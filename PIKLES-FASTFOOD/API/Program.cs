@@ -108,16 +108,16 @@ if (app.Environment.IsDevelopment())
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
         c.DefaultModelRendering(ModelRendering.Example);
-        //c.DefaultModelExpandDepth(-1);
-        //c.DefaultModelsExpandDepth(-1);
-        //c.DocExpansion(DocExpansion.None);
-        //c.DisplayRequestDuration();
+        /// c.DefaultModelExpandDepth(-1);
+        /// c.DefaultModelsExpandDepth(-1);
+        /// c.DocExpansion(DocExpansion.None);
+        /// c.DisplayRequestDuration();
         c.DisplayOperationId();
         c.EnableDeepLinking();
         c.EnableFilter();
         c.ShowExtensions();
         c.EnableValidator();
-        //c.SupportedSubmitMethods(SubmitMethod.Get, SubmitMethod.Post, SubmitMethod.Put, SubmitMethod.Delete);
+        /// c.SupportedSubmitMethods(SubmitMethod.Get, SubmitMethod.Post, SubmitMethod.Put, SubmitMethod.Delete);
     });
 
     app.UseReDoc(c =>

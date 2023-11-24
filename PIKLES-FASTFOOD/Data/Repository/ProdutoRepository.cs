@@ -28,12 +28,10 @@ namespace Data.Repository
         public async Task<List<Produto>> GetProdutos()
         {
             if (_context.Produto is not null)
-                return await _context.Produto.ToListAsync();
+                return await _context.Produto.Include(p => p.Categoria).ToListAsync();
 
             return new List<Produto>();
         }
-
-
 
         /// <summary>
         /// Obtém um produto pelo ID no contexto do banco de dados.
@@ -45,7 +43,9 @@ namespace Data.Repository
             if (_context.Produto is null)
                 throw new InvalidOperationException("Contexto de produto nulo.");
 
-            var produto = await _context.Produto.FindAsync(id);
+            var produto = await _context.Produto
+                .Include(p => p.Categoria)
+                .FirstOrDefaultAsync(p => p.IdProduto == id);
 
             return produto;
         }

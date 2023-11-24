@@ -2,6 +2,7 @@
 using Domain.Entities.Output;
 using Domain.EntitiesDTO;
 using Domain.Port.DriverPort;
+using Domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
@@ -66,13 +67,26 @@ namespace API.Controllers
         [SwaggerResponse(201, "Pedido criado com sucesso!", typeof(PedidoDTO))]
         public async Task<IActionResult> PostPedido([Required][FromBody] PedidoInput pedidoInput)
         {
-            // Validação dos dados de entrada
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            try
+            {
+                // Validação dos dados de entrada
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
 
-            var novoPedido = await _pedidoService.PostPedido(pedidoInput);
+                var novoPedido = await _pedidoService.PostPedido(pedidoInput);
 
-            return CreatedAtAction("PostPedido", new { id = novoPedido.IdPedido }, novoPedido);
+                return CreatedAtAction("PostPedido", new { id = novoPedido.IdPedido }, novoPedido);
+            }
+            catch (PreconditionFailedException ex)
+            {
+                // Tratar a exceção aqui e retornar um BadRequest com a mensagem de erro personalizada
+                return StatusCode(412, ex.Message);
+            }
+            catch (Exception)
+            {
+                // Tratar outras exceções, se necessário
+                return StatusCode(500, "Ocorreu um erro interno. Por favor, tente novamente mais tarde.");
+            }
         }
     }
 }
