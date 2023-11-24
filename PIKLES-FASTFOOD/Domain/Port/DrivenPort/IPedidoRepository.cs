@@ -7,5 +7,8 @@ namespace Domain.Port.DrivenPort
     {
         Task<List<PedidoOutput>> GetPedidos();
         Task<Pedido> PostPedido(Pedido pedido);
+
+        Task<bool> ClienteExists(int clienteId);
+        Task<bool> ProdutoExists(int produtoId);
     }
 }

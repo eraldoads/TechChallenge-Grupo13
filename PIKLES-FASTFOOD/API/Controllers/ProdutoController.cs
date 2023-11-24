@@ -39,11 +39,11 @@ namespace API.Controllers
         Description = @"Busca todos os produtos </br>",
         Tags = new[] { "Produtos" }
         )]
-        [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(List<Produto>))]
-        [SwaggerResponse(206, "Conteúdo Parcial!", typeof(List<Produto>))]
-        public async Task<ActionResult<IEnumerable<Produto>>> GetProdutos()
+        [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(List<ProdutoLista>))]
+        [SwaggerResponse(206, "Conteúdo Parcial!", typeof(List<ProdutoLista>))]
+        public async Task<ActionResult<IEnumerable<ProdutoLista>>> GetProdutos()
         {
-            List<Produto> produtos = await _produtoService.GetProdutos();
+            List<ProdutoLista> produtos = await _produtoService.GetProdutos();
             return produtos;
         }
 
@@ -57,10 +57,10 @@ namespace API.Controllers
                 ",
             Tags = new[] { "Produtos" }
             )]
-        [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(Produto))]
-        public async Task<ActionResult<Produto?>> GetProduto(int id)
+        [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(ProdutoLista))]
+        public async Task<ActionResult<ProdutoLista?>> GetProduto(int id)
         {
-            Produto? produto = await _produtoService.GetProdutoById(id);
+            ProdutoLista? produto = await _produtoService.GetProdutoById(id);
 
             if (produto is null)
                 return NoContent();
@@ -114,9 +114,21 @@ namespace API.Controllers
             if (produtoDTO is null)
                 return BadRequest();
 
-            var novoProduto = await _produtoService.PostProduto(produtoDTO);
-
-            return CreatedAtAction("PostProduto", new { id = novoProduto.IdProduto }, novoProduto);
+            try
+            {
+                var novoProduto = await _produtoService.PostProduto(produtoDTO);
+                return CreatedAtAction("PostProduto", new { id = novoProduto.IdProduto }, novoProduto);
+            }
+            catch (PreconditionFailedException ex)
+            {
+                // Tratar a exceção específica para retornar um status HTTP 412
+                return StatusCode(412, ex.Message);
+            }
+            catch (ValidationException ex)
+            {
+                // Tratar outras exceções, se necessário
+                return BadRequest(ex.Message);
+            }
         }
 
 
@@ -176,7 +188,7 @@ namespace API.Controllers
             Tags = new[] { "Produtos" }
             )]
         [SwaggerResponse(240, "Produto atualizado com sucesso!", typeof(void))]
-        public async Task<IActionResult> PutProduto(int id, [FromBody] Produto produtoInput)
+        public async Task<IActionResult> PutProduto(int id, [FromBody] ProdutoDTO produtoInput)
         {
             try
             {
@@ -207,8 +219,8 @@ namespace API.Controllers
                 ",
             Tags = new[] { "Produtos" }
             )]
-        [SwaggerResponse(200, "Produto deletado com sucesso!", typeof(Produto))]
-        public async Task<ActionResult<Produto>> DeleteProduto(int id)
+        [SwaggerResponse(200, "Produto deletado com sucesso!", typeof(ProdutoLista))]
+        public async Task<ActionResult<ProdutoLista>> DeleteProduto(int id)
         {
             try
             {

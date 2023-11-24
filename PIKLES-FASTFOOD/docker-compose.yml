@@ -35,7 +35,7 @@ services:
     image: ${DOCKER_REGISTRY-}api
     build:
       context: .
-      dockerfile: API/Dockerfile
+      dockerfile: ./Dockerfile
     ports: 
       - "80:80"
     networks:

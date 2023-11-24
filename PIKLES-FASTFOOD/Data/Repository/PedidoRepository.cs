@@ -133,6 +133,33 @@ namespace Data.Repository
             return pedido;
         }
 
+        #region [Métodos de verificação]
+        /// <summary>
+        /// Verifica se existe um cliente com o id especificado no banco de dados.
+        /// </summary>
+        /// <param name="clienteId">O id do cliente a ser verificado.</param>
+        /// <returns>Um valor booleano que indica se o cliente existe ou não.</returns>
+        /// <exception cref="DbException">Se ocorrer um erro ao acessar o banco de dados.</exception>
+        public async Task<bool> ClienteExists(int clienteId)
+        {
+            if (_context.Cliente is not null)
+                return await _context.Cliente.AnyAsync(c => c.IdCliente == clienteId);
+            return false;
+        }
+
+        /// <summary>
+        /// Verifica se existe um produto com o id especificado no banco de dados.
+        /// </summary>
+        /// <param name="produtoId">O id do produto a ser verificado.</param>
+        /// <returns>Um valor booleano que indica se o produto existe ou não.</returns>
+        /// <exception cref="DbException">Se ocorrer um erro ao acessar o banco de dados.</exception>
+        public async Task<bool> ProdutoExists(int produtoId)
+        {
+            if (_context.Produto is not null)
+                return await _context.Produto.AnyAsync(p => p.IdProduto == produtoId);
+            return false;
+        }
+        #endregion
 
         #region [Método Privado]
         /// <summary>
@@ -164,5 +191,6 @@ namespace Data.Repository
             return valorTotal;
         }
         #endregion
+                
     }
 }
