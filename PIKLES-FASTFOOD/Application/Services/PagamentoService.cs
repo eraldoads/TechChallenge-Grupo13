@@ -23,5 +23,12 @@ namespace Application.Interfaces
             return null;
         }
 
+        /*
+          WEBHOOK
+         
+         // TODO: quando o retorno do WEBHOOK for igual a '"action": "payment.created", ' deverá chamar o endpointo de PATCH Pedidos.
+         
+         */
+
     }
 }
