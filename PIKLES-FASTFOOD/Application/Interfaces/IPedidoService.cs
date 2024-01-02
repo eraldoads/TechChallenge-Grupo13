@@ -2,11 +2,12 @@
 using Domain.Entities.Output;
 using Domain.EntitiesDTO;
 
-namespace Domain.Port.DriverPort
+namespace Application.Interfaces
 {
     public interface IPedidoService
     {
         Task<List<PedidoOutput>> GetPedidos();
         Task<PedidoDTO> PostPedido(PedidoInput pedidoInput);
+        Task<bool> UpdateStatusPedido(int idPedido, string novoStatus);
     }
 }

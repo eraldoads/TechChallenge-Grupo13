@@ -1,7 +1,7 @@
 ﻿using Data.Context;
 using Domain.Base;
 using Domain.Entities;
-using Domain.Port.DrivenPort;
+using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
 using System.Data;

@@ -1,7 +1,7 @@
 ﻿using Data.Context;
 using Domain.Entities;
 using Domain.Entities.Output;
-using Domain.Port.DrivenPort;
+using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repository
@@ -47,6 +47,7 @@ namespace Data.Repository
                                  ON COMBP.ComboId = COMB.IdCombo
                          INNER JOIN Produto PROD
                                  ON COMBP.IdProduto = PROD.IdProduto
+                              WHERE PEDI.StatusPedido <> 'Finalizado'
                            ORDER BY dataPedido, idCombo, nomeCompletoCliente;
                         ";
 
@@ -133,6 +134,35 @@ namespace Data.Repository
             return pedido;
         }
 
+        /// <summary>
+        /// Obtém um pedido pelo seu id no banco de dados.
+        /// </summary>
+        /// <param name="idPedido">O id do pedido a ser obtido.</param>
+        /// <returns>Um objeto Pedido com os dados do pedido encontrado ou null se não existir.</returns>
+        /// <exception cref="DbException">Se ocorrer um erro ao acessar o banco de dados.</exception>
+        public async Task<Pedido?> GetPedidoById(int idPedido)
+        {
+            // verifica se o DbSet Pedido não é nulo.
+            if (_context.Pedido is not null)
+                // retorna o primeiro pedido que corresponde ao idPedido ou null se não encontrar.
+                return await _context.Pedido.FirstOrDefaultAsync(p => p.IdPedido == idPedido);
+            // retorna null se o DbSet Pedido for nulo.
+            return null;
+        }
+
+        /// <summary>
+        /// Atualiza um pedido no banco de dados.
+        /// </summary>
+        /// <param name="pedido">O objeto Pedido com os dados atualizados.</param>
+        /// <exception cref="DbUpdateException">Se ocorrer um erro ao atualizar o banco de dados.</exception>
+        public async Task UpdatePedido(Pedido pedido)
+        {
+            // marca o estado do pedido como modificado.
+            _context.Entry(pedido).State = EntityState.Modified;
+            // salva as alterações no banco de dados de forma assíncrona.
+            await _context.SaveChangesAsync();
+        }
+
         #region [Métodos de verificação]
         /// <summary>
         /// Verifica se existe um cliente com o id especificado no banco de dados.
@@ -191,6 +221,6 @@ namespace Data.Repository
             return valorTotal;
         }
         #endregion
-                
+
     }
 }

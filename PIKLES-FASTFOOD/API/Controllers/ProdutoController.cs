@@ -1,7 +1,7 @@
-﻿using Domain.Base;
+﻿using Application.Interfaces;
+using Domain.Base;
 using Domain.Entities;
 using Domain.EntitiesDTO;
-using Domain.Port.Services;
 using Domain.ValueObjects;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -187,7 +187,7 @@ namespace API.Controllers
                 ",
             Tags = new[] { "Produtos" }
             )]
-        [SwaggerResponse(240, "Produto atualizado com sucesso!", typeof(void))]
+        [SwaggerResponse(204, "Produto atualizado com sucesso!", typeof(void))]
         public async Task<IActionResult> PutProduto(int id, [FromBody] ProdutoDTO produtoInput)
         {
             try

@@ -1,13 +1,12 @@
-﻿using Application.Services;
+﻿using Application.Interfaces;
 using Data.Context;
 using Data.Repository;
-using Domain.Port.DrivenPort;
-using Domain.Port.DriverPort;
-using Domain.Port.Services;
+using Domain.Interfaces;
 using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Globalization;
@@ -63,6 +62,9 @@ builder.Services.AddControllers(options =>
     // Usa a formatação padrão (PascalCase) para as propriedades.
     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+    options.SerializerSettings.Converters.Add(new StringEnumConverter());
+    options.SerializerSettings.Formatting = Formatting.Indented;
+    options.SerializerSettings.NullValueHandling = NullValueHandling.Include;
 });
 
 // Saiba mais sobre como configurar o Swagger/OpenAPI em https://aka.ms/aspnetcore/swashbuckle

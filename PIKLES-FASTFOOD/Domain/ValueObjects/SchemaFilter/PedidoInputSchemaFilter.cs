@@ -23,7 +23,7 @@ namespace Domain.ValueObjects
 
                 var modeloStatusPedido = new OpenApiObject
                 {
-                    ["statusPedido"] = new OpenApiString("Status de exemplo"),
+                    ["statusPedido"] = new OpenApiString("Status do pedido"),
                 };
 
                 var modeloProdutos = new OpenApiArray
