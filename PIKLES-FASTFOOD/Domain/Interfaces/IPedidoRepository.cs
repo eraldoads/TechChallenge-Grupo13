@@ -1,7 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Entities.Output;
 
-namespace Domain.Port.DrivenPort
+namespace Domain.Interfaces
 {
     public interface IPedidoRepository
     {
@@ -10,5 +10,8 @@ namespace Domain.Port.DrivenPort
 
         Task<bool> ClienteExists(int clienteId);
         Task<bool> ProdutoExists(int produtoId);
+
+        Task<Pedido?> GetPedidoById(int idPedido);
+        Task UpdatePedido(Pedido pedido);
     }
 }

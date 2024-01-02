@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 
-namespace Domain.Port.DrivenPort
+namespace Domain.Interfaces
 {
     public interface IClienteRepository
     {

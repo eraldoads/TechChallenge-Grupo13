@@ -1,6 +1,6 @@
 ﻿using Domain.Entities.Input;
 
-namespace Application.Services
+namespace Application.Interfaces
 {
     public class DateTimeAdjuster
     {

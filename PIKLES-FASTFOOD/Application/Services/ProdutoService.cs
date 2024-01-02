@@ -1,13 +1,12 @@
 ﻿using Domain.Base;
 using Domain.Entities;
 using Domain.EntitiesDTO;
-using Domain.Port.DrivenPort;
-using Domain.Port.Services;
+using Domain.Interfaces;
 using Domain.ValueObjects;
 using Microsoft.AspNetCore.JsonPatch;
 using System.ComponentModel.DataAnnotations;
 
-namespace Application.Services
+namespace Application.Interfaces
 {
     public class ProdutoService : IProdutoService
     {

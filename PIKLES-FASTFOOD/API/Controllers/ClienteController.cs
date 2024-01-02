@@ -1,6 +1,6 @@
-﻿using Domain.Entities;
+﻿using Application.Interfaces;
+using Domain.Entities;
 using Domain.EntitiesDTO;
-using Domain.Port.Services;
 using Domain.ValueObjects;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;

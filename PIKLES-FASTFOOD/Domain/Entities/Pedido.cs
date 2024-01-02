@@ -17,6 +17,7 @@ namespace Domain.Entities
         [JsonProperty("dataPedido")]
         public DateTime DataPedido { get; set; }
 
+        [JsonProperty("statusPedido")]
         [Required(ErrorMessage = "O status do pedido é obrigatório")]
         public string? StatusPedido { get; set; }
 

@@ -2,12 +2,10 @@
 using Domain.Entities.Input;
 using Domain.Entities.Output;
 using Domain.EntitiesDTO;
-using Domain.Port.DrivenPort;
-using Domain.Port.DriverPort;
-using Domain.Port.Services;
+using Domain.Interfaces;
 using Domain.ValueObjects;
 
-namespace Application.Services
+namespace Application.Interfaces
 {
     public class PedidoService : DateTimeAdjuster, IPedidoService
     {
@@ -88,5 +86,28 @@ namespace Application.Services
                 ValorTotal = novoPedidoCriado.ValorTotal
             };
         }
+
+        /// <summary>
+        /// Atualiza o status de um pedido no banco de dados.
+        /// </summary>
+        /// <param name="idPedido">O id do pedido a ser atualizado.</param>
+        /// <param name="novoStatus">O novo status do pedido.</param>
+        /// <returns>Um valor booleano que indica se a atualização foi bem-sucedida ou não.</returns>
+        /// <exception cref="PreconditionFailedException">Se o pedido com o id especificado não existir.</exception>
+        /// <exception cref="DbUpdateException">Se ocorrer um erro ao atualizar o banco de dados.</exception>
+        public async Task<bool> UpdateStatusPedido(int idPedido, string novoStatus)
+        {
+            // obtém o pedido pelo seu id ou lança uma exceção se não existir/
+            var pedido = await _pedidoRepository.GetPedidoById(idPedido) ?? throw new PreconditionFailedException($"Pedido com ID {idPedido} não existe. Operação Cancelada.", nameof(idPedido));
+
+            // altera o status do pedido para o novo status/
+            pedido.StatusPedido = novoStatus;
+            // atualiza o pedido no banco de dados/
+            await _pedidoRepository.UpdatePedido(pedido);
+
+            // retorna verdadeiro se a atualização foi bem-sucedida/
+            return true;
+        }
+
     }
 }
