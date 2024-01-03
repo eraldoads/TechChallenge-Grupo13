@@ -191,7 +191,7 @@ namespace Data.Repository
         }
         #endregion
 
-        #region [Método Privado]
+        #region [Métodos Privados]
         /// <summary>
         /// Calcula o valor total do pedido com base nos produtos e quantidades associados a ele.
         /// "O cálculo do valor total é uma operação relacionada à persistência de dados."

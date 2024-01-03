@@ -38,6 +38,13 @@ namespace Data.Context
                         .Navigation(p => p.Categoria)
                         .UsePropertyAccessMode(PropertyAccessMode.Property);
 
+            modelBuilder.Entity<Pagamento>().HasKey(p => p.IdPagamento);
+
+            modelBuilder.Entity<Pagamento>()
+                        .HasOne(p => p.Pedido)
+                        .WithMany()
+                        .HasForeignKey(p => p.IdPedido);
+
             // Mais configurações e relacionamentos podem ser definidos aqui.
         }
 
@@ -48,5 +55,6 @@ namespace Data.Context
         public DbSet<Pedido>? Pedido { get; set; }
         public DbSet<Combo>? Combo { get; set; }
         public DbSet<ComboProduto>? ComboProduto { get; set; }
+        public DbSet<Pagamento>? Pagamento { get; set; }
     }
 }
