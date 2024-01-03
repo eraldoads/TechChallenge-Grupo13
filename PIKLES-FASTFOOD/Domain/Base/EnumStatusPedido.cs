@@ -2,18 +2,15 @@
 
 namespace Domain.Base
 {
-    public enum EnumStatusPedido
+    public enum EnumStatusPagamento
     {
-        [Description("Recebido")]
-        Recebido = 1,
+        [Description("Pendente")]
+        Pendente = 1,
 
-        [Description("Em Preparação")]
-        EmPreparacao = 2,
+        [Description("Aprovado")]
+        Aprovado = 2,
 
-        [Description("Pronto")]
-        Pronto = 3,
-
-        [Description("Finalizado")]
-        Finalizado = 4
+        [Description("Reprovado")]
+        Reprovado = 3,
     }
 }

@@ -14,7 +14,7 @@ using System.Globalization;
 // Cria um builder de aplicação web com os argumentos passados.
 var builder = WebApplication.CreateBuilder(args);
 
-// Adiciona serviÇos ao contêiner.
+// Adiciona serviços ao contêiner.
 
 // Cria uma variável que armazena a string de conexão com o banco de dados MySQL.
 var connectionStringMysql = builder.Configuration.GetConnectionString("ConnectionMysql");
@@ -26,22 +26,24 @@ builder.Services.AddDbContext<MySQLContext>(option => option.UseMySql(
     builder => builder.MigrationsAssembly("API") // Especifica o assembly do projeto que contém as classes de migrações do EF Core.
 ));
 
-// Adiciona os serviÇos de controllers ao builder.
+// Adiciona os serviços de controllers ao builder.
 builder.Services.AddControllers(options =>
 {
     // Insere um formato de entrada personalizado para o JsonPatch.
     options.InputFormatters.Insert(0, JsonPatchSample.MyJPIF.GetJsonPatchInputFormatter());
 });
 
-// Adiciona os serviÇos específicos ao contêiner.
+// Adiciona os serviços específicos ao contêiner.
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
 builder.Services.AddScoped<IPedidoService, PedidoService>();
+builder.Services.AddScoped<IPagamentoService, PagamentoService>();
 
 // Adiciona os repositórios específicos ao contêiner.
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
+builder.Services.AddScoped<IPagamentoRepository, PagamentoRepository>();
 
 // Adiciona o suporte ao NewtonsoftJson aos controllers.
 builder.Services.AddControllers().AddNewtonsoftJson();
@@ -53,7 +55,7 @@ builder.Services.Configure<RouteOptions>(options =>
     options.LowercaseQueryStrings = true;
 });
 
-// Configura os serviÇos relacionados aos controladores.
+// Configura os serviços relacionados aos controladores.
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add(typeof(AjustaDataHoraLocal));

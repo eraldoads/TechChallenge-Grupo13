@@ -1,15 +1,15 @@
 ﻿using Application.Interfaces;
-using Domain.Entities.Input;
+using Domain.Entities;
 using Domain.Entities.Output;
 using Domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using System.ComponentModel.DataAnnotations;
 
 namespace API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+
     [Produces("application/json")]
     [SwaggerResponse(204, "Requisição concluída sem dados de retorno.", null)]
     [SwaggerResponse(400, "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.", null)]
@@ -29,20 +29,52 @@ namespace API.Controllers
             _pagamentoService = pagamentoService;
         }
 
+        // GET : /pagamento/{id}/status
+        [HttpGet("{idPedido}/status")]
+        [SwaggerOperation(
+            Summary = "Endpoint para obter o status do pagamento de um pedido",
+            Description = @"Endpoint para obter o status do pagamento de um determinado pedido </br>
+        <b>Parâmetros de entrada:</b>
+        <br/> • <b>idPedido</b>: o identificador do pedido ⇒ <font color='red'><b>Obrigatório</b></font>
+        ",
+            Tags = new[] { "Pagamento" }
+        )]
+        [SwaggerResponse(200, "Consulta executada com sucesso!", typeof(PagamentoStatusOutput))]
+        public async Task<ActionResult<PagamentoStatusOutput?>> GetStatusPagamentoPedido(int idPedido)
+        {
+            try
+            {
+                // Chamar o serviço para obter o status do pagamento
+                PagamentoStatusOutput? statusPagamento = await _pagamentoService.GetStatusPagamento(idPedido);
+
+                if (statusPagamento is null)
+                    return NoContent();
+
+                return statusPagamento;
+            }
+            catch (Exception)
+            {
+                // Tratar outras exceções, se necessário
+                return StatusCode(500, "Ocorreu um erro interno. Por favor, tente novamente mais tarde.");
+            }
+        }
+
         // POST : /pagamento
         [HttpPost]
         [SwaggerOperation(
-            Summary = "Endpoint para processar um pagamento",
-            Description = @"Processa um pagamento com os dados recebidos no corpo da requisição </br>
+            Summary = "Endpoint para processar o pagamento de um pedido",
+            Description = @"Endpoint para processar o pagamento de um determinado pedido </br>
                             <b>Parâmetros de entrada:</b>
-                            <br/> • <b>idPedido</b>: o identificador do pedido relacionado ao pagamento ⇒ <font color='red'><b>Obrigatório</b></font>
-                            <br/> • <b>valor</b>: o valor do pagamento ⇒ <font color='red'><b>Obrigatório</b></font>
-                            <br/> • <b>metodoPagamento</b>: o método de pagamento escolhido pelo cliente ⇒ <font color='red'><b>Obrigatório</b></font>
+                            <br/> • <b>StatusPagamento</b>: o identificador do Status do pagamento. Por padrão inicia como Pendente. ⇒ <font color='red'><b>Obrigatório</b></font>
+                            <br/> • <b>ValorPagamento</b>: o valor do pagamento. ⇒ <font color='red'><b>Obrigatório</b></font>
+                            <br/> • <b>MetodoPagamento</b>: o método de pagamento escolhido pelo cliente. Exemplo: QRCode, cartão de crédito, boleto, etc. Se não for informado, por padrão é gravado QRCode ⇒ <font color='green'><b>Opcional</b></font>
+                            <br/> • <b>DataPagamento</b>: Data do do pagamento. ⇒ <font color='red'><b>Obrigatório</b></font>
+                            <br/> • <b>IdPedido</b>: o identificador do pedido relacionado ao pagamento. ⇒ <font color='red'><b>Obrigatório</b></font>
                             <br/>",
-            Tags = new[] { "Pagamentos" }
+            Tags = new[] { "Pagamento" }
         )]
         [SwaggerResponse(201, "Pagamento processado com sucesso!", typeof(PagamentoOutput))]
-        public async Task<IActionResult> ProcessarPagamento([Required][FromBody] PagamentoInput pagamentoInput)
+        public async Task<ActionResult<Pagamento>> ProcessarPagamento([FromBody] Pagamento pagamentoInput)
         {
             try
             {
@@ -67,27 +99,27 @@ namespace API.Controllers
         }
 
         // POST : /pagamento/webhook
-        [HttpPost("webhook")]
-        [SwaggerOperation(
-            Summary = "Endpoint para receber webhooks de pagamento",
-            Description = "Recebe notificações assíncronas de pagamento do Mercado Pago.",
-            Tags = new[] { "Pagamentos" }
-        )]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> ReceberWebhookPagamento([FromBody] PagamentoInput modeloWebhook)
-        {
-            try
-            {
-                // Lógica para validar e processar o webhook
-                //await _pagamentoService.ProcessarWebhook(modeloWebhook);
+        //[HttpPost("webhook")]
+        //[SwaggerOperation(
+        //    Summary = "Endpoint para receber webhooks de pagamento",
+        //    Description = "Recebe notificações assíncronas de pagamento do Mercado Pago.",
+        //    Tags = new[] { "Pagamentos" }
+        //)]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //public async Task<IActionResult> ReceberWebhookPagamento([FromBody] Pagamento modeloWebhook)
+        //{
+        //    try
+        //    {
+        //        // Lógica para validar e processar o webhook
+        //        //await _pagamentoService.ProcessarWebhook(modeloWebhook);
 
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                // Tratar exceções, se necessário
-                return StatusCode(500, $"Erro ao processar webhook: {ex.Message}");
-            }
-        }
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Tratar exceções, se necessário
+        //        return StatusCode(500, $"Erro ao processar webhook: {ex.Message}");
+        //    }
+        //}
     }
 }

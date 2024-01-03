@@ -3,6 +3,7 @@ using System;
 using Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    partial class MySQLContextModelSnapshot : ModelSnapshot
+    [Migration("20240103015212_CreatePagamento")]
+    partial class CreatePagamento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,12 +117,15 @@ namespace API.Migrations
                     b.Property<string>("MetodoPagamento")
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("PedidoIdPedido")
+                        .HasColumnType("int");
+
                     b.Property<float>("ValorPagamento")
                         .HasColumnType("float");
 
                     b.HasKey("IdPagamento");
 
-                    b.HasIndex("IdPedido");
+                    b.HasIndex("PedidoIdPedido");
 
                     b.ToTable("Pagamento");
                 });
@@ -232,9 +237,7 @@ namespace API.Migrations
                 {
                     b.HasOne("Domain.Entities.Pedido", "Pedido")
                         .WithMany()
-                        .HasForeignKey("IdPedido")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PedidoIdPedido");
 
                     b.Navigation("Pedido");
                 });

@@ -75,6 +75,10 @@ namespace API.Controllers
             Description = @"Endpoint para listar os produtos de uma categoria específica </br>
                 <b>Parâmetros de entrada:</b>
                 <br/> • <b>idCategoria</b>: o id da categoria do produto ⇒ <font color='red'><b>Obrigatório</b></font>
+                    <br/>&nbsp;&emsp;&emsp;• <b>1</b> - Lanche
+                    <br/>&nbsp;&emsp;&emsp;• <b>2</b> - Acompanhamento
+                    <br/>&nbsp;&emsp;&emsp;• <b>3</b> - Bebida
+                    <br/>&nbsp;&emsp;&emsp;• <b>4</b> - Sobremesa
                 ",
             Tags = new[] { "Produtos" }
             )]
