@@ -46,6 +46,18 @@ CREATE TABLE Categoria (
   PRIMARY KEY (IdCategoria)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
+CREATE TABLE Pagamento (
+  IdPagamento INT NOT NULL AUTO_INCREMENT,
+  StatusPagamento VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'Pendente',
+  ValorPagamento FLOAT NOT NULL,
+  MetodoPagamento VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'QRCode',
+  DataPagamento DATETIME NOT NULL,
+  IdPedido INT NOT NULL,
+  PRIMARY KEY (IdPagamento),
+  FOREIGN KEY (IdPedido) REFERENCES Pedido(IdPedido)
+)ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+
+
 -- Massa de dados para testes
 -- Categorias
 INSERT INTO Categoria (NomeCategoria) VALUES
