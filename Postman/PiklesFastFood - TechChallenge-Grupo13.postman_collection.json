@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "68774d70-4b27-4f78-83da-e074faf50b3c",
+		"_postman_id": "e133de0c-58d5-4e12-a173-77145a7d2188",
 		"name": "PiklesFastFood - TechChallenge/Grupo13",
 		"description": "StartFragmentAplicação para todo sistema de Controle de Pedidos de uma lanchonete - \\[API\\] Backend (monolito).",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "5024741"
+		"_exporter_id": "13215309"
 	},
 	"item": [
 		{
@@ -4844,6 +4844,136 @@
 							"body": ""
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "pagamento",
+			"item": [
+				{
+					"name": "Endpoint para criar um novo pagamento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"StatusPagamento\": \"Pendente\",\r\n  \"ValorPagamento\": 148.91,\r\n  \"MetodoPagamento\": \"QRCode\",\r\n  \"DataPagamento\": \"2024-01-05 20:59\",\r\n  \"IdPedido\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pagamento",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pagamento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endpoint para receber a notificação de pagamento do webhook",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"StatusPagamento\": \"Pendente\",\r\n  \"ValorPagamento\": 1,\r\n  \"MetodoPagamento\": \"QRCode\",\r\n  \"DataPagamento\": \"2024-01-05 20:59\",\r\n  \"IdPedido\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pagamento/webhook?id=14699545934&topic=merchant_order",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pagamento",
+								"webhook"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "14699545934"
+								},
+								{
+									"key": "topic",
+									"value": "merchant_order"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endpoint para obter o status do pagamento do pedido",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"StatusPagamento\": \"Pendente\",\r\n  \"ValorPagamento\": 1,\r\n  \"MetodoPagamento\": \"QRCode\",\r\n  \"DataPagamento\": \"2024-01-05 20:59\",\r\n  \"IdPedido\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pagamento/1/status",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pagamento",
+								"1",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Endpoint para obter o QRCode de pagamento no Mercado Pago",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pagamento/qrcode/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pagamento",
+								"qrcode",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
