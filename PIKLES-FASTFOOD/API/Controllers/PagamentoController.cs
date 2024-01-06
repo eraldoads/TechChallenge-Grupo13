@@ -128,8 +128,8 @@ namespace API.Controllers
             }
         }
 
-        // Get : /pagamento/qrcode/idPedido
-        [HttpGet("qrcode/{idPedido}")]
+        // Get : /pagamento/idPedido/qrcode
+        [HttpGet("{idPedido}/qrcode")]
         [SwaggerOperation(
             Summary = "Endpoint para obter QRCode para pagamento de um pedido",
             Description = @"Obtém o QRCode para pagamento do pedido no Mercado Pago </br>                        

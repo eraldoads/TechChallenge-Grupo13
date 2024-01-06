@@ -4962,14 +4962,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/pagamento/qrcode/1",
+							"raw": "{{baseUrl}}/pagamento/1/qrcode",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"pagamento",
-								"qrcode",
-								"1"
+								"1",
+								"qrcode"
 							]
 						}
 					},
