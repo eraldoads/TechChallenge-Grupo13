@@ -101,7 +101,7 @@ namespace API.Controllers
         // POST : /pagamento/webhook
         [HttpPost("webhook")]
         [SwaggerOperation(
-            Summary = "Endpoint para receber webhooks de pagamento",
+            Summary = "Endpoint para receber notificações de pagamento",
             Description = @"Recebe notificações assíncronas de pagamento do Mercado Pago </br>                        
             <b>Parâmetros de entrada:</b>
             <br/> • <b>id</b>: o identificador da ordem de pagamento no Mercado Pago ⇒ <font color='red'><b>Obrigatório</b></font>
@@ -110,13 +110,13 @@ namespace API.Controllers
             Tags = new[] { "Pagamento" }
         )]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> ReceberWebhookPagamento([FromQuery]long id, [FromQuery] string topic)
+        public async Task<IActionResult> ReceberNotificacaoPagamento([FromQuery]long id, [FromQuery] string topic)
         {
             try
             {
                 if (topic.Equals("merchant_order"))
                 {                    
-                    await _pagamentoService.ProcessarWebhook(id);
+                    await _pagamentoService.ProcessarNotificacaoPagamento(id);
                 }
 
                 return Ok();
