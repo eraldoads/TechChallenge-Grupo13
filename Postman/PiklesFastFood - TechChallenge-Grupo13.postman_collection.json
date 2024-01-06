@@ -4877,7 +4877,7 @@
 					"response": []
 				},
 				{
-					"name": "Endpoint para receber a notificação de pagamento do webhook",
+					"name": "Endpoint para receber a notificação de pagamento (webhook)",
 					"request": {
 						"method": "POST",
 						"header": [],
