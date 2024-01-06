@@ -119,7 +119,7 @@ namespace Application.Interfaces
             return qrcodeOutput;
         }
 
-        public async Task ProcessarWebhook(long id_merchant_order)
+        public async Task ProcessarNotificacaoPagamento(long id_merchant_order)
         {
             var ordemPagamento = await ConsultarOrdemPagamentoMercadoPago(id_merchant_order);
 

@@ -8,6 +8,6 @@ namespace Application.Interfaces
         Task<PagamentoOutput> ProcessarPagamento(Pagamento pagamentoInput);
         Task<PagamentoStatusOutput?> GetStatusPagamento(int idPedido);
         Task<QRCodeOutput?> ObterQRCodePagamento(int idPedido);
-        Task ProcessarWebhook(long id_merchant_order);
+        Task ProcessarNotificacaoPagamento(long id_merchant_order);
     }
 }

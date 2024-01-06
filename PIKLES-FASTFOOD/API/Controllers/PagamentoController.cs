@@ -110,13 +110,13 @@ namespace API.Controllers
             Tags = new[] { "Pagamento" }
         )]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> ReceberWebhookPagamento([FromQuery]long id, [FromQuery] string topic)
+        public async Task<IActionResult> ReceberNotificacaoPagamento([FromQuery]long id, [FromQuery] string topic)
         {
             try
             {
                 if (topic.Equals("merchant_order"))
                 {                    
-                    await _pagamentoService.ProcessarWebhook(id);
+                    await _pagamentoService.ProcessarNotificacaoPagamento(id);
                 }
 
                 return Ok();
