@@ -12,7 +12,7 @@ namespace Application.Interfaces
         private readonly IPedidoRepository _pedidoRepository;
         private readonly string _baseUrlMercadoPago = Environment.GetEnvironmentVariable("MERCADO_PAGO_BASE_URL");
         private readonly string _pathCriarOrdemMercadoPago = Environment.GetEnvironmentVariable("MERCADO_PAGO_CRIAR_QR_ORDER_PATH");
-        private readonly string _pathConsutarOrdemMercadoPago = Environment.GetEnvironmentVariable("MERCADO_PAGO_CONSULTAR_QR_ORDER_PATH");
+        private readonly string _pathConsultarOrdemMercadoPago = Environment.GetEnvironmentVariable("MERCADO_PAGO_CONSULTAR_QR_ORDER_PATH");
         private readonly string _authorizationMercadoPago = Environment.GetEnvironmentVariable("MERCADO_PAGO_AUTHORIZATION");
         private readonly int _sponsorIdMercadoPago = Convert.ToInt32(Environment.GetEnvironmentVariable("MERCADO_PAGO_SPONSOR_ID"));
         private readonly string _endpointWebhook = Environment.GetEnvironmentVariable("WEBHOOK_ENDPOINT");
@@ -25,7 +25,6 @@ namespace Application.Interfaces
 
         public async Task<PagamentoStatusOutput?> GetStatusPagamento(int idPedido)
         {
-            // Implemente a lógica para obter o status do pagamento com base no idPedido.
             var pagamentoStatus = await _pagamentoRepository.GetPagamentoByIdPedido(idPedido);
 
             if (pagamentoStatus == null)
@@ -69,7 +68,6 @@ namespace Application.Interfaces
 
         public async Task<QRCodeOutput?> ObterQRCodePagamento(int idPedido)
         {
-            // Implemente a lógica para obter o status do pagamento com base no idPedido.
             var pagamento = await _pagamentoRepository.GetPagamentoByIdPedido(idPedido);
 
             if (pagamento == null)
@@ -168,7 +166,7 @@ namespace Application.Interfaces
         private async Task<OrdemPagamento> ConsultarOrdemPagamentoMercadoPago(long merchant_order)
         {                        
             var client = new HttpClient();
-            var urlConsultarOrdem = _baseUrlMercadoPago + string.Format(_pathConsutarOrdemMercadoPago, merchant_order);
+            var urlConsultarOrdem = _baseUrlMercadoPago + string.Format(_pathConsultarOrdemMercadoPago, merchant_order);
             var request = new HttpRequestMessage(HttpMethod.Get, urlConsultarOrdem);
             request.Headers.Add("Authorization", _authorizationMercadoPago);
             var response = await client.SendAsync(request);            

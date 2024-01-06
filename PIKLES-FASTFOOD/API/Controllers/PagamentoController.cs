@@ -101,7 +101,7 @@ namespace API.Controllers
         // POST : /pagamento/webhook
         [HttpPost("webhook")]
         [SwaggerOperation(
-            Summary = "Endpoint para receber webhooks de pagamento",
+            Summary = "Endpoint para receber notificações de pagamento",
             Description = @"Recebe notificações assíncronas de pagamento do Mercado Pago </br>                        
             <b>Parâmetros de entrada:</b>
             <br/> • <b>id</b>: o identificador da ordem de pagamento no Mercado Pago ⇒ <font color='red'><b>Obrigatório</b></font>
