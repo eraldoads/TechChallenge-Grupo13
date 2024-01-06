@@ -1,6 +1,5 @@
 ﻿using Domain.Entities;
 using Domain.Entities.Output;
-using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
@@ -8,6 +7,7 @@ namespace Application.Interfaces
     {
         Task<PagamentoOutput> ProcessarPagamento(Pagamento pagamentoInput);
         Task<PagamentoStatusOutput?> GetStatusPagamento(int idPedido);
-        Task<QRCodeOutput?> CriarQRCodePagamento(int idPedido);
+        Task<QRCodeOutput?> ObterQRCodePagamento(int idPedido);
+        Task ProcessarWebhook(long id_merchant_order);
     }
 }

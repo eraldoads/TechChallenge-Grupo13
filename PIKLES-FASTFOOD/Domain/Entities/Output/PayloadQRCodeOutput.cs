@@ -10,13 +10,13 @@ namespace Domain.Entities.Output
     {
         public string description { get; set; }
         public string external_reference { get; set; }
-        public List<Item> items { get; set; }
+        public List<ItemPagamento> items { get; set; }
         public string notification_url { get; set; }
         public Sponsor sponsor { get; set; }
         public string title { get; set; }
         public double total_amount { get; set; }
     }
-    public class Item
+    public class ItemPagamento
     {
         public string title { get; set; }
         public string description { get; set; }

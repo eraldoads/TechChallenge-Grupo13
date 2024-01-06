@@ -31,6 +31,13 @@ services:
     environment:
       - ConnectionStrings__ConnectionMysql=server=172.16.238.10;port=3306;userid=pikles;password=fastfood;database=piklesfastfood;
       - LANG=C.UTF-8
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MERCADO_PAGO_BASE_URL=https://api.mercadopago.com
+      - MERCADO_PAGO_CRIAR_QR_ORDER_PATH=/instore/orders/qr/seller/collectors/1619908702/pos/SUC001POS001/qrs
+      - MERCADO_PAGO_CONSULTAR_QR_ORDER_PATH=/merchant_orders/{0}
+      - MERCADO_PAGO_AUTHORIZATION=Bearer TEST-1380797655451164-010212-2bb955330b75683baa093d93183e0c2e-1619908702
+      - MERCADO_PAGO_SPONSOR_ID=58923039
+      - WEBHOOK_ENDPOINT=https://webhook.site/0ed53b32-a18f-4d3f-acbf-6cb022187561
     restart: always
     image: ${DOCKER_REGISTRY-}api
     build:

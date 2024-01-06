@@ -34,5 +34,17 @@ namespace Data.Repository
             }
             return pagamento;
         }
+
+        public async Task<Pagamento> PutPagamento(Pagamento pagamento)
+        {
+            if (_context.Pagamento is not null)
+            {
+                var pagto = await _context.Pagamento.FirstOrDefaultAsync(p => p.IdPagamento == pagamento.IdPagamento);
+                pagto.StatusPagamento = pagamento.StatusPagamento;
+                _context.Pagamento.Update(pagto);
+                await _context.SaveChangesAsync();
+            }
+            return pagamento;
+        }
     }
 }

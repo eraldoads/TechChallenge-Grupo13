@@ -98,43 +98,52 @@ namespace API.Controllers
             }
         }
 
-        //// POST : /pagamento/webhook
-        //[HttpPost("webhook")]
-        //[SwaggerOperation(
-        //    Summary = "Endpoint para receber webhooks de pagamento",
-        //    Description = "Recebe notificações assíncronas de pagamento do Mercado Pago.",
-        //    Tags = new[] { "Pagamentos" }
-        //)]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //public async Task<IActionResult> ReceberWebhookPagamento(int merchant_order)
-        //{
-        //    try
-        //    {
-        //        // Lógica para validar e processar o webhook
-        //        //await _pagamentoService.ProcessarWebhook(modeloWebhook);
+        // POST : /pagamento/webhook
+        [HttpPost("webhook")]
+        [SwaggerOperation(
+            Summary = "Endpoint para receber webhooks de pagamento",
+            Description = @"Recebe notificações assíncronas de pagamento do Mercado Pago </br>                        
+            <b>Parâmetros de entrada:</b>
+            <br/> • <b>id</b>: o identificador da ordem de pagamento no Mercado Pago ⇒ <font color='red'><b>Obrigatório</b></font>
+            <br/> • <b>topic</b>: este endpoint somente tratará requisições com o parâmetro topic=merchant_order ⇒ <font color='red'><b>Obrigatório</b></font>
+            <br/>",
+            Tags = new[] { "Pagamento" }
+        )]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> ReceberWebhookPagamento([FromQuery]long id, [FromQuery] string topic)
+        {
+            try
+            {
+                if (topic.Equals("merchant_order"))
+                {                    
+                    await _pagamentoService.ProcessarWebhook(id);
+                }
 
-        //        return Ok();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Tratar exceções, se necessário
-        //        return StatusCode(500, $"Erro ao processar webhook: {ex.Message}");
-        //    }
-        //}
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                // Tratar exceções, se necessário
+                return StatusCode(500, $"Erro ao processar webhook: {ex.Message}");
+            }
+        }
 
         // Get : /pagamento/qrcode/idPedido
         [HttpGet("qrcode/{idPedido}")]
         [SwaggerOperation(
-            Summary = "Endpoint para gerar QRCode para pagamento de um pedido",
-            Description = "Gera QRCode para pagamento no Mercado Pago.",
+            Summary = "Endpoint para obter QRCode para pagamento de um pedido",
+            Description = @"Obtém o QRCode para pagamento do pedido no Mercado Pago </br>                        
+            <b>Parâmetros de entrada:</b>
+            <br/> • <b>IdPedido</b>: o identificador do pedido relacionado ao pagamento. ⇒ <font color='red'><b>Obrigatório</b></font>
+            <br/>",
             Tags = new[] { "Pagamento" }
         )]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> CriarQRCodePagamento(int idPedido)
+        public async Task<IActionResult> ObterQRCodePagamento(int idPedido)
         {
             try
             {                
-                var qrCode = await _pagamentoService.CriarQRCodePagamento(idPedido);
+                var qrCode = await _pagamentoService.ObterQRCodePagamento(idPedido);
                 return Ok(qrCode);
 
             }
