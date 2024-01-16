@@ -1,0 +1,10 @@
+kubectl apply -f mysql-pv.yaml
+kubectl apply -f mysql-pvc.yaml
+kubectl apply -f mysql-deployment.yaml
+kubectl apply -f mysql-service.yaml
+kubectl apply -f adminer-deployment.yaml
+kubectl apply -f adminer-service.yaml
+kubectl apply -f piklesfastfood-deployment.yaml
+kubectl apply -f piklesfastfood-service.yaml
+kubectl apply -f piklesfastfood-hpa.yaml
+
