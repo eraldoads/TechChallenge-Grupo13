@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: piklesfastfood
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: piklesfastfood
+    spec:
+      containers:
+      - name: piklesfastfood
+        image: lfelipeat/piklesfastfood:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 25m
+            memory: 80Mi
+          limits:
+            cpu: 75m
+            memory: 250Mi  
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        - name: ASPNETCORE_URLS
+          value: http://*:80    
+        - name: ConnectionStrings__ConnectionMysql
+          value: server=mysql;port=3306;userid=pikles;password=fastfood;database=piklesfastfood;
+        - name: MERCADO_PAGO_BASE_URL
+          value: https://api.mercadopago.com
+        - name: MERCADO_PAGO_CRIAR_QR_ORDER_PATH
+          value: /instore/orders/qr/seller/collectors/1619908702/pos/SUC001POS001/qrs
+        - name: MERCADO_PAGO_CONSULTAR_QR_ORDER_PATH
+          value: /merchant_orders/{0}
+        - name: MERCADO_PAGO_AUTHORIZATION
+          value: Bearer TEST-1380797655451164-010212-2bb955330b75683baa093d93183e0c2e-1619908702
+        - name: MERCADO_PAGO_SPONSOR_ID
+          value: "58923039"
+        - name: WEBHOOK_ENDPOINT
+          value: https://webhook.site/0ed53b32-a18f-4d3f-acbf-6cb022187561
+  selector:
+    matchLabels:
+        app: piklesfastfood
