@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+spec:
+  serviceName: mysql
+  replicas: 1
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: mysql
+        image: mysql:8
+        ports:
+        - containerPort: 3306
+          name: mysql
+        env:
+        - name: MYSQL_DATABASE # Notice that the case is different here
+          # from the key name in the ConfigMap.
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-config # The ConfigMap this value comes from.
+              key: MYSQL_DATABASE # The key to fetch.
+        - name: MYSQL_USER # Notice that the case is different here
+          # from the key name in the ConfigMap.
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-config # The ConfigMap this value comes from.
+              key: MYSQL_USER # The key to fetch.
+        - name: MYSQL_ROOT_PASSWORD # Notice that the case is different here
+          # from the key name in the ConfigMap.
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secrets # The ConfigMap this value comes from.
+              key: MYSQL_ROOT_PASSWORD # The key to fetch.
+        - name: MYSQL_PASSWORD # Notice that the case is different here
+          # from the key name in the ConfigMap.
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secrets # The ConfigMap this value comes from.
+              key: MYSQL_PASSWORD # The key to fetch.
+        volumeMounts:
+        - name: mysql-ps
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-ps
+        persistentVolumeClaim:
+          claimName: mysql
