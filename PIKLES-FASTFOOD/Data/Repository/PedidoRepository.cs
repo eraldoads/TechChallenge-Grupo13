@@ -38,17 +38,26 @@ namespace Data.Repository
                                     PROD.NomeProduto                        AS nomeProduto,
                                     COMBP.Quantidade                        AS quantidadeProduto,
                                     PROD.ValorProduto                       AS valorProduto
-                               FROM Pedido PEDI
-                         INNER JOIN Cliente CLIE
-                                 ON PEDI.IdCliente = CLIE.IdCliente
-                         INNER JOIN Combo COMB
-                                 ON COMB.PedidoId = PEDI.IdPedido
-                         INNER JOIN ComboProduto COMBP
-                                 ON COMBP.ComboId = COMB.IdCombo
-                         INNER JOIN Produto PROD
-                                 ON COMBP.IdProduto = PROD.IdProduto
-                              WHERE PEDI.StatusPedido <> 'Finalizado'
-                           ORDER BY dataPedido, idCombo, nomeCompletoCliente;
+                                FROM Pedido PEDI
+                            INNER JOIN Cliente CLIE
+                                    ON PEDI.IdCliente = CLIE.IdCliente
+                            INNER JOIN Combo COMB
+                                    ON COMB.PedidoId = PEDI.IdPedido
+                            INNER JOIN ComboProduto COMBP
+                                    ON COMBP.ComboId = COMB.IdCombo
+                            INNER JOIN Produto PROD
+                                    ON COMBP.IdProduto = PROD.IdProduto
+                            WHERE PEDI.StatusPedido <> 'Finalizado'
+                            ORDER BY 
+                                CASE 
+                                    WHEN PEDI.StatusPedido = 'Pronto' THEN 1
+                                    WHEN PEDI.StatusPedido = 'Em Preparação' THEN 2
+                                    WHEN PEDI.StatusPedido = 'Recebido' THEN 3
+                                    ELSE 4
+                                END,
+                                dataPedido, 
+                                idCombo, 
+                                nomeCompletoCliente;
                         ";
 
             await using var command = _context.Database.GetDbConnection().CreateCommand();
