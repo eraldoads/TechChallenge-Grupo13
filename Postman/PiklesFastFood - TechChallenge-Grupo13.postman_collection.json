@@ -2777,7 +2777,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"idCliente\": 1,\n  \"dataPedido\": \"2023-10-20 21:49\",\n  \"statusPedido\": \"Recebido\",\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": 18,\n          \"quantidade\": 1\n        }\n      ]\n    }\n  ]\n}",
+							"raw": "{\n  \"statusPedido\": 3\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -2786,13 +2786,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}:{{port}}/pedido",
+							"raw": "{{baseUrl}}:{{port}}/pedido/2",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"port": "{{port}}",
 							"path": [
-								"pedido"
+								"pedido",
+								"2"
 							]
 						},
 						"description": "Cria um novo pedido com os dados recebidos no corpo da requisição </br>\r\n                <b>Parâmetros de entrada:</b>\r\n                <br/> • <b>idCliente</b>: o identificador do cliente que realizou o pedido ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>dataPedido</b>: a data em que o pedido foi realizado ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>statusPedido</b>: o status atual do pedido ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>combo</b>: uma lista de combos incluídos no pedido, cada um contendo uma lista de produtos:\r\n                    <br/>&nbsp;&emsp;&emsp;  • <b>produto</b>: a lista de produtos incluídos no combo, cada um contendo os seguintes parâmetros:\r\n                        <br/>&nbsp;&emsp;&emsp;&nbsp;&emsp;&emsp;   • <b>idProduto</b>: o identificador do produto incluído no combo ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                        <br/>&nbsp;&emsp;&emsp;&nbsp;&emsp;&emsp;   • <b>quantidade</b>: a quantidade do respectivo produto incluído no combo ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                "
