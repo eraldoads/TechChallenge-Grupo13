@@ -1,4 +1,4 @@
-![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/16ee2652-d21e-459a-a710-55fe517a8b48)# 🚀 TechChallenge-Grupo13
+# 🚀 TechChallenge-Grupo13
 Aplicação para todo sistema de Controle de Pedidos de uma lanchonete - [API] Backend (monolito).
 
 
