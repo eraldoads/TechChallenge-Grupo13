@@ -1,4 +1,4 @@
-# 🚀 TechChallenge-Grupo13
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/16ee2652-d21e-459a-a710-55fe517a8b48)# 🚀 TechChallenge-Grupo13
 Aplicação para todo sistema de Controle de Pedidos de uma lanchonete - [API] Backend (monolito).
 
 
@@ -154,9 +154,7 @@ Crie um pagamento para um pedido que esteja com o status <b>Recebido</b>:
 Obtenha o QRCode para pagamento do pedido no Mercado Pago:
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/3ffbc7bc-c5ca-4e50-a677-8dc9e592d44d)
-
 </br></br>
-
 Acesse o site https://www.qrcode-monkey.com/ e gere a imagem a partir do QRCODE obtido no campo <b>qr_data</b>. Selecione a aba <b>TEXT</b>, cole o QRCode no campo <b>Your Text</b> e clique no botão <b>Create QR Code</b>:
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/cf814600-1f62-41de-af08-d5035aec6b14)
@@ -170,17 +168,17 @@ Informe dados inválidos para o cartão de crédito:
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/99a923c4-e19f-458b-8b8f-f9c11d4fa37e)
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/dbcb4d1a-6f23-4b77-8c39-3e10e3556550)
-
-Verifique a notificação recebida no Webhook.site, copie o id da merchant_order:
+</br></br>
+Verifique a notificação recebida no Webhook.site e copie o id da merchant_order:
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/e576df04-4a95-438a-b851-7483a6920ede)
 </br></br>
-Atualize o status do pagamento utilizando o endpoint destinado ao webhook: 
+Simule o recebimento da notificação do webhook de pagamento: 
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/1964f7a8-93a5-4f5e-9fe6-24bc545953d3)
 </br></br>
 
-Verifique o status do pagamento do pedido:
+Verifique o status do pagamento do pedido como <b>Rejeitado</b>:
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/850937f3-f7d5-4244-8bcc-b4a82e17d1a7)
 
@@ -191,13 +189,17 @@ Repita o processo de pagamento informando um cartão de crédito válido:
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/77e83a3b-b08a-43d3-abf8-4edb19e539b9)
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/092e336b-e10f-4d66-b6cf-d40d49d7f244)
 </br></br>
-Atualize novamente o status do pagamento utilizando o endpoint destinado ao webhook: 
+Simule novamente o recebimento da notificação do webhook de pagamento: 
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/1964f7a8-93a5-4f5e-9fe6-24bc545953d3)
 </br></br>
-Verifique o status do pagamento do pedido:
+Verifique novamente o status do pagamento do pedido como <b>Aprovado</b>:
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/e37cc5ba-49dd-4875-a548-c8379938949f)
+</br></br>
+Liste novamente os pedidos e verifique o status do pedido que recebeu o pagamento como <b>Em Preparação</b>
+</br></br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/8b97fb1c-f0d7-4722-8641-c8a702807ddc)
 </br></br>
 
 ## 🔗 Tecnologias
