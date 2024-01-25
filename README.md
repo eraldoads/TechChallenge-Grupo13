@@ -165,23 +165,40 @@ Com o aplicativo do Mercado Pago, faça a leitura do QRCode:
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/d4287e51-b44f-4b8e-921e-cc67683427d9)
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/cf1aa19a-6c57-4650-87e5-54d53990729c)
+</br></br>
+Informe dados inválidos para o cartão de crédito:
+</br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/99a923c4-e19f-458b-8b8f-f9c11d4fa37e)
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/dbcb4d1a-6f23-4b77-8c39-3e10e3556550)
 
 Verifique a notificação recebida no Webhook.site, copie o id da merchant_order:
-</br>
+</br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/e576df04-4a95-438a-b851-7483a6920ede)
-
-</br>
+</br></br>
 Atualize o status do pagamento utilizando o endpoint destinado ao webhook: 
-</br>
-![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/d45f482b-2d68-4a8d-b275-6a28a28fe324)
-</br>
-</br>
+</br></br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/1964f7a8-93a5-4f5e-9fe6-24bc545953d3)
+</br></br>
 
 Verifique o status do pagamento do pedido:
+</br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/850937f3-f7d5-4244-8bcc-b4a82e17d1a7)
 
+</br></br>
+
+Repita o processo de pagamento informando um cartão de crédito válido:
+</br></br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/77e83a3b-b08a-43d3-abf8-4edb19e539b9)
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/092e336b-e10f-4d66-b6cf-d40d49d7f244)
+</br></br>
+Atualize novamente o status do pagamento utilizando o endpoint destinado ao webhook: 
+</br></br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/1964f7a8-93a5-4f5e-9fe6-24bc545953d3)
+</br></br>
+Verifique o status do pagamento do pedido:
+</br></br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/e37cc5ba-49dd-4875-a548-c8379938949f)
+</br></br>
 
 ## 🔗 Tecnologias
 
