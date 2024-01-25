@@ -149,19 +149,37 @@ Liste todos os pedidos realizados:
 
 Crie um pagamento para um pedido que esteja com o status <b>Recebido</b>:
 </br></br>
-![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/52ee996d-d2e7-4f74-a7ed-42cb83d4ee6f)
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/ac473e5f-a106-4eb0-b2d7-fd89abfdaa5a)
 </br></br>
 Obtenha o QRCode para pagamento do pedido no Mercado Pago:
 </br></br>
-![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/b29bac1a-36cc-459c-98b8-8663765ffa59)
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/3ffbc7bc-c5ca-4e50-a677-8dc9e592d44d)
+
 </br></br>
 
 Acesse o site https://www.qrcode-monkey.com/ e gere a imagem a partir do QRCODE obtido no campo <b>qr_data</b>. Selecione a aba <b>TEXT</b>, cole o QRCode no campo <b>Your Text</b> e clique no botão <b>Create QR Code</b>:
 </br></br>
-![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/564cf52a-394e-4124-8f51-dd423d032d0a)
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/cf814600-1f62-41de-af08-d5035aec6b14)
 </br></br>
+Com o aplicativo do Mercado Pago, faça a leitura do QRCode:
+</br></br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/d4287e51-b44f-4b8e-921e-cc67683427d9)
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/cf1aa19a-6c57-4650-87e5-54d53990729c)
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/99a923c4-e19f-458b-8b8f-f9c11d4fa37e)
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/dbcb4d1a-6f23-4b77-8c39-3e10e3556550)
 
-Realizar o pagamento via Mercado Pago
+Verifique a notificação recebida no Webhook.site, copie o id da merchant_order:
+</br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/e576df04-4a95-438a-b851-7483a6920ede)
+
+</br>
+Atualize o status do pagamento utilizando o endpoint destinado ao webhook: 
+</br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/91115d2d-c6dc-4877-95a7-0076e6a0cd78)
+
+</br>
+
+
 Obter o id da merchant_order
 Realizar o request para o endpoint webhook passando o id por parâmetro
 
