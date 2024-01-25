@@ -127,7 +127,29 @@ Para testar os endpoints da API via Postman, você deverá importar o json da co
 Após seguir todos os passos anteriores, o ambiente estará pronto para os testes.
 
 ## ☑️ Testes
-Criação do pedido
+Utilizando a collection do Postman, crie alguns pedidos.
+</br></br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/1b58dcaa-ef4f-452f-ae7f-bdf822158f60)
+
+Posteriormente, altere o status de alguns deles utilizando os status permitidos:
+</br></br>
+<b>1 - Recebido</b>
+</br>
+<b>2 - Em Preparação</b>
+</br>
+<b>3 - Pronto</b>
+</br>
+<b>4 - Finalizado</b>
+</br></br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/97251cbd-36f2-4c82-bce2-86d4ce61fc52)
+
+Liste todos os pedidos realizados:
+</br></br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/b0b35cd7-ac34-4304-83f7-3e3131828d10)
+
+
+
+
 Criação do pagamento
 
 Opcional:
