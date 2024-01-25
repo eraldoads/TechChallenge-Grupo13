@@ -9,3 +9,5 @@ kubectl apply -f piklesfastfood-deployment.yaml
 kubectl apply -f piklesfastfood-hpa.yaml
 kubectl apply -f piklesfastfood-secrets.yaml
 kubectl apply -f piklesfastfood-service.yaml
+kubectl apply -f adminer-deployment.yaml
+kubectl apply -f adminer-service.yaml
