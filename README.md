@@ -175,16 +175,13 @@ Verifique a notificação recebida no Webhook.site, copie o id da merchant_order
 </br>
 Atualize o status do pagamento utilizando o endpoint destinado ao webhook: 
 </br>
-![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/91115d2d-c6dc-4877-95a7-0076e6a0cd78)
-
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/d45f482b-2d68-4a8d-b275-6a28a28fe324)
+</br>
 </br>
 
+Verifique o status do pagamento do pedido:
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/850937f3-f7d5-4244-8bcc-b4a82e17d1a7)
 
-Obter o id da merchant_order
-Realizar o request para o endpoint webhook passando o id por parâmetro
-
-Relizar o request do endpoint para obter o status do pedido
-Realizar o request para o endpoint de atualização do status do pedido
 
 ## 🔗 Tecnologias
 
