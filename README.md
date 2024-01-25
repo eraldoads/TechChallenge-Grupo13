@@ -127,7 +127,7 @@ Para testar os endpoints da API via Postman, você deverá importar o json da co
 Após seguir todos os passos anteriores, o ambiente estará pronto para os testes.
 
 ## ☑️ Testes
-Utilizando a collection do Postman, crie alguns pedidos.
+Utilizando a collection do Postman, crie alguns pedidos:
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/1b58dcaa-ef4f-452f-ae7f-bdf822158f60)
 
@@ -147,14 +147,20 @@ Liste todos os pedidos realizados:
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/b0b35cd7-ac34-4304-83f7-3e3131828d10)
 
+Crie um pagamento para um pedido que esteja com o status <b>Recebido</b>:
+</br></br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/52ee996d-d2e7-4f74-a7ed-42cb83d4ee6f)
+</br></br>
+Obtenha o QRCode para pagamento do pedido no Mercado Pago:
+</br></br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/b29bac1a-36cc-459c-98b8-8663765ffa59)
+</br></br>
 
+Acesse o site https://www.qrcode-monkey.com/ e gere a imagem a partir do QRCODE obtido no campo <b>qr_data</b>. Selecione a aba <b>TEXT</b>, cole o QRCode no campo <b>Your Text</b> e clique no botão <b>Create QR Code</b>:
+</br></br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/564cf52a-394e-4124-8f51-dd423d032d0a)
+</br></br>
 
-
-Criação do pagamento
-
-Opcional:
-Obter QRCODE
-Acessar site https://www.qrcode-monkey.com/ e gerar a imagem a partir do QRCODE obtido
 Realizar o pagamento via Mercado Pago
 Obter o id da merchant_order
 Realizar o request para o endpoint webhook passando o id por parâmetro
