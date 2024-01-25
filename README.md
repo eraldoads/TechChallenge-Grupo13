@@ -19,19 +19,93 @@ Aplicação para todo sistema de Controle de Pedidos de uma lanchonete - [API] B
 
 </br>
 
-## ☑️ Testes
+## ☑️ Criação do ambiente para testes
 
-Para executar esta solução, você deve entrar na pasta <b>PIKLES-FASTFOOD</b> e executar o comando:
+</br>
+Realizar o download do projeto TechChallenge-Grupo13.
+
+Acessar site https://webhook.site/ e copiar a url para teste do webhook.
+</br>
+Alterar valor da variável <b>WEBHOOK_ENDPOINT</b> dentro do arquivo <b>piklesfastfood-configmap.yaml</b> para a url copiada do site.
+</br>
+Iniciar o Docker Engine.
+</br>
+Abrir um terminal e executar o comando abaixo:
+</br>
 ```
-docker-compose up
+minikube start
 ```
-Esse comando irá ler o arquivo <b>docker-compose.yml</b> que está na mesma pasta e criar os containers da API e do Banco de Dados MySQL.
 </br>
+
+Em seguida, executar o comando para habilitar a coleta de métricas no cluster:
 </br>
-Além disso, será criado um container para uma interface de administração do banco, onde você poderá visualizar as tabelas criadas.
+```
+minikube addons enable metrics-server
+```
 </br>
+
+Abrir o terminal na pasta TechChallenge-Grupo13\kubernetes e executar os comandos apply, conforme abaixo:
 </br>
-Depois da criação do banco, serão executados os comandos definidos no arquivo <b>init.sql</b>, que contém a criação das tabelas e os inserts para gerar uma massa de dados para os testes.
+
+```
+kubectl apply -f mysql-configmap.yaml
+kubectl apply -f mysql-pv.yaml
+kubectl apply -f mysql-pvc.yaml
+kubectl apply -f mysql-secrets.yaml
+kubectl apply -f mysql-service.yaml
+kubectl apply -f mysql-statefulset.yaml
+kubectl apply -f piklesfastfood-configmap.yaml
+kubectl apply -f piklesfastfood-deployment.yaml
+kubectl apply -f piklesfastfood-hpa.yaml
+kubectl apply -f piklesfastfood-secrets.yaml
+kubectl apply -f piklesfastfood-service.yaml
+kubectl apply -f adminer-deployment.yaml
+kubectl apply -f adminer-service.yaml
+```
+</br>
+Rodar o comando abaixo para expor a api na porta 8080:
+
+```
+kubectl port-forward svc/piklesfastfood 8080:80
+```
+</br>
+
+Abrir outro terminal e rodar o comando abaixo para expor o Adminer na porta 8090:
+```
+kubectl port-forward svc/adminer 8090:8080
+```
+</br>
+
+Acessar o Adminer no browser :
+http://localhost:8090/
+
+```
+Servidor: mysql
+Usuário: pikles
+Senha: fastfood
+Base de Dados: piklesfastfood
+```
+
+Importar arquivo <b>init.sql</b> localizado na pasta <b>PIKLESFASTFOOD</b>
+
+Rodar o comando minikube dashboard para visualizar os recursos criados no ambiente kubernetes
+
+Ambiente pronto para testes
+
+Sequência de testes:
+
+Criação do pedido
+Criação do pagamento
+
+Opcional:
+Obter QRCODE
+Acessar site https://www.qrcode-monkey.com/ e gerar a imagem a partir do QRCODE obtido
+Realizar o pagamento via Mercado Pago
+Obter o id da merchant_order
+Realizar o request para o endpoint webhook passando o id por parâmetro
+
+Relizar o request do endpoint para obter o status do pedido
+Realizar o request para o endpoint de atualização do status do pedido
 
 </br>
 <b>Como acessar</b>:
@@ -43,14 +117,13 @@ Depois da criação do banco, serão executados os comandos definidos no arquivo
 </br>
 </br>
 ```
-Servidor: db
+Servidor: mysql
 Usuário: pikles
 Senha: fastfood
 Base de Dados: piklesfastfood
 ```
-
-![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/e7cb3296-c50c-413f-b055-723bb0dca25e)
-
+</br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/87b1308b-9b42-467c-a7db-5e3005b54666)
 
 </br>
 
