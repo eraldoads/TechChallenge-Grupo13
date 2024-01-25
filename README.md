@@ -20,29 +20,29 @@ Aplicação para todo sistema de Controle de Pedidos de uma lanchonete - [API] B
 </br>
 
 ## ☑️ Criação do ambiente para testes
-Realizar o download do projeto TechChallenge-Grupo13.
+Realize o download do projeto TechChallenge-Grupo13.
 </br></br>
-Acessar site https://webhook.site/ e copiar a url para teste do webhook.
+Acesse o site https://webhook.site/ e copie a url para teste do webhook.
 </br></br>
-Alterar valor da variável <b>WEBHOOK_ENDPOINT</b> dentro do arquivo <b>piklesfastfood-configmap.yaml</b> para a url copiada do site. Este arquivo está localizado na pasta <b>TechChallenge-Grupo13\kubernetes</b>.
+Altere o valor da variável <b>WEBHOOK_ENDPOINT</b> dentro do arquivo <b>piklesfastfood-configmap.yaml</b> para a url copiada do site. Este arquivo está localizado na pasta <b>TechChallenge-Grupo13\kubernetes</b>.
 </br></br>
-Executar o Docker Engine.
+Execute o Docker Engine.
 </br></br>
-Abrir um terminal e executar o comando abaixo:
+Abra um terminal e execute o comando abaixo para iniciar o minikube:
 </br>
 ```
 minikube start
 ```
 </br>
 
-Em seguida, executar o comando abaixo para habilitar a coleta de métricas no cluster:
+Em seguida, execute o comando abaixo para habilitar a coleta de métricas no cluster:
 </br>
 ```
 minikube addons enable metrics-server
 ```
 </br>
 
-Ainda no terminal, acessar a pasta <b>TechChallenge-Grupo13\kubernetes</b> e executar os comandos a seguir:
+Ainda no terminal, acesse a pasta <b>TechChallenge-Grupo13\kubernetes</b> e execute os comandos a seguir:
 </br>
 
 ```
@@ -61,28 +61,30 @@ kubectl apply -f adminer-deployment.yaml
 kubectl apply -f adminer-service.yaml
 ```
 </br>
-Executar o comando abaixo para expor a API na porta 8080:
+Execute o comando abaixo para expor a API na porta 8080:
+</br></br>
 
 ```
 kubectl port-forward svc/piklesfastfood 8080:80
 ```
 </br>
 
-Verificar se a API está em execução acessando o endereço do Swagger: 
+Acesse a documentação da API:
 http://localhost:8080/swagger/index.html
 
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/dbd6fdd3-eb04-442f-b715-7b8f1649fa5c)
 
-
-
-Abrir outro terminal e executar o comando abaixo para expor o Adminer na porta 8090:
+Abra outro terminal e execute o comando abaixo para expor o Adminer na porta 8090:
 ```
 kubectl port-forward svc/adminer 8090:8080
 ```
 </br>
 
-Acessar o Adminer no browser :
+Acesse o Adminer no browser: 
 http://localhost:8090/
+
+
+Utilize as seguintes credenciais:
 
 ```
 Servidor: mysql
@@ -92,14 +94,14 @@ Base de Dados: piklesfastfood
 ```
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/8c6ae06e-a8ae-4bc9-b157-5f985f0445df)
 
-Importar o arquivo <b>init.sql</b> localizado na pasta <b>PIKLESFASTFOOD</b> e executar:
+Para criar as tabelas e inserir uma massa de dados no banco Mysql, importe o arquivo <b>init.sql</b> localizado na pasta <b>PIKLESFASTFOOD</b> e clique no botão <b>Executar</b>:
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/4c950fcb-b38f-485d-8df6-8c18fc2ba748)
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/d03e4e66-d90e-4455-8fc6-47bbea81282e)
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/7e2d045b-5c0a-431c-863f-9925c08c4ffe)
 </br>
 
-Abrir um terminal e executar o comando a seguir para visualizar os recursos criados no ambiente kubernetes:
+Abra um terminal e execute o comando a seguir para visualizar os recursos criados no ambiente Kubernetes:
 
 ```
 minikube dashboard
@@ -112,15 +114,6 @@ Será exibida a url para acessar o dashboard com o ambiente Kubernetes:
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/04a157b5-6787-4c45-9d8a-c9006b3ae91a)
 
 </br>
-<b>Como acessar</b>:
-</br>
-
-<b>API</b>: http://localhost/swagger/index.html
-</br>
-
-<b>⚠️ Atenção:</b> A documentação estará disponível somente depois de executar a solução. Para acessar a documentação do SWAGGER, clique na imagem abaixo:
-
-[![Badge](https://img.shields.io/static/v1?label=swagger&message=Documentação&color=darkgreen&style=for-the-badge&logo=swagger)](https://www.postman.com/martian-resonance-699333/workspace/grupo-13-tech-challenge-fase-i/collection/13215309-ff36e055-fccf-48db-9965-b76e4ace4e93?tab=overview)
 
 Para testar os endpoints da API via Postman, você deverá importar o json da collection e do enviroment, os quais estão disponíveis na pasta <b>Postman</b> dentro do projeto:
 
@@ -131,11 +124,9 @@ Para testar os endpoints da API via Postman, você deverá importar o json da co
 </br>
 </br>
 
+Após seguir todos os passos anteriores, o ambiente estará pronto para os testes.
 
-Ambiente pronto para testes
-
-Sequência de testes:
-
+## ☑️ Testes
 Criação do pedido
 Criação do pagamento
 
