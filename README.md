@@ -85,8 +85,14 @@ Usuário: pikles
 Senha: fastfood
 Base de Dados: piklesfastfood
 ```
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/6351851a-262c-44b6-99c4-e196b43073d7)
 
-Importar arquivo <b>init.sql</b> localizado na pasta <b>PIKLESFASTFOOD</b>
+Importar arquivo <b>init.sql</b> localizado na pasta <b>PIKLESFASTFOOD</b> e executar:
+</br></br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/4c950fcb-b38f-485d-8df6-8c18fc2ba748)
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/d03e4e66-d90e-4455-8fc6-47bbea81282e)
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/7e2d045b-5c0a-431c-863f-9925c08c4ffe)
+</br>
 
 Rodar o comando minikube dashboard para visualizar os recursos criados no ambiente kubernetes
 
@@ -123,8 +129,8 @@ Senha: fastfood
 Base de Dados: piklesfastfood
 ```
 </br>
-![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/87b1308b-9b42-467c-a7db-5e3005b54666)
-
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/3a3723fa-2742-4d11-94e0-8c8351d62e01)
+</br>
 </br>
 
 <b>⚠️ Atenção:</b> A documentação estará disponível somente depois de executar a solução. Para acessar a documentação do SWAGGER, clique na imagem abaixo:
