@@ -24,10 +24,11 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/cliente/:id",
+									"raw": "{{baseUrl}}:{{port}}/cliente/:id",
 									"host": [
 										"{{baseUrl}}"
 									],
+									"port": "{{port}}",
 									"path": [
 										"cliente",
 										":id"
@@ -299,10 +300,11 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/cliente/:id",
+									"raw": "{{baseUrl}}:{{port}}/cliente/:id",
 									"host": [
 										"{{baseUrl}}"
 									],
+									"port": "{{port}}",
 									"path": [
 										"cliente",
 										":id"
@@ -641,10 +643,11 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/cliente/:id",
+									"raw": "{{baseUrl}}:{{port}}/cliente/:id",
 									"host": [
 										"{{baseUrl}}"
 									],
+									"port": "{{port}}",
 									"path": [
 										"cliente",
 										":id"
@@ -973,10 +976,11 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/cliente/:id",
+									"raw": "{{baseUrl}}:{{port}}/cliente/:id",
 									"host": [
 										"{{baseUrl}}"
 									],
+									"port": "{{port}}",
 									"path": [
 										"cliente",
 										":id"
@@ -1240,10 +1244,11 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/cliente",
+							"raw": "{{baseUrl}}:{{port}}/cliente",
 							"host": [
 								"{{baseUrl}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"cliente"
 							]
@@ -1496,10 +1501,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/cliente",
+							"raw": "{{baseUrl}}:{{port}}/cliente",
 							"host": [
 								"{{baseUrl}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"cliente"
 							]
@@ -1844,10 +1850,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/login",
+							"raw": "{{baseUrl}}:{{port}}/login",
 							"host": [
 								"{{baseUrl}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"login"
 							]
@@ -2178,10 +2185,11 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/pedido",
+							"raw": "{{baseUrl}}:{{port}}/pedido",
 							"host": [
 								"{{baseUrl}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"pedido"
 							]
@@ -2410,7 +2418,7 @@
 					]
 				},
 				{
-					"name": "Endpoint para criar um novo pedido",
+					"name": "Endpoint para criar um novo pedido (checkout)",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -2425,7 +2433,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"idCliente\": 1,\n  \"dataPedido\": \"2023-10-20 21:49\",\n  \"statusPedido\": \"Recebido\",\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": 3,\n          \"quantidade\": 1\n        },\n        {\n          \"idProduto\": 8,\n          \"quantidade\": 1\n        },\n        {\n          \"idProduto\": 13,\n          \"quantidade\": 1\n        },\n        {\n          \"idProduto\": 20,\n          \"quantidade\": 1\n        }\n      ]\n    },\n    {\n      \"produto\": [\n        {\n          \"idProduto\": 4,\n          \"quantidade\": 2\n        },\n        {\n          \"idProduto\": 9,\n          \"quantidade\": 1\n        },\n        {\n          \"idProduto\": 15,\n          \"quantidade\": 1\n        }\n      ]\n    },\n    {\n      \"produto\": [\n        {\n          \"idProduto\": 18,\n          \"quantidade\": 1\n        }\n      ]\n    }\n  ]\n}",
+							"raw": "{\n  \"idCliente\": 1,\n  \"dataPedido\": \"2024-01-24 12:49\",\n  \"statusPedido\": \"Recebido\",\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": 9,\n          \"quantidade\": 1\n        },\n        {\n          \"idProduto\": 17,\n          \"quantidade\": 1\n        }\n      ]\n    }\n  ]\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -2434,12 +2442,358 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/pedido",
+							"raw": "{{baseUrl}}:{{port}}/pedido",
 							"host": [
 								"{{baseUrl}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"pedido"
+							]
+						},
+						"description": "Cria um novo pedido com os dados recebidos no corpo da requisição </br>\r\n                <b>Parâmetros de entrada:</b>\r\n                <br/> • <b>idCliente</b>: o identificador do cliente que realizou o pedido ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>dataPedido</b>: a data em que o pedido foi realizado ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>statusPedido</b>: o status atual do pedido ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>combo</b>: uma lista de combos incluídos no pedido, cada um contendo uma lista de produtos:\r\n                    <br/>&nbsp;&emsp;&emsp;  • <b>produto</b>: a lista de produtos incluídos no combo, cada um contendo os seguintes parâmetros:\r\n                        <br/>&nbsp;&emsp;&emsp;&nbsp;&emsp;&emsp;   • <b>idProduto</b>: o identificador do produto incluído no combo ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                        <br/>&nbsp;&emsp;&emsp;&nbsp;&emsp;&emsp;   • <b>quantidade</b>: a quantidade do respectivo produto incluído no combo ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                "
+					},
+					"response": [
+						{
+							"name": "Pedido criado com sucesso!",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": \"<integer>\",\n          \"quantidade\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"dataPedido\": \"<dateTime>\",\n  \"idCliente\": \"<integer>\",\n  \"statusPedido\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"idPedido\": \"<integer>\",\n  \"dataPedido\": \"<dateTime>\",\n  \"valorTotal\": \"<float>\"\n}"
+						},
+						{
+							"name": "Requisição concluída sem dados de retorno.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": \"<integer>\",\n          \"quantidade\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"dataPedido\": \"<dateTime>\",\n  \"idCliente\": \"<integer>\",\n  \"statusPedido\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "A solicitação não pode ser entendida pelo servidor devido à sintaxe malformada.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": \"<integer>\",\n          \"quantidade\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"dataPedido\": \"<dateTime>\",\n  \"idCliente\": \"<integer>\",\n  \"statusPedido\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "A requisição requer autenticação do usuário.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": \"<integer>\",\n          \"quantidade\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"dataPedido\": \"<dateTime>\",\n  \"idCliente\": \"<integer>\",\n  \"statusPedido\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Privilégios insuficientes.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": \"<integer>\",\n          \"quantidade\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"dataPedido\": \"<dateTime>\",\n  \"idCliente\": \"<integer>\",\n  \"statusPedido\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "O recurso solicitado não existe.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": \"<integer>\",\n          \"quantidade\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"dataPedido\": \"<dateTime>\",\n  \"idCliente\": \"<integer>\",\n  \"statusPedido\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Condição prévia dada em um ou mais dos campos avaliada como falsa.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": \"<integer>\",\n          \"quantidade\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"dataPedido\": \"<dateTime>\",\n  \"idCliente\": \"<integer>\",\n  \"statusPedido\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Precondition Failed",
+							"code": 412,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "O servidor encontrou uma condição inesperada.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"combo\": [\n    {\n      \"produto\": [\n        {\n          \"idProduto\": \"<integer>\",\n          \"quantidade\": \"<integer>\"\n        }\n      ]\n    }\n  ],\n  \"dataPedido\": \"<dateTime>\",\n  \"idCliente\": \"<integer>\",\n  \"statusPedido\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedido",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedido"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Endpoint para atualizar o status de um pedido",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"statusPedido\": 3\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}:{{port}}/pedido/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"pedido",
+								"1"
 							]
 						},
 						"description": "Cria um novo pedido com os dados recebidos no corpo da requisição </br>\r\n                <b>Parâmetros de entrada:</b>\r\n                <br/> • <b>idCliente</b>: o identificador do cliente que realizou o pedido ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>dataPedido</b>: a data em que o pedido foi realizado ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>statusPedido</b>: o status atual do pedido ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                <br/> • <b>combo</b>: uma lista de combos incluídos no pedido, cada um contendo uma lista de produtos:\r\n                    <br/>&nbsp;&emsp;&emsp;  • <b>produto</b>: a lista de produtos incluídos no combo, cada um contendo os seguintes parâmetros:\r\n                        <br/>&nbsp;&emsp;&emsp;&nbsp;&emsp;&emsp;   • <b>idProduto</b>: o identificador do produto incluído no combo ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                        <br/>&nbsp;&emsp;&emsp;&nbsp;&emsp;&emsp;   • <b>quantidade</b>: a quantidade do respectivo produto incluído no combo ⇒ <font color='red'><b>Obrigatório</b></font>\r\n                "
@@ -2771,10 +3125,11 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/produto/:id",
+									"raw": "{{baseUrl}}:{{port}}/produto/:id",
 									"host": [
 										"{{baseUrl}}"
 									],
+									"port": "{{port}}",
 									"path": [
 										"produto",
 										":id"
@@ -3046,10 +3401,11 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/produto/:id",
+									"raw": "{{baseUrl}}:{{port}}/produto/:id",
 									"host": [
 										"{{baseUrl}}"
 									],
+									"port": "{{port}}",
 									"path": [
 										"produto",
 										":id"
@@ -3388,10 +3744,11 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/produto/:id",
+									"raw": "{{baseUrl}}:{{port}}/produto/:id",
 									"host": [
 										"{{baseUrl}}"
 									],
+									"port": "{{port}}",
 									"path": [
 										"produto",
 										":id"
@@ -3720,10 +4077,11 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/produto/:id",
+									"raw": "{{baseUrl}}:{{port}}/produto/:id",
 									"host": [
 										"{{baseUrl}}"
 									],
+									"port": "{{port}}",
 									"path": [
 										"produto",
 										":id"
@@ -3993,10 +4351,11 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/produto/categoria/:idCategoria",
+											"raw": "{{baseUrl}}:{{port}}/produto/categoria/:idCategoria",
 											"host": [
 												"{{baseUrl}}"
 											],
+											"port": "{{port}}",
 											"path": [
 												"produto",
 												"categoria",
@@ -4271,10 +4630,11 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/produto",
+							"raw": "{{baseUrl}}:{{port}}/produto",
 							"host": [
 								"{{baseUrl}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"produto"
 							]
@@ -4527,10 +4887,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/produto",
+							"raw": "{{baseUrl}}:{{port}}/produto",
 							"host": [
 								"{{baseUrl}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"produto"
 							]
@@ -4857,7 +5218,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"StatusPagamento\": \"Pendente\",\r\n  \"ValorPagamento\": 148.91,\r\n  \"MetodoPagamento\": \"QRCode\",\r\n  \"DataPagamento\": \"2024-01-05 20:59\",\r\n  \"IdPedido\": 1\r\n}",
+							"raw": "{\r\n  \"StatusPagamento\": \"Pendente\",\r\n  \"ValorPagamento\": 0.99,\r\n  \"MetodoPagamento\": \"QRCode\",\r\n  \"DataPagamento\": \"2024-01-23 20:59\",\r\n  \"IdPedido\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4865,10 +5226,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/pagamento",
+							"raw": "{{baseUrl}}:{{port}}/pagamento",
 							"host": [
 								"{{baseUrl}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"pagamento"
 							]
@@ -4891,10 +5253,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/pagamento/webhook?id=14699545934&topic=merchant_order",
+							"raw": "{{baseUrl}}:{{port}}/pagamento/webhook?id=15149246158&topic=merchant_order",
 							"host": [
 								"{{baseUrl}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"pagamento",
 								"webhook"
@@ -4902,7 +5265,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "14699545934"
+									"value": "15149246158"
 								},
 								{
 									"key": "topic",
@@ -4931,10 +5294,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/pagamento/1/status",
+							"raw": "{{baseUrl}}:{{port}}/pagamento/1/status",
 							"host": [
 								"{{baseUrl}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"pagamento",
 								"1",
@@ -4962,10 +5326,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/pagamento/1/qrcode",
+							"raw": "{{baseUrl}}:{{port}}/pagamento/1/qrcode",
 							"host": [
 								"{{baseUrl}}"
 							],
+							"port": "{{port}}",
 							"path": [
 								"pagamento",
 								"1",

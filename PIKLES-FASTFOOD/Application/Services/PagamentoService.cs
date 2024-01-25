@@ -78,7 +78,7 @@ namespace Application.Interfaces
             var payLoad = new PayloadQRCodeOutput()
             {
                 description = string.Format("Pedido_{0}", pagamento.IdPedido), 
-                external_reference = pagamento.IdPagamento.ToString(),
+                external_reference = pagamento.IdPedido.ToString(),
                 items = new List<ItemPagamento>()
                 {
                     new ItemPagamento()
