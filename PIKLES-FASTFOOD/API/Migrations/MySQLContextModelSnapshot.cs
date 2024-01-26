@@ -100,6 +100,31 @@ namespace API.Migrations
                     b.ToTable("ComboProduto");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Pagamento", b =>
+                {
+                    b.Property<int>("IdPagamento")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataPagamento")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("IdPedido")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MetodoPagamento")
+                        .HasColumnType("longtext");
+
+                    b.Property<float>("ValorPagamento")
+                        .HasColumnType("float");
+
+                    b.HasKey("IdPagamento");
+
+                    b.HasIndex("IdPedido");
+
+                    b.ToTable("Pagamento");
+                });
+
             modelBuilder.Entity("Domain.Entities.Pedido", b =>
                 {
                     b.Property<int>("IdPedido")
@@ -138,6 +163,9 @@ namespace API.Migrations
                     b.Property<int>("IdCategoria")
                         .HasColumnType("int");
 
+                    b.Property<string>("ImagemProduto")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("NomeProduto")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -151,6 +179,35 @@ namespace API.Migrations
                     b.HasIndex("IdCategoria");
 
                     b.ToTable("Produto");
+                });
+
+            modelBuilder.Entity("Domain.Entities.ProdutoLista", b =>
+                {
+                    b.Property<int>("IdProduto")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("DescricaoProduto")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("IdCategoria")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImagemProduto")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NomeCategoria")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NomeProduto")
+                        .HasColumnType("longtext");
+
+                    b.Property<float>("ValorProduto")
+                        .HasColumnType("float");
+
+                    b.HasKey("IdProduto");
+
+                    b.ToTable("ProdutoLista");
                 });
 
             modelBuilder.Entity("Domain.Entities.Combo", b =>
@@ -169,6 +226,17 @@ namespace API.Migrations
                         .HasForeignKey("ComboId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pagamento", b =>
+                {
+                    b.HasOne("Domain.Entities.Pedido", "Pedido")
+                        .WithMany()
+                        .HasForeignKey("IdPedido")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pedido");
                 });
 
             modelBuilder.Entity("Domain.Entities.Produto", b =>

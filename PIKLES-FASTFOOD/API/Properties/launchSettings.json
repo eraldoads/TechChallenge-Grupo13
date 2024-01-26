@@ -5,7 +5,13 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "MERCADO_PAGO_BASE_URL": "https://api.mercadopago.com",
+        "MERCADO_PAGO_CRIAR_QR_ORDER_PATH": "/instore/orders/qr/seller/collectors/1619908702/pos/SUC001POS001/qrs",
+        "MERCADO_PAGO_CONSULTAR_QR_ORDER_PATH": "/merchant_orders/{0}",
+        "MERCADO_PAGO_AUTHORIZATION": "Bearer TEST-1380797655451164-010212-2bb955330b75683baa093d93183e0c2e-1619908702",
+        "MERCADO_PAGO_SPONSOR_ID": "58923039",
+        "WEBHOOK_ENDPOINT": "https://webhook.site/f63a6e8f-7a02-4608-b0d4-80bf191c3c8a"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5245"

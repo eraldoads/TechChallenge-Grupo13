@@ -1,7 +1,7 @@
 ﻿using Data.Context;
 using Domain.Entities;
 using Domain.Entities.Output;
-using Domain.Port.DrivenPort;
+using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repository
@@ -38,16 +38,26 @@ namespace Data.Repository
                                     PROD.NomeProduto                        AS nomeProduto,
                                     COMBP.Quantidade                        AS quantidadeProduto,
                                     PROD.ValorProduto                       AS valorProduto
-                               FROM Pedido PEDI
-                         INNER JOIN Cliente CLIE
-                                 ON PEDI.IdCliente = CLIE.IdCliente
-                         INNER JOIN Combo COMB
-                                 ON COMB.PedidoId = PEDI.IdPedido
-                         INNER JOIN ComboProduto COMBP
-                                 ON COMBP.ComboId = COMB.IdCombo
-                         INNER JOIN Produto PROD
-                                 ON COMBP.IdProduto = PROD.IdProduto
-                           ORDER BY dataPedido, idCombo, nomeCompletoCliente;
+                                FROM Pedido PEDI
+                            INNER JOIN Cliente CLIE
+                                    ON PEDI.IdCliente = CLIE.IdCliente
+                            INNER JOIN Combo COMB
+                                    ON COMB.PedidoId = PEDI.IdPedido
+                            INNER JOIN ComboProduto COMBP
+                                    ON COMBP.ComboId = COMB.IdCombo
+                            INNER JOIN Produto PROD
+                                    ON COMBP.IdProduto = PROD.IdProduto
+                            WHERE PEDI.StatusPedido <> 'Finalizado'
+                            ORDER BY 
+                                CASE 
+                                    WHEN PEDI.StatusPedido = 'Pronto' THEN 1
+                                    WHEN PEDI.StatusPedido = 'Em Preparação' THEN 2
+                                    WHEN PEDI.StatusPedido = 'Recebido' THEN 3
+                                    ELSE 4
+                                END,
+                                dataPedido, 
+                                idCombo, 
+                                nomeCompletoCliente;
                         ";
 
             await using var command = _context.Database.GetDbConnection().CreateCommand();
@@ -133,8 +143,64 @@ namespace Data.Repository
             return pedido;
         }
 
+        /// <summary>
+        /// Obtém um pedido pelo seu id no banco de dados.
+        /// </summary>
+        /// <param name="idPedido">O id do pedido a ser obtido.</param>
+        /// <returns>Um objeto Pedido com os dados do pedido encontrado ou null se não existir.</returns>
+        /// <exception cref="DbException">Se ocorrer um erro ao acessar o banco de dados.</exception>
+        public async Task<Pedido?> GetPedidoById(int idPedido)
+        {
+            // verifica se o DbSet Pedido não é nulo.
+            if (_context.Pedido is not null)
+                // retorna o primeiro pedido que corresponde ao idPedido ou null se não encontrar.
+                return await _context.Pedido.FirstOrDefaultAsync(p => p.IdPedido == idPedido);
+            // retorna null se o DbSet Pedido for nulo.
+            return null;
+        }
 
-        #region [Método Privado]
+        /// <summary>
+        /// Atualiza um pedido no banco de dados.
+        /// </summary>
+        /// <param name="pedido">O objeto Pedido com os dados atualizados.</param>
+        /// <exception cref="DbUpdateException">Se ocorrer um erro ao atualizar o banco de dados.</exception>
+        public async Task UpdatePedido(Pedido pedido)
+        {
+            // marca o estado do pedido como modificado.
+            _context.Entry(pedido).State = EntityState.Modified;
+            // salva as alterações no banco de dados de forma assíncrona.
+            await _context.SaveChangesAsync();
+        }
+
+        #region [Métodos de verificação]
+        /// <summary>
+        /// Verifica se existe um cliente com o id especificado no banco de dados.
+        /// </summary>
+        /// <param name="clienteId">O id do cliente a ser verificado.</param>
+        /// <returns>Um valor booleano que indica se o cliente existe ou não.</returns>
+        /// <exception cref="DbException">Se ocorrer um erro ao acessar o banco de dados.</exception>
+        public async Task<bool> ClienteExists(int clienteId)
+        {
+            if (_context.Cliente is not null)
+                return await _context.Cliente.AnyAsync(c => c.IdCliente == clienteId);
+            return false;
+        }
+
+        /// <summary>
+        /// Verifica se existe um produto com o id especificado no banco de dados.
+        /// </summary>
+        /// <param name="produtoId">O id do produto a ser verificado.</param>
+        /// <returns>Um valor booleano que indica se o produto existe ou não.</returns>
+        /// <exception cref="DbException">Se ocorrer um erro ao acessar o banco de dados.</exception>
+        public async Task<bool> ProdutoExists(int produtoId)
+        {
+            if (_context.Produto is not null)
+                return await _context.Produto.AnyAsync(p => p.IdProduto == produtoId);
+            return false;
+        }
+        #endregion
+
+        #region [Métodos Privados]
         /// <summary>
         /// Calcula o valor total do pedido com base nos produtos e quantidades associados a ele.
         /// "O cálculo do valor total é uma operação relacionada à persistência de dados."
@@ -164,5 +230,6 @@ namespace Data.Repository
             return valorTotal;
         }
         #endregion
+
     }
 }

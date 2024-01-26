@@ -1,7 +1,7 @@
 ﻿using Data.Context;
 using Domain.Base;
 using Domain.Entities;
-using Domain.Port.DrivenPort;
+using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
 using System.Data;
@@ -28,12 +28,10 @@ namespace Data.Repository
         public async Task<List<Produto>> GetProdutos()
         {
             if (_context.Produto is not null)
-                return await _context.Produto.ToListAsync();
+                return await _context.Produto.Include(p => p.Categoria).ToListAsync();
 
             return new List<Produto>();
         }
-
-
 
         /// <summary>
         /// Obtém um produto pelo ID no contexto do banco de dados.
@@ -45,7 +43,9 @@ namespace Data.Repository
             if (_context.Produto is null)
                 throw new InvalidOperationException("Contexto de produto nulo.");
 
-            var produto = await _context.Produto.FindAsync(id);
+            var produto = await _context.Produto
+                .Include(p => p.Categoria)
+                .FirstOrDefaultAsync(p => p.IdProduto == id);
 
             return produto;
         }
@@ -122,6 +122,7 @@ namespace Data.Repository
                                 , PROD.IdCategoria          AS IdCategoria
                                 , CATE.NomeCategoria        AS NomeCategoria
                                 , PROD.DescricaoProduto     AS DescricaoProduto
+                                , PROD.ImagemProduto        AS ImagemProduto
                              FROM Produto PROD
                         LEFT JOIN Categoria CATE
                                ON PROD.IdCategoria = CATE.IdCategoria
@@ -160,11 +161,12 @@ namespace Data.Repository
 
                         categoria.Produtos?.Add(new Produto
                         {
-                            IdProduto = result.GetInt32("IdProduto"),
-                            NomeProduto = result.GetString("NomeProduto"),
-                            ValorProduto = result.GetFloat("ValorProduto"),
-                            IdCategoria = result.GetInt32("IdCategoria"),
-                            DescricaoProduto = result.GetString("DescricaoProduto")
+                            IdProduto = result.IsDBNull("IdProduto") ? 0 : result.GetInt32("IdProduto"),
+                            NomeProduto = result.IsDBNull("NomeProduto") ? null : result.GetString("NomeProduto"),
+                            ValorProduto = result.IsDBNull("ValorProduto") ? 0 : result.GetFloat("ValorProduto"),
+                            IdCategoria = result.IsDBNull("IdCategoria") ? 0 : result.GetInt32("IdCategoria"),
+                            DescricaoProduto = result.IsDBNull("DescricaoProduto") ? null : result.GetString("DescricaoProduto"),
+                            ImagemProduto = result.IsDBNull("ImagemProduto") ? null : result.GetString("ImagemProduto")
                         });
                     }
                 }

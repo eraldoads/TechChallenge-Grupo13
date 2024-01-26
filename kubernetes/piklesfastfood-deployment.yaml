@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: piklesfastfood
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: piklesfastfood
+    spec:
+      containers:
+      - name: piklesfastfood
+        image: lfelipeat/piklesfastfood:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 25m
+            memory: 80Mi
+          limits:
+            cpu: 75m
+            memory: 250Mi
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+              name: piklesfastfood-config
+              key: ASPNETCORE_ENVIRONMENT
+        - name: ASPNETCORE_URLS
+          valueFrom:
+            configMapKeyRef:
+              name: piklesfastfood-config
+              key: ASPNETCORE_URLS
+        - name: MERCADO_PAGO_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: piklesfastfood-config
+              key: MERCADO_PAGO_BASE_URL
+        - name: MERCADO_PAGO_CRIAR_QR_ORDER_PATH
+          valueFrom:
+            configMapKeyRef:
+              name: piklesfastfood-config
+              key: MERCADO_PAGO_CRIAR_QR_ORDER_PATH
+        - name: MERCADO_PAGO_CONSULTAR_QR_ORDER_PATH
+          valueFrom:
+            configMapKeyRef:
+              name: piklesfastfood-config
+              key: MERCADO_PAGO_CONSULTAR_QR_ORDER_PATH
+        - name: MERCADO_PAGO_AUTHORIZATION
+          valueFrom:
+            configMapKeyRef:
+              name: piklesfastfood-config
+              key: MERCADO_PAGO_AUTHORIZATION
+        - name: MERCADO_PAGO_SPONSOR_ID
+          valueFrom:
+            configMapKeyRef:
+              name: piklesfastfood-config
+              key: MERCADO_PAGO_SPONSOR_ID
+        - name: WEBHOOK_ENDPOINT
+          valueFrom:
+            configMapKeyRef:
+              name: piklesfastfood-config
+              key: WEBHOOK_ENDPOINT
+        - name: ConnectionStrings__ConnectionMysql
+          valueFrom:
+            secretKeyRef:
+              name: piklesfastfood-secrets
+              key: ConnectionStrings__ConnectionMysql
+  selector:
+    matchLabels:
+      app: piklesfastfood
