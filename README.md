@@ -19,6 +19,12 @@ Aplicação para todo sistema de Controle de Pedidos de uma lanchonete - [API] B
 
 </br>
 
+## ☑️ Arquitetura
+O desenho abaixo apresenta uma visão macro contemplando o negócio e a infraestrutura utilizada:
+</br></br>
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/ebe265a5-e109-4a81-90ea-c244c521271a)
+</br></br>
+
 ## ☑️ Criação do ambiente para testes
 Realize o download do projeto TechChallenge-Grupo13.
 </br></br>
