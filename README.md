@@ -32,7 +32,7 @@ Acesse o site https://webhook.site/ e copie a url para teste do webhook.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/adf0b5a9-ee63-4eb7-8b3b-f0a2abe404df)
 </br></br>
-Altere o valor da variável <b>WEBHOOK_ENDPOINT</b> dentro do arquivo <b>piklesfastfood-configmap.yaml</b> para a url copiada do site. Este arquivo está localizado na pasta <b>TechChallenge-Grupo13\kubernetes</b>.
+Altere o valor da variável <b>WEBHOOK_ENDPOINT</b> dentro do arquivo <b>piklesfastfood-configmap.yaml</b> para a url copiada do site. Este arquivo está localizado na pasta <b>kubernetes</b>.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/7e837eb0-fe6a-4804-9df7-0e758ac22bfd)
 </br></br>
@@ -45,7 +45,7 @@ minikube start
 ```
 </br>
 
-Também no terminal, acesse a pasta <b>TechChallenge-Grupo13\kubernetes</b> e execute os comandos a seguir:
+Também no terminal, acesse a pasta <b>kubernetes</b> e execute os comandos a seguir:
 </br>
 
 ```
