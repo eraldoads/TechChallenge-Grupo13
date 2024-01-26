@@ -98,7 +98,7 @@ Base de Dados: piklesfastfood
 ```
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/8c6ae06e-a8ae-4bc9-b157-5f985f0445df)
 
-Para criar as tabelas e inserir uma massa de dados no banco Mysql, importe o arquivo <b>init.sql</b> localizado na pasta <b>PIKLESFASTFOOD</b> e clique no botão <b>Executar</b>:
+Para criar as tabelas e inserir uma massa de dados no banco Mysql, importe o arquivo <b>init.sql</b> localizado na pasta <b>PIKLESFASTFOOD</b> e clique no botão <b>Executar</b>.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/4c950fcb-b38f-485d-8df6-8c18fc2ba748)
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/d03e4e66-d90e-4455-8fc6-47bbea81282e)
@@ -111,7 +111,7 @@ Abra um terminal e execute o comando a seguir para visualizar os recursos criado
 minikube dashboard
 ```
 
-Será exibida a url para acessar o dashboard com o ambiente Kubernetes:
+Será exibida a url para acessar o dashboard com o ambiente Kubernetes.
 
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/1d2e9232-b443-4864-809e-48e4f2e85cee)
 
@@ -119,7 +119,7 @@ Será exibida a url para acessar o dashboard com o ambiente Kubernetes:
 
 </br>
 
-Para testar os endpoints da API via Postman, você deverá importar o json da collection e do enviroment, os quais estão disponíveis na pasta <b>Postman</b> dentro do projeto:
+Para testar os endpoints da API via Postman, você deverá importar o json da collection e do enviroment, os quais estão disponíveis na pasta <b>Postman</b> dentro do projeto.
 
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/69488ce6-4a61-4028-8c4a-ae9855e86eed)
 </br>
@@ -131,7 +131,7 @@ Para testar os endpoints da API via Postman, você deverá importar o json da co
 Após seguir todos os passos anteriores, o ambiente estará pronto para os testes.
 
 ## ☑️ Testes
-Utilizando a collection do Postman, crie alguns pedidos:
+Utilizando a collection do Postman, crie alguns pedidos.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/1b58dcaa-ef4f-452f-ae7f-bdf822158f60)
 
@@ -147,61 +147,61 @@ Posteriormente, altere o status de alguns deles utilizando os status permitidos:
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/97251cbd-36f2-4c82-bce2-86d4ce61fc52)
 
-Liste todos os pedidos realizados:
+Liste todos os pedidos realizados.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/b0b35cd7-ac34-4304-83f7-3e3131828d10)
 
-Crie um pagamento para um pedido que esteja com o status <b>Recebido</b>:
+Crie um pagamento para um pedido que esteja com o status <b>Recebido</b>.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/ac473e5f-a106-4eb0-b2d7-fd89abfdaa5a)
 </br></br>
-Obtenha o QRCode para pagamento do pedido no Mercado Pago:
+Obtenha o QRCode para pagamento do pedido no Mercado Pago.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/3ffbc7bc-c5ca-4e50-a677-8dc9e592d44d)
 </br></br>
-Acesse o site https://www.qrcode-monkey.com/ e gere a imagem a partir do QRCODE obtido no campo <b>qr_data</b>. Selecione a aba <b>TEXT</b>, cole o QRCode no campo <b>Your Text</b> e clique no botão <b>Create QR Code</b>:
+Acesse o site https://www.qrcode-monkey.com/ e gere a imagem a partir do QRCODE obtido no campo <b>qr_data</b>. Selecione a aba <b>TEXT</b>, cole o QRCode no campo <b>Your Text</b> e clique no botão <b>Create QR Code</b>.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/cf814600-1f62-41de-af08-d5035aec6b14)
 </br></br>
-Com o aplicativo do Mercado Pago, faça a leitura do QRCode:
+Com o aplicativo do Mercado Pago, faça a leitura do QRCode.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/d4287e51-b44f-4b8e-921e-cc67683427d9)
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/cf1aa19a-6c57-4650-87e5-54d53990729c)
 </br></br>
-Informe dados inválidos para o cartão de crédito:
+Informe dados inválidos para o cartão de crédito.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/99a923c4-e19f-458b-8b8f-f9c11d4fa37e)
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/dbcb4d1a-6f23-4b77-8c39-3e10e3556550)
 </br></br>
-Verifique a notificação recebida no Webhook.site e copie o id da merchant_order:
+Verifique a notificação recebida no Webhook.site e copie o <b>id</b> da <b>merchant_order</b>.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/e576df04-4a95-438a-b851-7483a6920ede)
 </br></br>
-Simule o recebimento da notificação do webhook de pagamento: 
+Simule o recebimento da notificação do webhook de pagamento. 
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/1964f7a8-93a5-4f5e-9fe6-24bc545953d3)
 </br></br>
 
-Verifique o status do pagamento do pedido como <b>Rejeitado</b>:
+Verifique o status do pagamento do pedido como <b>Rejeitado</b>.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/850937f3-f7d5-4244-8bcc-b4a82e17d1a7)
 
 </br></br>
 
-Repita o processo de pagamento informando um cartão de crédito válido:
+Repita o processo de pagamento informando um cartão de crédito válido.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/77e83a3b-b08a-43d3-abf8-4edb19e539b9)
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/092e336b-e10f-4d66-b6cf-d40d49d7f244)
 </br></br>
-Simule novamente o recebimento da notificação do webhook de pagamento: 
+Simule novamente o recebimento da notificação do webhook de pagamento.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/1964f7a8-93a5-4f5e-9fe6-24bc545953d3)
 </br></br>
-Verifique novamente o status do pagamento do pedido como <b>Aprovado</b>:
+Verifique novamente o status do pagamento do pedido como <b>Aprovado</b>.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/e37cc5ba-49dd-4875-a548-c8379938949f)
 </br></br>
-Liste novamente os pedidos e verifique o status do pedido que recebeu o pagamento como <b>Em Preparação</b>
+Liste novamente os pedidos e verifique o status do pedido que recebeu o pagamento como <b>Em Preparação</b>.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/8b97fb1c-f0d7-4722-8641-c8a702807ddc)
 </br></br>
