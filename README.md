@@ -32,7 +32,7 @@ Acesse o site https://webhook.site/ e copie a url para teste do webhook.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/adf0b5a9-ee63-4eb7-8b3b-f0a2abe404df)
 </br></br>
-Altere o valor da variável <b>WEBHOOK_ENDPOINT</b> dentro do arquivo <b>piklesfastfood-configmap.yaml</b> para a url copiada do site. Este arquivo está localizado na pasta <b>kubernetes</b>.
+Altere o valor da variável <b>WEBHOOK_ENDPOINT</b> dentro do arquivo <b>piklesfastfood-configmap.yaml</b> para a url copiada do site. Este arquivo está localizado na pasta <b>kubernetes</b> dentro do projeto.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/7e837eb0-fe6a-4804-9df7-0e758ac22bfd)
 </br></br>
@@ -45,7 +45,7 @@ minikube start
 ```
 </br>
 
-Também no terminal, acesse a pasta <b>kubernetes</b> e execute os comandos a seguir:
+Também no terminal, acesse a pasta <b>kubernetes</b> dentro do projeto e execute os comandos a seguir:
 </br>
 
 ```
@@ -119,7 +119,7 @@ Base de Dados: piklesfastfood
 ```
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/8c6ae06e-a8ae-4bc9-b157-5f985f0445df)
 
-Para criar as tabelas e inserir uma massa de dados no banco Mysql, importe o arquivo <b>init.sql</b> localizado na pasta <b>PIKLESFASTFOOD</b> e clique no botão <b>Executar</b>.
+Para criar as tabelas e inserir uma massa de dados no banco Mysql, importe o arquivo <b>init.sql</b> localizado na pasta <b>PIKLESFASTFOOD</b> dentro do projeto e clique no botão <b>Executar</b>.
 </br></br>
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/4c950fcb-b38f-485d-8df6-8c18fc2ba748)
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/d03e4e66-d90e-4455-8fc6-47bbea81282e)
