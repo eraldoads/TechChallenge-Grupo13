@@ -20,7 +20,8 @@ namespace Domain.ValueObjects
                     ["nomeProduto"] = new OpenApiString("string"),
                     ["valorProduto"] = new OpenApiDouble(0.00),
                     ["IdCategoria"] = new OpenApiInteger(1),
-                    ["descricaoProduto"] = new OpenApiString("string")
+                    ["descricaoProduto"] = new OpenApiString("string"),
+                    ["ImagemProduto"] = new OpenApiString("string")
                 };
                 // atribui o exemplo ao esquema
                 schema.Example = modeloProduto;
@@ -35,7 +36,8 @@ namespace Domain.ValueObjects
                     ["nomeProduto"] = new OpenApiString("string"),
                     ["valorProduto"] = new OpenApiDouble(0.00),
                     ["IdCategoria"] = new OpenApiInteger(1),
-                    ["descricaoProduto"] = new OpenApiString("string")
+                    ["descricaoProduto"] = new OpenApiString("string"),
+                    ["ImagemProduto"] = new OpenApiString("string")
                 };
                 // atribui o exemplo ao esquema
                 schema.Example = modeloProduto;

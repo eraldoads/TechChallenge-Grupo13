@@ -19,7 +19,7 @@ namespace Domain.ValueObjects
                     ["Id"] = new OpenApiInteger(0),
                     ["IdCliente"] = new OpenApiInteger(0),
                     ["DataPedido"] = new OpenApiString(DateTime.Now.ToString("yyyy-MM-dd HH:mm")),
-                    ["ValorTotal"] = new OpenApiInteger(0),
+                    ["ValorTotal"] = new OpenApiInteger(0)
                 };
                 // atribui o exemplo ao esquema
                 schema.Example = modeloPedido;
@@ -33,10 +33,22 @@ namespace Domain.ValueObjects
                 {
                     ["idPedido"] = new OpenApiString("string"),
                     ["dataPedido"] = new OpenApiString(DateTime.Now.ToString("yyyy-MM-dd HH:mm")),
-                    ["valorTotal"] = new OpenApiDouble(0.00),
+                    ["valorTotal"] = new OpenApiDouble(0.00)
                 };
                 // atribui o exemplo ao esquema
                 schema.Example = modeloPedidoDTO;
+            }
+
+            // verifica se o contexto é da classe PedidoStatus
+            if (context.Type == typeof(PedidoStatus))
+            {
+                // cria um objeto OpenApiObject com os valores desejados
+                var modeloPedidoStatus = new OpenApiObject
+                {
+                    ["statusPedido"] = new OpenApiInteger(0)
+                };
+                // atribui o exemplo ao esquema
+                schema.Example = modeloPedidoStatus;
             }
         }
     }

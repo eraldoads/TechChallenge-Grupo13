@@ -1,13 +1,12 @@
 ﻿using Domain.Base;
 using Domain.Entities;
 using Domain.EntitiesDTO;
-using Domain.Port.DrivenPort;
-using Domain.Port.Services;
+using Domain.Interfaces;
 using Domain.ValueObjects;
 using Microsoft.AspNetCore.JsonPatch;
 using System.ComponentModel.DataAnnotations;
 
-namespace Application.Services
+namespace Application.Interfaces
 {
     public class ProdutoService : IProdutoService
     {
@@ -23,24 +22,30 @@ namespace Application.Services
         }
 
         /// <summary>
+        /// Obtém todos os produtos.
+        /// </summary>
+        /// <returns>Retorna uma lista de produtos.</returns>
+        public async Task<List<ProdutoLista>> GetProdutos()
+        {
+            var produtosBase = await _produtoRepository.GetProdutos();
+            var produtosLista = MapParaProdutoLista(produtosBase);
+
+            return produtosLista;
+        }
+
+        /// <summary>
         /// Obtém um produto pelo seu ID.
         /// </summary>
         /// <param name="id">O ID do produto.</param>
         /// <returns>Retorna o produto se encontrado; caso contrário, retorna null.</returns>
-        public async Task<Produto?> GetProdutoById(int id)
+        public async Task<ProdutoLista?> GetProdutoById(int id)
         {
-            var produto = await _produtoRepository.GetProdutoById(id);
+            var produtoBase = await _produtoRepository.GetProdutoById(id);
+            if (produtoBase == null)
+                return null;
 
-            return produto;
-        }
-
-        /// <summary>
-        /// Obtém todos os produtos.
-        /// </summary>
-        /// <returns>Retorna uma lista de produtos.</returns>
-        public async Task<List<Produto>> GetProdutos()
-        {
-            return await _produtoRepository.GetProdutos();
+            var produtoLista = MapParaProdutoLista(produtoBase);
+            return produtoLista;
         }
 
         /// <summary>
@@ -56,23 +61,39 @@ namespace Application.Services
                 throw new ValidationException("Ocorreu um erro de validação", new Exception(string.Join("\n", errors)));
             }
 
-            var produto = MapProdutoDtoToProduto(produtoDTO);
-            return await _produtoRepository.PostProduto(produto);
+            // Lógica de validação da categoria
+            int idCategoria = produtoDTO.IdCategoria;
+
+            if (Enum.IsDefined(typeof(EnumCategoria), idCategoria))
+            {
+                var categoriaExistente = await _produtoRepository.GetProdutosByIdCategoria((EnumCategoria)idCategoria);
+                // Restante do código
+                var produto = MapProdutoDtoToProduto(produtoDTO);
+                return await _produtoRepository.PostProduto(produto);
+            }
+            else
+            {
+                // Lógica para lidar com valores inválidos
+                // Alteração aqui para lançar uma exceção específica para ser capturada no controlador
+                throw new PreconditionFailedException("A categoria informada não existe. Operação cancelada.", nameof(produtoDTO.IdCategoria));
+            }
         }
+
 
         /// <summary>
         /// Atualiza um produto existente.
         /// </summary>
         /// <param name="idProduto">O ID do produto a ser atualizado.</param>
-        /// <param name="produtoInput">O produto com as informações atualizadas.</param>
-        public async Task PutProduto(int idProduto, Produto produtoInput)
+        /// <param name="produtoPut">O produto com as informações atualizadas.</param>
+        public async Task PutProduto(int idProduto, ProdutoDTO produtoPut)
         {
             var produto = await _produtoRepository.GetProdutoById(idProduto) ?? throw new ResourceNotFoundException("Produto não encontrado.");
 
-            produto.NomeProduto = produtoInput.NomeProduto;
-            produto.DescricaoProduto = produtoInput.DescricaoProduto;
-            produto.ValorProduto = produtoInput.ValorProduto;
+            produto.NomeProduto = produtoPut.NomeProduto;
+            produto.DescricaoProduto = produtoPut.DescricaoProduto;
+            produto.ValorProduto = produtoPut.ValorProduto;
             produto.IdCategoria = produto.IdCategoria;
+            produto.ImagemProduto = produtoPut.ImagemProduto;
 
             await UpdateProduto(produto);
         }
@@ -95,7 +116,7 @@ namespace Application.Services
         /// </summary>
         /// <param name="id">O ID do produto a ser excluído.</param>
         /// <returns>Retorna o produto excluído.</returns>
-        public async Task<Produto> DeleteProduto(int id)
+        public async Task<ProdutoLista> DeleteProduto(int id)
         {
             try
             {
@@ -161,7 +182,52 @@ namespace Application.Services
                 NomeProduto = produtoDto.NomeProduto,
                 DescricaoProduto = produtoDto.DescricaoProduto,
                 ValorProduto = produtoDto.ValorProduto,
-                IdCategoria = produtoDto.IdCategoria
+                IdCategoria = produtoDto.IdCategoria,
+                ImagemProduto = produtoDto.ImagemProduto
+            };
+        }
+
+        /// <summary>
+        /// Mapeia uma lista de objetos ProdutoBase para uma lista de objetos ProdutoLista.
+        /// </summary>
+        /// <param name="produtosBase">A lista de objetos ProdutoBase a ser mapeada.</param>
+        /// <returns>Uma lista de objetos ProdutoLista com os mesmos dados dos objetos ProdutoBase, mais o nome da categoria.</returns>
+        private static List<ProdutoLista> MapParaProdutoLista(IEnumerable<Produto> produtosBase)
+        {
+            // cria uma lista vazia de objetos ProdutoLista
+            var produtosLista = new List<ProdutoLista>();
+
+            // percorre a lista de objetos ProdutoBase
+            foreach (var produtoBase in produtosBase)
+            {
+                // cria um objeto ProdutoLista com os mesmos dados do objeto ProdutoBase
+                var produtoLista = MapParaProdutoLista(produtoBase);
+
+                // adiciona o objeto ProdutoLista à lista de produtos
+                produtosLista.Add(produtoLista);
+            }
+
+            // retorna a lista de objetos ProdutoLista
+            return produtosLista;
+        }
+
+        /// <summary>
+        /// Mapeia um objeto ProdutoBase para um objeto ProdutoLista.
+        /// </summary>
+        /// <param name="produtoBase">O objeto ProdutoBase a ser mapeado.</param>
+        /// <returns>Um objeto ProdutoLista com os mesmos dados do objeto ProdutoBase, mais o nome da categoria.</returns>
+        private static ProdutoLista MapParaProdutoLista(Produto produtoBase)
+        {
+            // cria um objeto ProdutoLista com os mesmos dados do objeto ProdutoBase
+            return new ProdutoLista
+            {
+                IdProduto = produtoBase.IdProduto,
+                NomeProduto = produtoBase.NomeProduto,
+                ValorProduto = produtoBase.ValorProduto,
+                IdCategoria = produtoBase.IdCategoria,
+                DescricaoProduto = produtoBase.DescricaoProduto,
+                ImagemProduto = produtoBase.ImagemProduto,
+                NomeCategoria = produtoBase.Categoria?.NomeCategoria // usa a propriedade de navegação Categoria para obter o nome da categoria
             };
         }
         #endregion

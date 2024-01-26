@@ -2,7 +2,7 @@
 using Domain.EntitiesDTO;
 using Microsoft.AspNetCore.JsonPatch;
 
-namespace Domain.Port.Services
+namespace Application.Interfaces
 {
     public interface IClienteService
     {

@@ -1,5 +1,5 @@
-﻿using Domain.Entities;
-using Domain.Port.Services;
+﻿using Application.Interfaces;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
