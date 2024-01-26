@@ -45,14 +45,7 @@ minikube start
 ```
 </br>
 
-Em seguida, execute o comando abaixo para habilitar a coleta de métricas no cluster:
-</br>
-```
-minikube addons enable metrics-server
-```
-</br>
-
-Ainda no terminal, acesse a pasta <b>TechChallenge-Grupo13\kubernetes</b> e execute os comandos a seguir:
+Também no terminal, acesse a pasta <b>TechChallenge-Grupo13\kubernetes</b> e execute os comandos a seguir:
 </br>
 
 ```
@@ -71,8 +64,30 @@ kubectl apply -f adminer-deployment.yaml
 kubectl apply -f adminer-service.yaml
 ```
 </br>
-Execute o comando abaixo para expor a API na porta 8080:
-</br></br>
+
+Em seguida, execute o comando abaixo para habilitar a coleta de métricas no cluster:
+</br>
+```
+minikube addons enable metrics-server
+```
+</br>
+
+Execute o comando a seguir para visualizar os recursos criados no ambiente Kubernetes:
+
+```
+minikube dashboard
+```
+
+Será exibida a url para acessar o dashboard com o ambiente Kubernetes.
+
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/1d2e9232-b443-4864-809e-48e4f2e85cee)
+
+![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/04a157b5-6787-4c45-9d8a-c9006b3ae91a)
+
+</br>
+
+Abra outro terminal e execute o comando abaixo para expor a API na porta 8080:
+</br>
 
 ```
 kubectl port-forward svc/piklesfastfood 8080:80
@@ -109,20 +124,6 @@ Para criar as tabelas e inserir uma massa de dados no banco Mysql, importe o arq
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/4c950fcb-b38f-485d-8df6-8c18fc2ba748)
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/d03e4e66-d90e-4455-8fc6-47bbea81282e)
 ![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/7e2d045b-5c0a-431c-863f-9925c08c4ffe)
-</br>
-
-Abra um terminal e execute o comando a seguir para visualizar os recursos criados no ambiente Kubernetes:
-
-```
-minikube dashboard
-```
-
-Será exibida a url para acessar o dashboard com o ambiente Kubernetes.
-
-![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/1d2e9232-b443-4864-809e-48e4f2e85cee)
-
-![image](https://github.com/eraldoads/TechChallenge-Grupo13/assets/47857203/04a157b5-6787-4c45-9d8a-c9006b3ae91a)
-
 </br>
 
 Para testar os endpoints da API via Postman, você deverá importar o json da collection e do enviroment, os quais estão disponíveis na pasta <b>Postman</b> dentro do projeto.
