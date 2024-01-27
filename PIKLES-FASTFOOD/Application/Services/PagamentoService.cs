@@ -158,7 +158,7 @@ namespace Application.Interfaces
                 if (ordemPagamento.order_status.Equals("paid"))
                 {
                     pedido.StatusPedido = "Em Preparação";
-                    _pedidoRepository.UpdatePedido(pedido);
+                    await _pedidoRepository.UpdatePedido(pedido);
                 }                
             }
         }
