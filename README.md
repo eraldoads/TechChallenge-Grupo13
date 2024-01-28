@@ -11,6 +11,7 @@ Aplicação para todo sistema de Controle de Pedidos de uma lanchonete - [API] B
 </br>
 
 ## 🔗 Links do projeto
+- Vídeo Entrega Fase 2: https://youtu.be/hiPcLCMny-w
 - Documento: [DDD](https://1drv.ms/w/s!AntPAkrc0xN9q8kH5tUnZYZQgotMxQ?e=f4ur3f)
 - Miro: [Dashboard Miro](https://miro.com/app/board/uXjVNVsDxDM=/?share_link_id=908610551369)
 - GIT: [Repositório GIT](https://github.com/eraldoads/TechChallenge-Grupo13)
