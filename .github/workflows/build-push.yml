@@ -13,6 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Configura AWS Credentials Action para as GitHub Actions
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET }}
+          aws-region: us-west-1
+
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
@@ -29,7 +36,7 @@ jobs:
       - name: Log in to AWS ECR
         id: login-ecr
         run: |          
-          echo ${{ secrets.AWS_ACCESS_KEY }} | docker login -u AWS --password-stdin 399256494712.dkr.ecr.us-east-1.amazonaws.com
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 399256494712.dkr.ecr.us-east-1.amazonaws.com
 
       - name: Build Docker image
         working-directory: ./PIKLES-FASTFOOD
