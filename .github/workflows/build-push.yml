@@ -1,0 +1,39 @@
+name: Build and Push to ECR
+
+on:
+  push:
+    branches:
+      - felipe/faseIII
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0'
+
+      - name: Restore NuGet packages
+        run: dotnet restore
+
+      - name: Build API
+        run: dotnet build --configuration Release
+
+      - name: Log in to AWS ECR
+        id: login-ecr
+        run: |
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 399256494712.dkr.ecr.us-east-1.amazonaws.com
+
+      - name: Build Docker image
+        run: |
+          docker build -t ecr-piklesfastfood .          
+          docker tag ecr-piklesfastfood:latest 399256494712.dkr.ecr.us-east-1.amazonaws.com/ecr-piklesfastfood:latest
+
+      - name: Push Docker image to ECR
+        run: |
+          docker push 399256494712.dkr.ecr.us-east-1.amazonaws.com/ecr-piklesfastfood:latest
