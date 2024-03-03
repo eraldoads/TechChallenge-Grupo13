@@ -28,8 +28,8 @@ jobs:
 
       - name: Log in to AWS ECR
         id: login-ecr
-        run: |
-          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 399256494712.dkr.ecr.us-east-1.amazonaws.com
+        run: |          
+          echo ${{ secrets.AWS_ACCESS_KEY }} | docker login -u AWS --password-stdin 399256494712.dkr.ecr.us-east-1.amazonaws.com
 
       - name: Build Docker image
         working-directory: ./PIKLES-FASTFOOD
