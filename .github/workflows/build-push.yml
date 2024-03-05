@@ -3,7 +3,7 @@ name: Build and Push to ECR
 on:
   push:
     branches:
-      - develop
+      - main
 
 jobs:
   build:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Configura AWS Credentials Action para as GitHub Actions
+      - name: Configure AWS Credentials Action for GitHub Actions
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_KEY }}
@@ -47,3 +47,8 @@ jobs:
       - name: Push Docker image to ECR
         run: |
           docker push 399256494712.dkr.ecr.us-east-1.amazonaws.com/ecr-piklesfastfood:latest
+
+      - name: Update ECS with new image
+        id: new-deploy
+        run: |                    
+          aws ecs update-service --cluster piklesCluster --service SVC-piklesfastfood --force-new-deployment
