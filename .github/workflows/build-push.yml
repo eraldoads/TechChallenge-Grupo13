@@ -47,3 +47,8 @@ jobs:
       - name: Push Docker image to ECR
         run: |
           docker push 399256494712.dkr.ecr.us-east-1.amazonaws.com/ecr-piklesfastfood:latest
+
+      - name: Update ECS with new image
+        id: new-deploy
+        run: |                    
+          aws ecs update-service --cluster piklesCluster --service SVC-piklesfastfood --force-new-deployment
