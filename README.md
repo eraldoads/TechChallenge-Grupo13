@@ -1,7 +1,7 @@
 # 🚀 TechChallenge-Grupo13
 Aplicação para todo sistema de Controle de Pedidos de uma lanchonete - [API] Backend (monolito).
 
-
+O build e o push da imagem no ECR na AWS são realizados pelo Github Actions.
 
 ## 🖥️ Grupo 13 - Integrantes
 🧑🏻‍💻 *<b>RM352133</b>*: Eduardo de Jesus Coruja </br>
