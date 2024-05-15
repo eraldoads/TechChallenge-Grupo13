@@ -42,7 +42,7 @@ jobs:
         working-directory: ./PIKLES-FASTFOOD
         run: |
           docker build -t ecr-piklesfastfood .          
-          docker tag ecr-piklesfastfood:latest 399256494712.dkr.ecr.us-east-1.amazonaws.com/ecr-piklesfastfood:latest
+          docker tag ecr-monolito:latest 399256494712.dkr.ecr.us-east-1.amazonaws.com/ecr-monolito:latest
 
       - name: Push Docker image to ECR
         run: |
@@ -51,4 +51,4 @@ jobs:
       - name: Update ECS with new image
         id: new-deploy
         run: |                    
-          aws ecs update-service --cluster piklesCluster --service SVC-piklesfastfood --force-new-deployment
+          aws ecs update-service --cluster piklesCluster --service svc-monolito --force-new-deployment
