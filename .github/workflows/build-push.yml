@@ -41,12 +41,12 @@ jobs:
       - name: Build Docker image
         working-directory: ./PIKLES-FASTFOOD
         run: |
-          docker build -t ecr-piklesfastfood .          
+          docker build -t ecr-monolito .          
           docker tag ecr-monolito:latest 399256494712.dkr.ecr.us-east-1.amazonaws.com/ecr-monolito:latest
 
       - name: Push Docker image to ECR
         run: |
-          docker push 399256494712.dkr.ecr.us-east-1.amazonaws.com/ecr-piklesfastfood:latest
+          docker push 399256494712.dkr.ecr.us-east-1.amazonaws.com/ecr-monolito:latest
 
       - name: Update ECS with new image
         id: new-deploy
